@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>05 图标/格式图标/表单 30px-品牌@1x</title>
+    <defs>
+        <linearGradient x1="50%" y1="54.5221336%" x2="83.5011303%" y2="99.2293921%" id="linearGradient-1">
+            <stop stop-color="#0D59D3" offset="0%"></stop>
+            <stop stop-color="#0075E3" offset="100%"></stop>
+        </linearGradient>
+        <path d="M9.82424007,12.1 L17.1554047,0.276305982 L22.3958528,-3.52656571e-10 L22.3958528,21.1492187 C22.3958528,21.6190923 22.0330906,22 21.5856007,22 L1.20653439,22 C0.759044546,22 0.396282354,21.6190923 0.396282354,21.1492187 L0.395852755,12.1 L9.82424007,12.1 Z" id="path-2"></path>
+        <linearGradient x1="96.4014894%" y1="33.3579882%" x2="25.1758709%" y2="64.3089352%" id="linearGradient-4">
+            <stop stop-color="#34B2FF" offset="0%"></stop>
+            <stop stop-color="#0081FC" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="103.334601%" y1="34.9306953%" x2="62.8162963%" y2="54.6744038%" id="linearGradient-5">
+            <stop stop-color="#1275EC" offset="0%"></stop>
+            <stop stop-color="#0787FC" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="05-图标/格式图标/表单-30px-品牌" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-2" transform="translate(-1.000000, 4.000000)">
+            <g id="编组" transform="translate(4.604147, 0.000000)">
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-2"></use>
+                </mask>
+                <use id="路径" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                <image id="路径" mask="url(#mask-3)" x="0" y="0" width="22.68" height="21.6" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAAABGdBTUEAALGOfPtRkwAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAFaADAAQAAAABAAAAFAAAAAA1ezu+AAADGElEQVQ4EaWUz24cRRDGv+qenbWtje04OJEiIvkQcjASh2wk4MgNCYUoSD7xGNy4oLxGXiFvwIlnCFhCCgiRBOzsv+zuzM7ObndX8Y2deM3NdlpazfRs96+/qvqqBR8wrh/8uTWtZ18B2TUgAQ6luNR3V2WamUyXy28M2RdiqWte7lnCLaRWJ7sqNH/8+33T8ADid8l3LjqopNwMciWlO9+/2EwhPRJp3RS1bfVogy8wLEV8fWloE/ZkMn8oTu8o0o6KtEUlAlqI8+MYQ3FpaPu7558yxC7M7cBkzZkRaIWqjSTpWxZseino7sFhJ5o8Fi83VdAhTOB05gwjkawfE0bYXCsvBR0t8IjV2CPshhPJGXLgfEovDUQxxLqfoFifXxja+vbXB7D0tZj/mAK3YUpbWuFFeua0F6EDiBUI4+WFoI3JVeUHMdkT2EcCaauTBRW+jaZ9Kh+gnaZYxBpbWbiQT4v5/EcT22cC2/S1icjMpVQwjwOkMEiII34vEWQJ7Kcse/jbExX3CbvijgHblN5mZMJFFCLNk47hoMENrLFY1TSTM3nDljziyh7cxojnVfinCvgZyrRwudG4zDon7AduYYwnPzMVQyIgkrow+IKhD7numGcc8YRern4IrUu8Gi6xf8gLgDeBepuQMaTv2GJSiyZ2B61yftDx5hBFdU5lI/75Lzxe0vLHVRbG2Nyp8FcZ8exAGZhlhBwntm6msWQaOqxkC+kk7FOsZ/OBkWjT3TbnrjHUvxHR1zG6HnxeoOgvsN9NODzdkiXn/vaKgko6jHyNwTp6ZaXUPJmJkVsyZzUtVaa0nMCtD7CZj4GqxPVuwFOcqGywGXN/lBRTuFbOjXQDLxmLK2hOpYFgx/KpBISaVpIK0c3Qr+a4N1/gdnOZMvvvRoYb7NfhRoEUM15j1FjRNG4FjSx6M3NMQRUStnYjyjqi0w/4/MuAw2eGp90zYMPNsJdXuEZIsSGYZYK6ZIEZyfthJbB263TT7T8Me58pfmGonbvNN2Nx+FypbLZRw/lKP1kpfA89e/50Ts3/IWdL3r38B+7tpl6bl+w1AAAAAElFTkSuQmCC"></image>
+            </g>
+            <path d="M27,0 L18.1736355,14.6345412 C18.0119831,14.9025688 17.7080749,15.0348356 17.4142276,14.9921 L1.252278,14.99239 C1.11294871,14.99239 1,14.8803048 1,14.7420407 C1,14.6961938 1.01268673,14.6512272 1.03667641,14.6120455 L4.15680544,9.44875867 C4.29406968,9.22456887 4.53926202,9.08769657 4.80361022,9.08769657 L14.6994323,9.0874857 L19.9155312,0.369412699 C20.0516331,0.140487928 20.2995295,0 20.5673744,0 L27,0 Z M15.7447481,0 C15.8857198,0 16,0.104659259 16,0.233762999 C16,0.272460471 15.98951,0.310552652 15.9694713,0.344621821 L12.8599703,5.63128747 C12.7263944,5.85838873 12.4674663,6 12.1858006,6 L6.25525195,6 C6.11428019,6 6,5.89534074 6,5.766237 C6,5.72811461 6.01018063,5.69057068 6.02965463,5.65687727 L9.08348967,0.3732098 C9.21619402,0.143608107 9.47661808,0 9.76028162,0 L15.7447481,0 Z" id="形状" fill="url(#linearGradient-4)"></path>
+            <path d="M4.79333141,9.0874857 L14.6994323,9.0874857 L14.6994323,9.0874857 L11.5492595,15 L1.30990167,14.9938839 C1.17010462,14.9938004 1.05684441,14.8804048 1.05692791,14.7406077 C1.05695497,14.6953163 1.06913368,14.6508616 1.09219385,14.6118803 L4.13975435,9.46022468 C4.27642314,9.22919709 4.52490618,9.0874857 4.79333141,9.0874857 Z" id="矩形" fill="url(#linearGradient-5)"></path>
+        </g>
+    </g>
+</svg>

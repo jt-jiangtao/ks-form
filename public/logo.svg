@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>05 图标/格式图标/金山文档 30px@1x</title>
+    <defs>
+        <path d="M6.22477053,0 L11.5358073,3.12473894 L11.5358073,10.4017536 L0.375001553,3.7769816 C0.254416091,3.70540512 0.214686462,3.54962709 0.286262942,3.42904163 C0.308691307,3.39125639 0.340541621,3.35993837 0.378699467,3.33814996 L6.22477053,0 L6.22477053,0 Z" id="path-1"></path>
+        <linearGradient x1="99.8586179%" y1="35.9150549%" x2="71.3546205%" y2="76.0430392%" id="linearGradient-3">
+            <stop stop-color="#0044B1" offset="0%"></stop>
+            <stop stop-color="#0062FF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="12.0434907%" y1="74.11694%" x2="62.3737678%" y2="37.892852%" id="linearGradient-4">
+            <stop stop-color="#1A4ACC" offset="0%"></stop>
+            <stop stop-color="#0854E4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="86.1660936%" x2="50%" y2="12.4413752%" id="linearGradient-5">
+            <stop stop-color="#0A5DF6" offset="0%"></stop>
+            <stop stop-color="#124CDC" offset="100%"></stop>
+        </linearGradient>
+        <path d="M6.17854387,-1.13686838e-13 L11.8461372,2.87611349 L11.8461372,9.98159484 L0.402454796,3.55260541 C0.280198146,3.48392238 0.236768142,3.32913519 0.305451166,3.20687854 C0.329031832,3.16490466 0.364060073,3.1305 0.406450708,3.10767701 L6.17854387,-1.13686838e-13 L6.17854387,-1.13686838e-13 Z" id="path-6"></path>
+        <linearGradient x1="100%" y1="37.2970024%" x2="71.3546205%" y2="73.1605331%" id="linearGradient-8">
+            <stop stop-color="#0044B1" offset="0%"></stop>
+            <stop stop-color="#0062FF" stop-opacity="0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-9">
+            <stop stop-color="#4AC3FF" offset="0%"></stop>
+            <stop stop-color="#0E93F8" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="05-图标/格式图标/金山文档-30px" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="金山文档" transform="translate(2.000000, 2.000000)">
+            <g id="编组-5" transform="translate(1.464193, 16.680278)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="路径" fill="#0062FF" xlink:href="#path-1"></use>
+                <polygon id="路径-6备份" fill="url(#linearGradient-3)" opacity="0.6" mask="url(#mask-2)" points="11.5358073 10.4017536 11.5358073 3.12473894 6.5521888 -0.206419468 0.0363600498 3.57295488"></polygon>
+            </g>
+            <path d="M24.6260851,13.5403646 L24.7985938,20.7001872 L13,27.0820313 L13,19.859809 L24.6260851,13.5403646 Z" id="形状结合" fill="url(#linearGradient-4)"></path>
+            <polygon id="路径-2" fill="url(#linearGradient-5)" points="24.7985938 20.7001872 24.7985938 6.58333333 19.389974 9.47522108 19.389974 16.3588797"></polygon>
+            <g id="编组-3" transform="translate(1.119604, 9.248382)">
+                <g id="编组-4" transform="translate(0.034259, 0.680871)">
+                    <mask id="mask-7" fill="white">
+                        <use xlink:href="#path-6"></use>
+                    </mask>
+                    <use id="路径" fill="#0082FF" xlink:href="#path-6"></use>
+                    <path d="M11.8461372,10.3054143 L11.8461372,3.23957723 L5.97145271,0 L0.579434481,3.01684823 C0.39587019,3.11955293 0.330320539,3.3516198 0.433025237,3.53518409 C0.466022544,3.59416024 0.514117972,3.64329446 0.572375655,3.67754428 L11.8461372,10.3054143 L11.8461372,10.3054143 Z" id="路径-6" fill="url(#linearGradient-8)" opacity="0.600678943" mask="url(#mask-7)"></path>
+                </g>
+            </g>
+            <g id="编组-2" transform="translate(0.400426, 0.000000)" fill="url(#linearGradient-9)">
+                <path d="M12.3515593,0.139628571 L0.968155386,6.54832125 C0.845960977,6.61711494 0.802671145,6.77194139 0.87146484,6.8941358 C0.894239557,6.93458926 0.927669289,6.96802449 0.968119006,6.99080586 L12.5995737,13.5416667 L12.5995737,13.5416667 L24.3981676,6.58333333 L12.8481187,0.138682123 C12.6937207,0.0525317558 12.5056277,0.052890263 12.3515593,0.139628571 Z" id="路径-3备份"></path>
+            </g>
+        </g>
+    </g>
+</svg>

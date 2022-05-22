@@ -1,0 +1,56 @@
+import React from "react";
+import classNames from "classnames";
+import {CloseOutlined} from "@ant-design/icons";
+
+interface Props {
+  visible: boolean
+  title: string | React.ReactNode
+  footer: React.ReactNode
+  onClose: () => void,
+  children ?: JSX.Element | string | React.ReactNode
+}
+
+export default class Modal extends React.Component<Props> {
+
+  constructor(props: Props) {
+    super(props);
+  }
+
+  renderTitle = ()=>{
+    if (typeof this.props.title === 'string'){
+      return <div className="modal-title">{this.props.title}</div>
+    }
+    return this.props.title
+  }
+
+  render() {
+    return (
+        <div className={classNames('modal-root', {
+          'modal-root-hidden': !this.props.visible
+        })}>
+          <div className="modal-mask" onClick={()=> this.props.onClose()}></div>
+          <div className="modal-content">
+            <div className="close-button" onClick={()=> this.props.onClose()}>
+                <div className="close-container">
+                    <CloseOutlined />
+                </div>
+              </div>
+            <div className="modal-header">
+                {
+                  this.renderTitle()
+                }
+              </div>
+            <div className="modal-body">
+                {this.props.children}
+              </div>
+            <div className="modal-footer">
+                {
+                  this.props.footer
+                }
+              </div>
+          </div>
+        </div>
+    );
+  }
+
+}

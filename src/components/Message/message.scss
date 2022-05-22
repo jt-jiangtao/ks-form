@@ -1,0 +1,64 @@
+.message-container{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    position: fixed;
+    top: 16px;
+    left: 0;
+    z-index: 1010;
+    width: 100%;
+}
+
+.message{
+    padding: 8px;
+    text-align: center;
+    &:first-child{
+        margin-top: -8px;
+    }
+}
+
+.message-content{
+    background: #fff;
+    box-shadow: 0 2px 12px 0 rgba(56,56,56,.2);
+    border-radius: 2px;
+    padding: 0 16px;
+    font-size: 14px;
+    color: #3d4757;
+    text-align: center;
+    border: 1px solid rgba(211, 211, 211, 0.5);
+    line-height: 40px;
+    display: inline-block;
+    .message-content-container{
+        display: flex;
+        align-items: center;
+
+        .icon{
+            margin-right: 12px;
+            width: 16px;
+        }
+    }
+}
+
+// 动画
+.slide-in-top-enter {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+
+.slide-in-top-enter-active {
+    opacity: 1;
+    transform: translate(0);
+    transition: transform 200ms ease-out, opacity 200ms ease-in-out;
+}
+
+.slide-in-top-exit {
+    opacity: 1;
+}
+
+.slide-in-top-exit-active {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: transform 300ms linear 100ms, opacity 300ms ease-in-out;
+}

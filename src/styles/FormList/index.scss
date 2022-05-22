@@ -1,0 +1,18 @@
+.logo-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 25px;
+    .logo{
+        justify-content: center;
+        margin-right: 8px;
+        width: 30px;
+        height: 30px;
+    }
+    .title{
+        font-size: 18px;
+        font-weight: 500;
+        color: #3c414b;
+        margin: 0.67em 0;
+    }
+}
