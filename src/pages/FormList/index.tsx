@@ -5,14 +5,20 @@ import logo from '@/assets/icon/logo.svg'
 import '@/styles/FormList/index.scss'
 import SideBar from "@/pages/FormList/SideBar";
 import Content from "@/pages/FormList/Content";
+import Myedit from "@/pages/FormList/Myedit";
+import Myshare from "@/pages/FormList/Myshare";
+import Mycollect from "@/pages/FormList/Mycollect";
+import Recycle from "@/pages/FormList/Recycle";
 
-export default function FormList(){
+export default function FormList() {
+    let hash = useLocation().hash.slice(1)
+
     let sidebarHash = ['mycreate', 'share']
     let location = useLocation()
-    const parseSideBar = ()=>{
-        if (location.hash.slice(1).length === 0)return 'mycreate'
-        else if(sidebarHash.indexOf(location.hash.slice(1)) !== -1) return location.hash.slice(1)
-        return  'mycreate'
+    const parseSideBar = () => {
+        if (location.hash.slice(1).length === 0) return 'mycreate'
+        else if (sidebarHash.indexOf(location.hash.slice(1)) !== -1) return location.hash.slice(1)
+        return 'mycreate'
     }
     let [sidebar] = useState(parseSideBar)
 
@@ -28,11 +34,13 @@ export default function FormList(){
             </HeaderLayout>
             <div className="main">
                 <div className="left-sideBar">
-                    <SideBar active={sidebar} />
+                    <SideBar active={sidebar}/>
                 </div>
-                <div className="content">
-                    <Content sidebar={sidebar} />
-                </div>
+                <div className="content">{hash === "content" && <Content/>}</div>
+                <div>{hash === "myedit" && <Myedit/>}</div>
+                <div>{hash === "share" && <Myshare/>}</div>
+                <div>{hash === "collect" && <Mycollect/>}</div>
+                <div>{hash === "recycle" && <Recycle/>}</div>
             </div>
         </section>
     );

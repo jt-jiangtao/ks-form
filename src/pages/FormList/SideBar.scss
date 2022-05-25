@@ -1,0 +1,17 @@
+.submenu {
+  margin-top: 40px;
+  width: 197px;
+  height: 70px;
+  color: gray;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+  .nvlink {
+    padding: 10px 10px;
+  }
+}
+
+.isactive {
+  background: #F2F5FA;
+}
