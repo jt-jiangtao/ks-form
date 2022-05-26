@@ -1,0 +1,118 @@
+.header-layout__wrapper form-list__header {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav {
+    display: flex;
+    width: 944px;
+    margin: 0 auto;
+
+    .nav-item {
+        list-style-type: none;
+        cursor: pointer;
+        /* text-align: center; */
+        margin-top: 1rem;
+        margin-bottom: 0px;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid #40a9ff;
+        margin-right: 2rem;
+        color: #40a9ff;
+    }
+
+    .nav-active:hover {
+        color: #40a9ff;
+        // border-bottom: 2px solid #40a9ff;
+    }
+
+    .nav-active {
+        list-style-type: none;
+        cursor: pointer;
+        /* text-align: center; */
+        margin-top: 1rem;
+        margin-bottom: 0px;
+        padding-bottom: 1.5rem;
+        margin-right: 2rem;
+
+    }
+}
+
+
+.left-wrapper {
+    display: flex;
+
+    .logo {
+        display: flex;
+    }
+
+    .return {
+        width: 3rem;
+        line-height: 3rem;
+        font-size: 2rem;
+        cursor: pointer;
+    }
+
+    .logo-title {
+        line-height: 3rem;
+    }
+}
+
+.m {
+    background-color: #eee;
+    height: inherit;
+
+    .sideBar {
+        width: 100%;
+        background-color: #fff;
+    }
+    .result {
+        width: 944px;
+        margin: 0 auto -1px;
+        background-color: #fff;
+        min-height: -webkit-calc(100vh - 111px);
+        min-height: calc(100vh - 111px);
+        margin-top: 3rem;
+
+        
+    }
+}
+
+.middle{
+    background-color: #eee;
+    height: inherit;
+
+    .sideBar {
+        width: 100%;
+        background-color: #fff;
+    }
+    .result {
+        width: 944px;
+        margin: 0 auto -1px;
+        background-color: #fff;
+        min-height: -webkit-calc(100vh - 111px);
+        min-height: calc(100vh - 111px);
+        margin-top: 3rem;
+
+        .box {
+            box-sizing: border-box;
+            padding: 25px 40px;
+    
+            .box_item {
+                text-align: center;
+                justify-content: center;
+                margin-top: 2rem;
+    
+                .box_bor{
+                    width: 300px;
+                    height: 350px;
+                    text-align: center;
+                    justify-content: center;
+                    margin: 0 auto;
+                    padding-top: 25px;
+                    border: 1px solid #ddd;
+                }
+            }
+    
+        }
+    }
+    
+}
