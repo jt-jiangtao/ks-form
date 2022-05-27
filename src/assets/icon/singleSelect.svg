@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>未整理/01图标/16px/选择题</title>
+    <g id="未整理/01图标/16px/选择题" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="矩形" stroke="#3D4757" fill-rule="nonzero" x="1.5" y="2.5" width="12" height="12" rx="2"></rect>
+        <g id="Group" transform="translate(7.500000, 7.500000) rotate(-45.000000) translate(-7.500000, -7.500000) translate(3.000000, 5.000000)" fill="#3D4757">
+            <rect id="Rectangle-25" x="0.745252862" y="0.192827368" width="1" height="4.80598452"></rect>
+            <polygon id="Rectangle-25-Copy" points="1 4 8.16718143 4 8.16718143 5 1 5"></polygon>
+        </g>
+    </g>
+</svg>

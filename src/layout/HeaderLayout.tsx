@@ -2,7 +2,6 @@ import React from "react";
 import '@/styles/HeaderLayout.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {refreshUserInfo} from "@/store/actions";
-import classNames from "classnames";
 import {useNavigate} from "react-router";
 
 type HeaderLayoutProps = {

@@ -11,13 +11,14 @@ interface Props {
   type?: ButtonType
   shape?: ButtonShape
   size?: ButtonSize
-  icon?: JSX.Element
+  icon?: JSX.Element | React.ReactNode
   disabled ?: boolean
   block?: boolean
   href?: string
   target?: TargetType
-  onClick?: () => void
+  onClick?: (event : any) => void
   loading?: boolean,
+  className?: string,
   children ?: JSX.Element | string | React.ReactNode
 }
 
@@ -73,16 +74,22 @@ export default class Button extends React.Component<Props> {
     )
   }
 
+  // TODO: PROBLEM click事件传参
+  clickEvent = (event : any)=>{
+    this.props.onClick && this.props.onClick(event)
+  }
+
   render() {
     return (
         <button
-          onClick={()=> this.props.onClick && this.props.onClick()}
+          onClick={this.clickEvent}
           disabled={this.props.disabled}
           className={classNames('btn',
               `btn-${this.props.type}`,
               `btn-${this.props.size}`,
               `btn-${this.props.shape}`,
-              {
+              this.props.className,
+          {
                 'btn-icon-only': this.iconOnly(),
                 'btn-block': this.props.block,
                 'btn-loading': this.props.loading
