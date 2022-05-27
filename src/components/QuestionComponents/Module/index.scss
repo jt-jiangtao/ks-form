@@ -1,0 +1,55 @@
+.module{
+    width: 100%;
+    position: relative;
+}
+
+.module--focus{
+    padding: 20px 24px 40px 24px;
+    margin-top: 20px;
+    box-shadow: 0 4px 16px 0 rgba(192,198,207,.5);
+
+    .module__title{
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translateY(-100%);
+        box-shadow: 0 -3px 5px 0 rgba(192,198,207,.5);
+        width: 92px;
+        padding: 6px 10px;
+        background: #fff;
+        border-radius: 1px;
+        font-size: 12px;
+        color: #3d4757;
+        .module__title--string{
+            text-align: center;
+        }
+    }
+    .module__draggable{
+        position: absolute;
+        top: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+        cursor: move;
+        background-size: cover;
+        height: 18px;
+        width: 18px;
+        background-image: url("../../../assets/icon/draggable.png");
+    }
+    .module__tools{
+        display: flex;
+        align-items: center;
+        position: absolute;
+        justify-content: flex-end;
+        left: 24px;
+        right: 24px;
+        bottom: 8px;
+    }
+}
+
+.module--not-focus{
+    padding: 20px 24px 40px 24px;
+    .module__title, .module__draggable, .module__tools{
+        display: none;
+    }
+}

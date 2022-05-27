@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <g id="2021-新增" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="文件命名方式开启" transform="translate(-850.000000, -842.000000)">
+            <g id="【题型成组模块】/01出题者/选择卡片备份" transform="translate(342.000000, 558.000000)">
+                <g id="【题型单条组件】/00基础-设置备份" transform="translate(24.000000, 278.000000)">
+                    <g id="【题型单条组件】/元素/右下角必填+删除" transform="translate(302.000000, -0.000000)">
+                        <g id="必填" transform="translate(150.000000, 3.000000)">
+                            <g id="Group-2" transform="translate(32.000000, 3.000000)">
+                                <rect id="Rectangle-34" fill="#1488ED" x="0" y="0" width="12" height="12" rx="2"></rect>
+                                <g id="Group" transform="translate(6.460516, 5.603373) rotate(-45.000000) translate(-6.460516, -5.603373) translate(3.460516, 3.103373)" fill="#FFFFFF">
+                                    <path d="M1.2972956e-12,4.28571429 L1.2972956e-12,-1.62092562e-13 L1.71428571,-1.62092562e-13 L1.714,2.571 L6,2.57142857 L6,4.28571429 L1.2972956e-12,4.28571429 Z" id="形状结合"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>切片</title>
+    <g id="·选择题" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="设置互斥选项" transform="translate(-847.000000, -457.000000)" stroke="#C0C6CF">
+            <g id="内容区" transform="translate(251.000000, 139.000000)">
+                <g id="【题型成组模块】/01出题者/选择卡片备份" transform="translate(88.000000, 98.000000)">
+                    <g id="【题型单条组件】/00基础-设置备份" transform="translate(24.000000, 214.000000)">
+                        <g id="【题型单条组件】/元素/右下角必填+删除" transform="translate(302.000000, 0.000000)">
+                            <g id="必填" transform="translate(150.000000, 3.000000)">
+                                <g id="其他控件/复选off备份" transform="translate(32.000000, 3.000000)">
+                                    <rect id="Rectangle-34" x="0.5" y="0.5" width="11" height="11" rx="2"></rect>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
