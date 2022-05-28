@@ -1,0 +1,58 @@
+.tablelist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px  20px;
+  border-bottom: 1px solid #e2e6ed;
+  &:hover{
+    background-color: #F9FAFD;
+  }
+}
+
+.tablelist-title {
+  flex: 1;
+}
+
+.tablelist-time {
+  flex: 2;
+  text-align: center;
+}
+
+.tablelist-status {
+  flex: 1;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  max-width: 140px;
+  font-size: 14px;
+  padding: 0 10px;
+  .draft{
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #fff5e5;
+    color: #ef8d00;
+  }
+  .over {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(235, 84, 81, .05);
+    color: #eb5451;
+  }
+  .collecting {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(20,136,237,.1);
+    color: #1488ed;
+  }
+}
+
+.tablelist-star {
+  flex: 1;
+  text-align: center;
+}
+
+.tablelist-operate {
+  flex: 3;
+  text-align: center;
+}

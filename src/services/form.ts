@@ -8,25 +8,31 @@ export function getFormList(data : IListReq){
 }
 
 export function createForm(data : ICreateFormReq){
-    return API.post('/api/form/create', data)
+    return API.post('/api/form/create',data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function getForm(data : IIdReq){
-    return API.post('/api/form/get', data)
+    return API.post('/api/form/get',data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function deleteForm(data : IIdReq){
-    return API.post('/api/form/delete', data)
+    return API.post('/api/form/delete',data)
+        .then(res => res.data)
+        .catch(res => res.data)
+}
+
+export function starForm(data : IIdReq){
+    return API.post('/api/form/star',data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function cancelStarForm(data : IIdReq){
-    return API.post('/api/form/cancelStar', data)
+    return API.post('/api/form/cancelStar',data)
         .then(res => res.data)
         .catch(res => res.data)
 }
@@ -50,13 +56,13 @@ export function formDetail(data : IIdReq){
 }
 
 export function startCollectForm(data : IIdReq){
-    return API.post(`/api/form/start`, data)
+    return API.post(`/api/form/start`,data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function endCollectForm(data : IIdReq){
-    return API.post(`/api/form/end`, data)
+    return API.post(`/api/form/end`,data)
         .then(res => res.data)
         .catch(res => res.data)
 }
