@@ -1,5 +1,6 @@
 import {GuideRouteObject} from "@/router/types/router";
 import {lazy} from "react";
+import { getCache } from "@/utils/localStorage";
 const Signin = lazy(()=> import('@/pages/Signin'))
 const Signup = lazy(()=> import('@/pages/Signup'))
 const FormList = lazy(()=> import('@/pages/FormList'))
@@ -76,7 +77,7 @@ const routes : GuideRouteObject[] = [
 
 function beforeEach(pathname: string, meta: any, last: string) {
     if (meta.redirect)return meta.redirect
-    // const hasLogin = getCache('login') === 'true'
+    const hasLogin = getCache('login') === 'true'
     // 权限校验
     // 已登录跳转
     // if (meta.log && !hasLogin) return '/signin'

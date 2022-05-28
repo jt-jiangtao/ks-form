@@ -4,10 +4,10 @@ import {useLocation, useNavigate} from "react-router";
 import Preview from "@/pages/NewFormCreate/Preview";
 import Create from "@/pages/NewFormCreate/Create";
 
-export default function NewFormCreate(){
+export default function NewFormCreate() {
     const location = useLocation()
     const navigate = useNavigate()
-    const getHash = ()=> {
+    const getHash = () => {
         if (!location.hash) {
             navigate({
                 hash: "#data"
@@ -22,14 +22,14 @@ export default function NewFormCreate(){
         return hash
     }
     let [hash, setHash] = useState(getHash)
-    useEffect(()=>{
+    useEffect(() => {
         setHash(getHash)
     }, [location.hash])
 
     return (
         <DataInfoProvider>
             {
-                hash === "preview" ? <Preview /> : <Create />
+                hash === "preview" ? <Preview/> : <Create/>
             }
         </DataInfoProvider>
     )

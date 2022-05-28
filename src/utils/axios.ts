@@ -14,7 +14,7 @@ const createAxios = (config : any) => {
         (success) => success,
         (error) => {
             // 统一错误处理
-            message.error(error.response.data.msg)
+            // message.error(error.response.data.msg)
             // 拦截未登录
             // if (error.response.Create.stat === 'ERR_USER_NOT_LOGIN' && window.location.pathname !== '/signin') {
             //     window.location.href = `/signin?cb=${window.location.pathname}`
