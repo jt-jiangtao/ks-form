@@ -11,7 +11,10 @@ export default function SideBar(props: SideBarProps){
     const navigate = useNavigate()
     return (
         <>
-            <Button icon={<PlusOutlined style={{fontWeight: "bolder", fontSize: 16}} />} type="primary" onClick={()=> navigate("/new-form-create")}>新建</Button>
+            <Button icon={<PlusOutlined style={{fontWeight: "bolder", fontSize: 16}} />} type="primary" onClick={()=> navigate({
+                pathname: "/new-form-create",
+                hash: "data",
+            })}>新建</Button>
         </>
     )
 }

@@ -1,0 +1,113 @@
+.preview {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #f2f4f7;
+    overflow: auto;
+}
+
+.preview-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    .left-wrapper {
+        height: 100%;
+    }
+}
+
+.preview-back {
+    cursor: pointer;
+    display: flex;
+    height: 100%;
+    align-items: center;
+
+    .back-icon {
+        width: 16px;
+        height: 16px;
+        margin: 0 16px 0 -4px;
+        color: #A0ACBF;
+    }
+
+    .folder-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .create-title {
+        font-size: 18px;
+        font-weight: 500;
+        color: #3c414b;
+        margin: 0.67em 0;
+    }
+}
+
+.window{
+    display: flex;
+    align-items: center;
+
+    img{
+        width: 24px;
+        padding: 16px 0;
+        margin: 0 13px;
+        cursor: pointer;
+    }
+    .img-active{
+        border-bottom: 2px solid #1488ed;
+        padding-bottom: 14px;
+    }
+}
+
+.preview-container{
+    padding-top: 72px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 800px;
+    //overflow: hidden;
+    .pc-preview-content{
+        width: 775px;
+        min-height: calc(100vh - 156px);
+        background-color: #fff;
+        overflow: auto;
+        padding: 48px 102px 90px;
+        display: flex;
+        flex-direction: column;
+    }
+    .preview-tools{
+        display: flex;
+        justify-content: center;
+        padding: 24px 0;
+        .btn{
+            width: 156px;
+        }
+        .btn:not(:first-child){
+            margin-left: 24px;
+        }
+    }
+}
+
+.phone-preview-container{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .phone-preview-content{
+        background-image: url("../../../assets/icon/phone-iframe.png");
+        background-size: 390px 610px;
+        transform: scale(1.1);
+        background-repeat: no-repeat;
+        width: 390px;
+        height: 610px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

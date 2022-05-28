@@ -23,13 +23,17 @@ export default function EditInput(props: EditInputProps){
         else textarea.current?.focus()
     },[props])
 
-    const textareaValueChange = (event : any) => {
+    const textareaValueChange = () => {
       setValue(textarea.current?.value || '')
         if (textarea.current){
             textarea.current.style.height = '18px'
             textarea.current.style.height = (textarea.current?.scrollHeight || 18) + 'px'
         }
     }
+
+    useEffect(()=>{
+        textareaValueChange()
+    }, [])
 
     const inputDataChange = () => {
         props.freshData(props.index, {

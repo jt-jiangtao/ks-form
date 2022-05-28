@@ -1,13 +1,13 @@
 // 表单
 export interface IForm {
-  id: string;
+  id?: string;
   title: string;
   subTitle: string;
-  status: EFormStatus;
-  ctime: number;
-  utime: number;
-  author: string;
-  isStar: boolean
+  status?: EFormStatus;
+  ctime?: number;
+  utime?: number;
+  author?: string;
+  isStar?: boolean
   problems: IProblem<TProblemType>[];
 }
 

@@ -1,5 +1,11 @@
-export default function WatchSubTitle(){
+type WatchSubTitleProps = {
+    title : string
+}
+
+export default function WatchSubTitle(props : WatchSubTitleProps){
     return (
-        <div>WatchDescribe</div>
-    )
+        <div className="watch-subTitle-container">
+            <div className="watch-subTitle">{props.title}</div>
+        </div>
+)
 }

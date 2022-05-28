@@ -18,7 +18,7 @@
     }
 }
 
-.over-btn .btn{
+.over-btn .btn-white{
     color: #3d4757;
     border: 1px solid #e7e9eb;
     &:hover{
@@ -26,6 +26,10 @@
         background-color: #f9fafd;
         border: 1px solid #e7e9eb;
     }
+}
+
+.button-hidden{
+    display: none;
 }
 
 @media screen and (max-width: 1217px) {

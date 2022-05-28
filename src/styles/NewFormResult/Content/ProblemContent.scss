@@ -1,0 +1,24 @@
+.problem-content-container{
+    padding: 48px 102px 90px;
+}
+
+.problem-footer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 0;
+    width: 930px;
+    height: 130px;
+    transform: translateX(-50%);
+    background-color: rgb(255, 255, 255);
+    .edit-btn{
+        min-width: 156px;
+        margin: 17px 0 21px;
+    }
+    .write-btn{
+        height: 21px;
+    }
+}

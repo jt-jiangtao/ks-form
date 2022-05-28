@@ -17,7 +17,7 @@ import {nanoid} from "nanoid";
 export default function QuestionList() {
     const {data, setData, changeFocus} = useContext(DataInfoContext)
 
-    const addData = (newData : IProblem<TProblemType>) => {
+    const addData = (newData : IProblem<TProblemType> & {isNew: boolean}) => {
         let copy = JSON.parse(JSON.stringify(data.problems))
         newData.id = nanoid(10)
         copy.push(newData)
@@ -32,7 +32,8 @@ export default function QuestionList() {
         addData({
             title: '',
             type: 'input',
-            required: false
+            required: false,
+            isNew: true
         })
     }
 
@@ -41,7 +42,8 @@ export default function QuestionList() {
         addData({
             title: '姓名',
             type: 'input',
-            required: true
+            required: true,
+            isNew: true
         })
     }
 

@@ -1,39 +1,65 @@
 import HeaderLayout from "@/layout/HeaderLayout";
-import logo from "@/assets/icon/logo.svg";
-import { useLocation, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import SideBar from "@/pages/NewFormResult/SideBar";
+import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import NavigateBar from "@/pages/NewFormResult/NavigateBar";
 import "@/styles/NewFormResult/index.scss";
+import {LeftOutlined} from "@ant-design/icons";
+import folder from "@/assets/icon/folder.svg";
+import {useLocation} from "react-router";
+import Content from "@/pages/NewFormResult/Content";
+import {IForm} from "@/types/service/model";
+import {getForm} from "@/services";
+import {parseSearch} from "@/utils/uri";
+
 export default function NewFormResult() {
-  let location = useLocation();
-  let sidebarHash = ["mycreate", "share"];
-  const parseSideBar = () => {
-    if (location.hash.slice(1).length === 0) return "mycreate";
-    else if (sidebarHash.indexOf(location.hash.slice(1)) !== -1)
-      return location.hash.slice(1);
-    return "mycreate";
-  };
-  let [sidebar] = useState(parseSideBar);
-  const navigate = useNavigate();
-  return (
-    <section>
-      <HeaderLayout className="form-list__header">
-        <div className="return" onClick={() => navigate("/new-form-list")}>
-          〈
+    const navigate = useNavigate();
+    const location = useLocation()
+    const getHash = () => {
+        if (!location.hash) {
+            navigate({
+                hash: "#share"
+            })
+        }
+        let hash = location.hash.slice(1)
+        if (["share", "data", "problem"].indexOf(hash) === -1) {
+            navigate({
+                hash: "#share",
+            })
+        }
+        return hash
+    }
+    let [hash, setHash] = useState(getHash)
+    let [form, setForm] = useState<IForm>()
+    useEffect(() => {
+        setHash(getHash)
+    }, [location.hash])
+    useEffect(()=>{
+        getForm({
+            id: parseSearch(location.search, 'id')
+        }).then(res => {
+            setForm(res.data.item)
+        })
+    }, [location.search])
+
+    return (
+        <div className="result-container">
+            <HeaderLayout className="result-header">
+                <div className="preview-back">
+                    <LeftOutlined onClick={() => navigate("/form-list")} className="back-icon"/>
+                    <img className="folder-icon" src={folder}/>
+                    <h1 className="create-title">{form?.title || '新建表单'}</h1>
+                </div>
+            </HeaderLayout>
+            <main>
+                <div className="sideBar">
+                    <NavigateBar active={hash}/>
+                </div>
+                <div className="result-content-scroll">
+                    <div className="result-content">
+                        <Content active={hash} data={form} />
+                    </div>
+                </div>
+            </main>
         </div>
-        <div className="logo-title">
-          <div className="logo">
-            <img src={logo} />
-            <h1 className="title">这里是上个页面传进来的表的名字</h1>
-          </div>
-        </div>
-      </HeaderLayout>
-      <main className="m">
-        <div className="sideBar">
-          <SideBar active={sidebar} />
-        </div>
-        <div className="result">Result</div>
-      </main>
-    </section>
-  );
+    );
 }

@@ -1,0 +1,86 @@
+.data-content{
+    margin-top: 16px;
+    .data-static{
+        display: flex;
+        flex-direction: column;
+        .count{
+            margin-bottom: 14px;
+            font-size: 20px;
+            color: #3d4757;
+        }
+        .switch{
+            display: flex;
+            flex-direction: row;
+        }
+    }
+}
+
+.switch{
+    .operate-color{
+        background: #f2f4f7;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        color: #3d4757;
+        border-radius: 2px;
+        font-size: 12px;
+    }
+    .back{
+        cursor: pointer;
+        width: 20px;
+        color: #3d4757;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 16px;
+        svg{
+            width: 10px;
+            height: 10px;
+        }
+    }
+    .current{
+        font-size: 14px;
+        color: #3d4757;
+        line-height: 1;
+        input{
+            padding: 4px;
+            margin: 0 4px;
+            height: 20px;
+            font-size: 14px;
+            width: 46px;
+            border: none;
+            border-radius: 2px;
+            outline: none;
+            text-align: center;
+            overflow: hidden;
+            background-color: #f2f4f7;
+        }
+    }
+    .next{
+        cursor: pointer;
+        width: 20px;
+        color: #3d4757;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 16px;
+        svg{
+            width: 10px;
+            height: 10px;
+        }
+    }
+}
+
+.opacity7{
+    opacity: .7
+}
+
+.get-form-content{
+    border-top: 1px solid #e7e9eb;
+    margin-top: 20px;
+    .form-time{
+        display: flex;
+        padding: 16px 0;
+        color: #767c85;
+    }
+}

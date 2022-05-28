@@ -6,6 +6,7 @@ const FormList = lazy(()=> import('@/pages/FormList'))
 const NewFormCreate = lazy(()=> import('@/pages/NewFormCreate'))
 const NewFormResult = lazy(()=> import('@/pages/NewFormResult'))
 const Write = lazy(()=> import('@/pages/Write'))
+const PhoneWrite = lazy(()=> import('@/pages/PhoneWrite'))
 const Account = lazy(()=> import('@/pages/Account'))
 
 const routes : GuideRouteObject[] = [
@@ -48,7 +49,14 @@ const routes : GuideRouteObject[] = [
         path: "/w/:id",
         element: <Write />,
         meta: {
-            log: true
+            log: false
+        }
+    },
+    {
+        path: "/m/w/:id",
+        element: <PhoneWrite />,
+        meta: {
+            log: false
         }
     },
     {

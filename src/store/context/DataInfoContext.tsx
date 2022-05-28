@@ -4,20 +4,21 @@ import {IProblem, TProblemType, TResult, TSetting} from "@/types/service/model";
 type DataInfo = {
     title: string,
     subTitle: string,
-    problems: IProblem<TProblemType>[]
+    problems: (IProblem<TProblemType> & { isNew: boolean })[];
 }
 
 type FocusType = 'title' | 'subTitle' | number | ''
 
 export const defaultDataInfo: DataInfo = {
-    "title": "标题",
-    "subTitle": "子标题",
+    "title": "",
+    "subTitle": "",
     "problems": [
         {
-            "title": "填写姓名",
+            "title": "",
             "type": "input",
-            "required": true,
-            "id": "a0c5b631-fdcb-416a-8a56-7ad89589cebf"
+            "required": false,
+            "id": "",
+            isNew: true
         }
     ]
 }
@@ -41,6 +42,7 @@ type DataInfoContextProps = {
 }
 
 export const DataInfoProvider = (props: DataInfoContextProps) => {
+
     const [data, setContextData] = useState<DataInfo>(defaultDataInfo)
     const setData = (newData : any) : void=>{
         setContextData({...data, ...newData})
