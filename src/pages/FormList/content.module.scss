@@ -6,17 +6,17 @@
   display: flex;
   flex-direction: column;
 
-  .form-header {
+  .form_header {
     display: flex;
     font-size: 18px;
     justify-content: space-between;
     border-bottom: 1px solid #e2e6ed;
 
-    .form-mycreate {
+    .form_mycreate {
       margin: 15px 0;
     }
 
-    .form-star {
+    .form_star {
       color: grey;
       margin: 10px 30px;
       display: flex;
@@ -29,39 +29,39 @@
   }
 }
 
-.form-list {
+.form_list {
   padding: 20px;
   border-bottom: 1px solid #e2e6ed;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
-  .list-title {
+  .list_title {
     flex: 1;
   }
 
-  .list-time {
+  .list_time {
     flex: 2;
     text-align: center;
   }
 
-  .list-status {
+  .list_status {
     flex: 1;
     text-align: center;
   }
 
-  .list-star {
+  .list_star {
     flex: 1;
     text-align: center;
   }
 
-  .list-operate {
+  .list_operate {
     flex: 3;
     text-align: center;
   }
 }
 
-.form-pagination {
+.form_pagination {
   position: absolute;
   margin-top: 10px;
   right: 25px;

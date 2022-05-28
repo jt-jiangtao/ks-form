@@ -1,7 +1,7 @@
 import React, { useState, FC, useMemo, memo } from 'react';
 import { EllipsisOutlined, LeftOutlined, RightOutlined, DownOutlined } from '@ant-design/icons';
 import  Select  from "../Select/Select";
-import "./pagination.scss";
+import style from "./pagination.module.scss";
 
 interface PaginationProps {
     /**
@@ -215,15 +215,15 @@ const Pagination: FC<PaginationProps> = (props) => {
 
 
     return (
-        <div className="pagination">
-            <div className={nowIndex === 1 ? `prev disabled` : `prev`} onClick={prevPage}>
+        <div className={style.pagination}>
+            <div className={nowIndex === 1 ? `${style.prev} ${style.disabled}` : `${style.prev}`} onClick={prevPage}>
                 <LeftOutlined />
             </div>
-            <div className={nowIndex === 1 ? `actived numberBox` : `numberBox`} onClick={changePage(1)}>
+            <div className={nowIndex === 1 ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`} onClick={changePage(1)}>
                 1
             </div>
             {nowIndex > 4 && totalPage > 6 && (
-                <div className="numberBox" onClick={prevFivePage}>
+                <div className={style.numberBox} onClick={prevFivePage}>
                     <EllipsisOutlined />
                 </div>
             )}
@@ -233,7 +233,7 @@ const Pagination: FC<PaginationProps> = (props) => {
                 pageRenderArray.map((item, index) => {
                     return (
                         <div
-                            className={nowIndex === item ? `actived numberBox` : `numberBox `}
+                            className={nowIndex === item ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`}
                             key={index}
                             onClick={changePage(item)}
                         >
@@ -246,7 +246,7 @@ const Pagination: FC<PaginationProps> = (props) => {
                     {
                         return (
                             <div
-                                className={nowIndex === item ? `actived numberBox` : `numberBox`}
+                                className={nowIndex === item ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`}
                                 key={index}
                                 onClick={changePage(item)}
                             >
@@ -256,20 +256,20 @@ const Pagination: FC<PaginationProps> = (props) => {
                     }
                 })}
             {totalPage - nowIndex >= 4 && totalPage > 6 && (
-                <div className="numberBox" onClick={nextFivePage}>
+                <div className={style.numberBox} onClick={nextFivePage}>
                     <EllipsisOutlined />
                 </div>
             )}
             {totalPage > 1 && (
                 <div
-                    className={nowIndex === totalPage ? `actived numberBox` : `numberBox`}
+                    className={nowIndex === totalPage ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`}
                     onClick={changePage(totalPage)}
                 >
                     {totalPage}
                 </div>
             )}
             <div
-                className={nowIndex === totalPage || totalPage <= 1 ? `next disabled` : `next`}
+                className={nowIndex === totalPage || totalPage <= 1 ? `${style.next} ${style.disabled}` : `${style.next}`}
                 onClick={nextPage}
             >
                 <RightOutlined />
@@ -314,9 +314,9 @@ const Pagination: FC<PaginationProps> = (props) => {
                 />
             )}
             {showJumpInput && (
-                <div className="jumpBox">
+                <div className={style.jumpBox}>
                     <span>跳至</span>
-                    <input type="text" className="jump" onKeyUp={jumpPageNum}></input>
+                    <input type="text" className={style.jump} onKeyUp={jumpPageNum}/>
                     <span>页</span>
                 </div>
             )}

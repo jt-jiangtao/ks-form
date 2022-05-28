@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {deleteForm, endCollectForm, getForm, getFormList, startCollectForm} from "@/services";
 import React from "react";
 import {StarOutlined} from "@ant-design/icons";
-import "./content.scss"
+import style from "./content.module.scss"
 import Table from "@/components/Table/Table";
 import {IForm} from "@/types/service/model";
 import message from "@/components/Message";
@@ -106,10 +106,10 @@ export default function Content(props: ContentProps) {
     }
     return (
         <>
-            <div className="form">
-                <div className="form-header">
-                    <div className="form-mycreate">我创建的</div>
-                    <div className="form-star" onClick={onlyStar}>
+            <div className={style.form}>
+                <div className={style.form_header}>
+                    <div className={style.form_mycreate}>我创建的</div>
+                    <div className={style.form_star } onClick={onlyStar}>
                         <img src={showStar ?
                             require('../../assets/images/star-yellow.png') :
                             require('../../assets/images/star.png')
@@ -118,12 +118,12 @@ export default function Content(props: ContentProps) {
                         仅展示星标
                     </div>
                 </div>
-                <div className="form-list">
-                    <div className="list-title">表单名称</div>
-                    <div className="list-time">创建时间</div>
-                    <div className="list-status">状态</div>
-                    <div className="list-star">标星</div>
-                    <div className="list-operate">操作</div>
+                <div className={style.form_list}>
+                    <div className={style.list_title}>表单名称</div>
+                    <div className={style.list_time}>创建时间</div>
+                    <div className={style.list_status }>状态</div>
+                    <div className={style.list_star}>标星</div>
+                    <div className={style.list_operate}>操作</div>
                 </div>
                 {
                     tableItem.map((item, index) => {
@@ -143,7 +143,7 @@ export default function Content(props: ContentProps) {
                     })
                 }
             </div>
-            <div className="form-pagination">
+            <div className={style.form_pagination }>
             <Pagination total={total}
                         showSizeChanger={true}
                         showJumpInput={false}

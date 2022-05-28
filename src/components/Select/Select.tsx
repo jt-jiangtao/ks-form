@@ -1,6 +1,6 @@
 import React, {FC, useMemo, createRef, useEffect, useState, useCallback, memo} from 'react';
 import {DownOutlined, LoadingOutlined, CloseOutlined} from '@ant-design/icons';
-import './select.scss';
+import style from './select.module.scss';
 
 interface Options {
     label: String | number;
@@ -151,11 +151,11 @@ const Select: FC<SelectProps> = (props) => {
 
     return showSearch ? (
         <>
-            <div className="select" style={{...ownsWidth, ...disabledStyle}}>
-                <div className="selected">
+            <div className={style.select} style={{...ownsWidth, ...disabledStyle}}>
+                <div className={style.selected}>
                     <input
                         type="text"
-                        className="selected"
+                        className={style.selected}
                         value={selected}
                         placeholder={placeholder as string}
                         onClick={toggleOptions}
@@ -167,12 +167,12 @@ const Select: FC<SelectProps> = (props) => {
                         <DownOutlined onClick={toggleOptions}/>
                     )}
                 </div>
-                <div className="selectOptions" style={ownsWidth} ref={optionRef}>
+                <div className={style.selectOptions} style={ownsWidth} ref={optionRef}>
                     {inputFilterOtpions.map((s) => {
                         return (
                             <div
                                 key={s.label as any}
-                                className="option"
+                                className={style.option}
                                 style={
                                     s.disabled ? {cursor: 'not-allowed', background: 'rgb(238, 238, 238)'} : {}
                                 }
@@ -186,21 +186,21 @@ const Select: FC<SelectProps> = (props) => {
             </div>
         </>
     ) : (
-        <div className="select" style={{...ownsWidth, ...disabledStyle}}>
-            <div className="selected" onClick={toggleOptions}>
+        <div className={style.select} style={{...ownsWidth, ...disabledStyle}}>
+            <div className={style.selected} onClick={toggleOptions}>
                 {selected ? (
-                    <div className="size">{selected}</div>
+                    <div className={style.size}>{selected}</div>
                 ) : (
-                    (placeholder && <div className="placeholder">{placeholder}</div>) || <div/>
+                    (placeholder && <div className={style.placeholder}>{placeholder}</div>) || <div/>
                 )}
                 {loading ? <LoadingOutlined/> : <DownOutlined/>}
             </div>
-            <div className="selectOptions" style={ownsWidth} ref={optionRef}>
+            <div className={style.selectOptions} style={ownsWidth} ref={optionRef}>
                 {option.map((s) => {
                     return (
                         <div
                             key={s.label as any}
-                            className={s.value == selectedValue ? 'select-option' : 'option'}
+                            className={s.value == selectedValue ? style.select_option : style.option}
                             style={s.disabled ? {cursor: 'not-allowed', background: 'rgb(238, 238, 238)'} : {}}
                             onClick={(e) => changeOptions(s as Options, e)}
                         >
