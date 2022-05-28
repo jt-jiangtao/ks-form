@@ -11,7 +11,6 @@ import {
 } from "@ant-design/icons";
 import "./SideBar.scss"
 import {NavLink} from "react-router-dom";
-import {login} from "@/services";
 import classNames from "classnames";
 
 type SideBarProps = {
@@ -30,11 +29,11 @@ export default function SideBar(props: SideBarProps) {
             {/*        onClick={() => navigate("/new-form-create")}*/}
             {/*        style={{marginTop: "15px", borderRight: "solid 4px #40A9FF"}}>表单列表</Button>*/}
             <div className="submenu">
-                <NavLink to="#content"  className={classNames('nvlink', {
-                    'isactive': hash === 'content'
+                <NavLink to="#mycreate" className={classNames('nvlink', {
+                    'isactive': hash === 'mycreate'
                 })}>
                     <PlusSquareOutlined style={{marginRight: 10, fontSize: 14}}/>
-                    我创建的
+                    表单列表
                 </NavLink>
                 <NavLink to="#myedit" className={classNames('nvlink', {
                     'isactive': hash === 'myedit'

@@ -1,12 +1,13 @@
-import React, { FC, useMemo, createRef, useEffect, useState, useCallback } from 'react';
-import { DownOutlined, LoadingOutlined, CloseOutlined } from '@ant-design/icons';
-import style from './select.module.scss';
+import React, {FC, useMemo, createRef, useEffect, useState, useCallback, memo} from 'react';
+import {DownOutlined, LoadingOutlined, CloseOutlined} from '@ant-design/icons';
+import './select.scss';
 
 interface Options {
     label: String | number;
     value: String | number;
     disabled?: Boolean;
 }
+
 interface SelectProps {
     /**
      * @description 选择器数据
@@ -56,15 +57,31 @@ interface SelectProps {
 }
 
 const Select: FC<SelectProps> = (props) => {
-    const { option, width, placeholder, disabled, loading, showSearch, clearable, handleSelectCallback, handleTextChange } = props;
+    const {
+        option,
+        width,
+        placeholder,
+        disabled,
+        loading,
+        showSearch,
+        clearable,
+        handleSelectCallback,
+        handleTextChange,
+    } = props;
     const [selected, setSelected] = useState<string | number | any>('');
+    const [selectedValue, setSelectedValue] = useState<string | number | any>('');
     const optionRef = createRef() as any;
 
     useEffect(() => {
-        optionRef.current.style.height = `0px`;
+        optionRef.current.height = `0px`;
+        // console.log(option);
     }, []);
+    useEffect(() => {
+        console.log(selected);
+    }, [selected]);
 
-    const ownsWidth = useMemo(() => {           //传参宽度
+    const ownsWidth = useMemo(() => {
+        //传参宽度
         if (width) {
             return {
                 width: `${width}px`,
@@ -72,7 +89,8 @@ const Select: FC<SelectProps> = (props) => {
         }
         return {};
     }, [width]);
-    const disabledStyle = useMemo(() => {       //禁用状态
+    const disabledStyle = useMemo(() => {
+        //禁用状态
         if (disabled) {
             return {
                 cursor: 'not-allowed',
@@ -81,10 +99,12 @@ const Select: FC<SelectProps> = (props) => {
         }
     }, [disabled]);
 
-    const toggleOptions = (e: any) => {         //切换下拉
+    const toggleOptions = (e: any) => {
+        //切换下拉
         e.stopPropagation();
         if (disabled) return;
-        if (optionRef.current.style.height === '0px') {
+        console.log(optionRef.current.style.height);
+        if (optionRef.current.style.height === '0px' || optionRef.current.style.height === '') {
             if (showSearch) {
                 optionRef.current.style.height = `${inputFilterOtpions.length * 100}%`;
             } else {
@@ -94,81 +114,68 @@ const Select: FC<SelectProps> = (props) => {
             optionRef.current.style.height = '0px';
         }
     };
-    const changeOptions = (v: Options, e: any) => {     //选择选项
+    const changeOptions = (v: Options, e: any) => {
+        //选择选项
         e.stopPropagation();
         if (v.disabled) return;
         optionRef.current.style.height = '0px';
         setSelected(v.label);
+        setSelectedValue(v.value);
         if (handleSelectCallback) {
-            handleSelectCallback(v.value);
+            handleSelectCallback(v);
         }
     };
-    const inputFilterOtpions = useMemo(() => {          //输入状态options过滤
-        return option.filter(item => {
-            return (item.label as string).includes(selected)
-        })
-    }, [option, selected])
-    const handleInputChange = useCallback((e: any) => {       //输入后的回调
-        setSelected(e.target.value);
-        optionRef.current.style.height = option.filter(item => {
-            return (item.label as string).includes(e.target.value)
-        }).length * 100 + "%";
-        if(handleTextChange) {
-            handleTextChange(e.target.value);
-        }
-    }, [selected])
+    const inputFilterOtpions = useMemo(() => {
+        //输入状态options过滤
+        return option.filter((item) => {
+            return (item.label as string).includes(selected);
+        });
+    }, [option, selected]);
+    const handleInputChange = useCallback(
+        (e: any) => {
+            //输入后的回调
+            setSelected(e.target.value);
+            console.log(selected);
+            optionRef.current.style.height =
+                option.filter((item) => {
+                    return (item.label as string).includes(e.target.value);
+                }).length *
+                100 +
+                '%';
+            if (handleTextChange) {
+                handleTextChange(e.target.value);
+            }
+        },
+        [selected],
+    );
 
-    return (
-        showSearch
-            ?
-            <>
-                <div className={style.select} style={{ ...ownsWidth, ...disabledStyle }}>
-                    <div className={style.selected}>
-                        <input type="text" className={style.selected} value={selected} placeholder={placeholder as string} onClick={toggleOptions} onChange={(e) => handleInputChange(e)} />
-                        {
-                            clearable
-                                ?
-                                <CloseOutlined onClick={() => setSelected('')} />
-                                :
-                                <DownOutlined  onClick={toggleOptions}/>
-                        }
-                    </div>
-                    <div className={style.selectOptions} style={ownsWidth} ref={optionRef}>
-                        {inputFilterOtpions.map((s) => {
-                            return (
-                                <div
-                                    key={s.label as any}
-                                    className={style.option}
-                                    style={s.disabled ? { cursor: 'not-allowed', background: 'rgb(238, 238, 238)' } : {}}
-                                    onClick={(e) => changeOptions(s as Options, e)}
-                                >
-                                    {s.label}
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
-            </>
-            :
-            <div className={style.select} style={{ ...ownsWidth, ...disabledStyle }}>
-                <div className={style.selected} onClick={toggleOptions}>
-                    {selected ? (
-                        <div className={style.size}>{selected}</div>
+    return showSearch ? (
+        <>
+            <div className="select" style={{...ownsWidth, ...disabledStyle}}>
+                <div className="selected">
+                    <input
+                        type="text"
+                        className="selected"
+                        value={selected}
+                        placeholder={placeholder as string}
+                        onClick={toggleOptions}
+                        onChange={(e) => handleInputChange(e)}
+                    />
+                    {clearable ? (
+                        <CloseOutlined onClick={() => setSelected('')}/>
                     ) : (
-                            placeholder && <div className={style.placeholder}>{placeholder}</div>
-                        )
-                        ||
-                        <div />
-                    }
-                    {loading ? <LoadingOutlined /> : <DownOutlined />}
+                        <DownOutlined onClick={toggleOptions}/>
+                    )}
                 </div>
-                <div className={style.selectOptions} style={ownsWidth} ref={optionRef}>
-                    {option.map((s) => {
+                <div className="selectOptions" style={ownsWidth} ref={optionRef}>
+                    {inputFilterOtpions.map((s) => {
                         return (
                             <div
                                 key={s.label as any}
-                                className={style.option}
-                                style={s.disabled ? { cursor: 'not-allowed', background: 'rgb(238, 238, 238)' } : {}}
+                                className="option"
+                                style={
+                                    s.disabled ? {cursor: 'not-allowed', background: 'rgb(238, 238, 238)'} : {}
+                                }
                                 onClick={(e) => changeOptions(s as Options, e)}
                             >
                                 {s.label}
@@ -177,6 +184,32 @@ const Select: FC<SelectProps> = (props) => {
                     })}
                 </div>
             </div>
+        </>
+    ) : (
+        <div className="select" style={{...ownsWidth, ...disabledStyle}}>
+            <div className="selected" onClick={toggleOptions}>
+                {selected ? (
+                    <div className="size">{selected}</div>
+                ) : (
+                    (placeholder && <div className="placeholder">{placeholder}</div>) || <div/>
+                )}
+                {loading ? <LoadingOutlined/> : <DownOutlined/>}
+            </div>
+            <div className="selectOptions" style={ownsWidth} ref={optionRef}>
+                {option.map((s) => {
+                    return (
+                        <div
+                            key={s.label as any}
+                            className={s.value == selectedValue ? 'select-option' : 'option'}
+                            style={s.disabled ? {cursor: 'not-allowed', background: 'rgb(238, 238, 238)'} : {}}
+                            onClick={(e) => changeOptions(s as Options, e)}
+                        >
+                            {s.label}
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
     );
 };
-export default Select;
+export default memo(Select);

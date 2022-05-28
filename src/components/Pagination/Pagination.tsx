@@ -1,7 +1,7 @@
-import React, { useState, useEffect, FC, useMemo, memo } from 'react';
+import React, { useState, FC, useMemo, memo } from 'react';
 import { EllipsisOutlined, LeftOutlined, RightOutlined, DownOutlined } from '@ant-design/icons';
-import  Select  from '../Select/Select';
-import style from './pagination.module.scss';
+import  Select  from "../Select/Select";
+import "./pagination.scss";
 
 interface PaginationProps {
     /**
@@ -32,10 +32,10 @@ interface PaginationProps {
 }
 const Pagination: FC<PaginationProps> = (props) => {
     const { changePageCallback, total, pageSizeOptions, showJumpInput, showSizeChanger } = props;
+
     const [nowIndex, setNowIndex] = useState<number>(1);
     const [pageRenderArray, setPageRenderArray] = useState<Array<number>>([]);
     const [sizePage, setSizePage] = useState<number>(pageSizeOptions ? pageSizeOptions[0] : 10);
-    const [showSizeOptions, setShowSizeOptions] = useState(false);
 
     const totalPage = useMemo(() => {
         setNowIndex(1);
@@ -54,10 +54,6 @@ const Pagination: FC<PaginationProps> = (props) => {
         }
         return Math.ceil(total / sizePage);
     }, [total, sizePage]);
-    useEffect(() => {
-        console.log(typeof nowIndex);
-    }, [nowIndex]);
-
     //点击改页码
     const changePage = (pageNum: number) => {
         return () => {
@@ -192,63 +188,56 @@ const Pagination: FC<PaginationProps> = (props) => {
                 //超出页码范围，不挑
                 return (e.target.value = '');
             }
-            if (jumpPage > 6 && jumpPage < totalPage - 6) {
-                setPageRenderArray([jumpPage - 2, jumpPage - 1, jumpPage, jumpPage + 1, jumpPage + 2]);
-            } else if (jumpPage - 5 < 0) {
+            if (Math.ceil(total / sizePage) > 6) {
                 setPageRenderArray([2, 3, 4, 5, 6]);
-            } else if (jumpPage + 5 > totalPage) {
-                setPageRenderArray([
-                    totalPage - 5,
-                    totalPage - 4,
-                    totalPage - 3,
-                    totalPage - 2,
-                    totalPage - 1,
-                ]);
+            } else {
+                if (Math.ceil(total / sizePage) > 2) {
+                    const array = new Array((Math.ceil(total / sizePage) as number) - 2).fill(0);
+                    array.forEach((item, index) => {
+                        array[index] = index + 2;
+                    });
+                    setPageRenderArray(array);
+                } else {
+                    setPageRenderArray([]);
+                }
             }
+            console.log(pageRenderArray, totalPage);
             setNowIndex(jumpPage);
             changePageCallback(jumpPage);
             e.target.value = '';
         }
     };
     //select回调
-    const handleSelectCallback = (pageSize: number) => {
-        setSizePage(pageSize);
+    const handleSelectCallback = (pageSize: any) => {
+        console.log(pageSize.value);
+        setSizePage(pageSize.value);
     };
 
+
     return (
-        <div className={style.pagination}>
-            <div
-                className={nowIndex === 1 ? `${style.prev} ${style.disabled}` : `${style.prev}`}
-                onClick={prevPage}
-            >
+        <div className="pagination">
+            <div className={nowIndex === 1 ? `prev disabled` : `prev`} onClick={prevPage}>
                 <LeftOutlined />
             </div>
-            <div
-                className={nowIndex === 1 ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`}
-                onClick={changePage(1)}
-            >
+            <div className={nowIndex === 1 ? `actived numberBox` : `numberBox`} onClick={changePage(1)}>
                 1
             </div>
             {nowIndex > 4 && totalPage > 6 && (
-                <div className={style.numberBox} onClick={prevFivePage}>
+                <div className="numberBox" onClick={prevFivePage}>
                     <EllipsisOutlined />
                 </div>
             )}
 
             {totalPage <= 4 &&
                 pageRenderArray.length >= 1 &&
-                pageRenderArray.map((index) => {
+                pageRenderArray.map((item, index) => {
                     return (
                         <div
-                            className={
-                                nowIndex === index + 2
-                                    ? `${style.actived} ${style.numberBox}`
-                                    : `${style.numberBox}`
-                            }
+                            className={nowIndex === item ? `actived numberBox` : `numberBox `}
                             key={index}
-                            onClick={changePage(index + 2)}
+                            onClick={changePage(item)}
                         >
-                            {index + 2}
+                            {item}
                         </div>
                     );
                 })}
@@ -257,9 +246,7 @@ const Pagination: FC<PaginationProps> = (props) => {
                     {
                         return (
                             <div
-                                className={
-                                    nowIndex === item ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`
-                                }
+                                className={nowIndex === item ? `actived numberBox` : `numberBox`}
                                 key={index}
                                 onClick={changePage(item)}
                             >
@@ -269,26 +256,20 @@ const Pagination: FC<PaginationProps> = (props) => {
                     }
                 })}
             {totalPage - nowIndex >= 4 && totalPage > 6 && (
-                <div className={style.numberBox} onClick={nextFivePage}>
+                <div className="numberBox" onClick={nextFivePage}>
                     <EllipsisOutlined />
                 </div>
             )}
             {totalPage > 1 && (
                 <div
-                    className={
-                        nowIndex === totalPage ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`
-                    }
+                    className={nowIndex === totalPage ? `actived numberBox` : `numberBox`}
                     onClick={changePage(totalPage)}
                 >
                     {totalPage}
                 </div>
             )}
             <div
-                className={
-                    nowIndex === totalPage || totalPage <= 1
-                        ? `${style.next} ${style.disabled}`
-                        : `${style.next}`
-                }
+                className={nowIndex === totalPage || totalPage <= 1 ? `next disabled` : `next`}
                 onClick={nextPage}
             >
                 <RightOutlined />
@@ -296,20 +277,20 @@ const Pagination: FC<PaginationProps> = (props) => {
             {/* {
                 Array.isArray(pageSizeOptions) && showSizeChanger
                 &&
-                <div className={style.pageSizeSelect} onClick={() => setShowSizeOptions(!showSizeOptions)}>
+                <div className={pageSizeSelect} onClick={() => setShowSizeOptions(!showSizeOptions)}>
                     <>
-                        <span className={style.size}>{sizePage} 条/页</span>
+                        <span className={size}>{sizePage} 条/页</span>
                         <DownOutlined />
 
                     </>
                     {
                         showSizeOptions
                         &&
-                        <div className={style.options}>
+                        <div className={options}>
                             {
                                 pageSizeOptions.map(s => {
                                     return (
-                                        <div key={s as number} className={style.option} onClick={() => setSizePage(s as number)}>
+                                        <div key={s as number} className={option} onClick={() => setSizePage(s as number)}>
                                             {s} 条/页
                                         </div>
                                     )
@@ -327,14 +308,15 @@ const Pagination: FC<PaginationProps> = (props) => {
                             value: item,
                         };
                     })}
+                    placeholder="5条/页"
                     width={100}
                     handleSelectCallback={handleSelectCallback}
                 />
             )}
             {showJumpInput && (
-                <div className={style.jumpBox}>
+                <div className="jumpBox">
                     <span>跳至</span>
-                    <input type="text" className={style.jump} onKeyUp={jumpPageNum}></input>
+                    <input type="text" className="jump" onKeyUp={jumpPageNum}></input>
                     <span>页</span>
                 </div>
             )}

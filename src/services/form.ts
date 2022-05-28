@@ -2,31 +2,37 @@ import API from "@/utils/axios";
 import {ICreateFormReq, IIdReq, IInputReq, IListReq} from "@/types/service/request";
 
 export function getFormList(data : IListReq){
-    return API.post('/api/form/list')
+    return API.post('/api/form/list', data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function createForm(data : ICreateFormReq){
-    return API.post('/api/form/create')
+    return API.post('/api/form/create',data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function getForm(data : IListReq){
-    return API.post('/api/form/get')
+    return API.post('/api/form/get',data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function deleteForm(data : IIdReq){
-    return API.post('/api/form/delete')
+    return API.post('/api/form/delete',data)
+        .then(res => res.data)
+        .catch(res => res.data)
+}
+
+export function starForm(data : IIdReq){
+    return API.post('/api/form/star',data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function cancelStarForm(data : IIdReq){
-    return API.post('/api/form/cancelStar')
+    return API.post('/api/form/cancelStar',data)
         .then(res => res.data)
         .catch(res => res.data)
 }
@@ -50,13 +56,13 @@ export function formDetail(data : IIdReq){
 }
 
 export function startCollectForm(data : IIdReq){
-    return API.post(`/api/form/start`)
+    return API.post(`/api/form/start`,data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function endCollectForm(data : IIdReq){
-    return API.post(`/api/form/end`)
+    return API.post(`/api/form/end`,data)
         .then(res => res.data)
         .catch(res => res.data)
 }

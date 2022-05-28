@@ -5,9 +5,9 @@ import message from "@/components/Message";
 const createAxios = (config : any) => {
     let instance = axios.create(config)
     instance.interceptors.request.use(async config => {
-        if (config.method === 'post') {
-            config.data = qs.stringify(config.data)
-        }
+        // if (config.method === 'post') {
+        //     config.data = qs.stringify(config.data)
+        // }
         return config
     })
     instance.interceptors.response.use(

@@ -1,4 +1,5 @@
 .select {
+  position: relative;
   width: 80px;
   height: 30px;
   margin-left: 10px;
@@ -15,30 +16,41 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
   .selected {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 5px;
     height: 100%;
+    padding: 0 5px;
+
     .size {
       margin-right: 5px;
     }
+
     .placeholder {
       margin-right: 5px;
       color: #ccc;
     }
+
+    &:focus {
+      border-color: #1890ff;
+    }
   }
+
   &:hover {
     border-color: #1890ff;
   }
+
   input {
     border: none;
     outline: none;
   }
+
   .selectOptions {
-    position: relative;
-    top: 5px;
+    position: absolute;
+    top: 35px;
+    z-index: 500;
     display: flex;
     flex-direction: column;
     width: 80px;
@@ -46,20 +58,24 @@
     overflow: hidden;
     box-shadow: 0 3px 10px #8c8c8c;
     transition: 0.1s linear;
+
     .option {
       font-size: 14px;
       line-height: 2em;
       text-align: center;
       cursor: pointer;
+
       &:hover {
         color: #1890ff;
       }
     }
   }
 }
+
 .selectOptions {
-  position: relative;
-  top: 5px;
+  position: absolute;
+  top: 35px;
+  z-index: 500;
   display: flex;
   flex-direction: column;
   width: 80px;
@@ -67,13 +83,23 @@
   overflow: hidden;
   box-shadow: 0 3px 10px #8c8c8c;
   transition: 0.1s linear;
+
   .option {
     font-size: 14px;
     line-height: 2em;
     text-align: center;
     cursor: pointer;
+
     &:hover {
       color: #1890ff;
     }
+  }
+
+  .select-option {
+    color: #1890ff;
+    font-size: 14px;
+    line-height: 2em;
+    text-align: center;
+    cursor: pointer;
   }
 }

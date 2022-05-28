@@ -15,6 +15,7 @@ interface Props {
     disabled?: boolean
     block?: boolean
     href?: string
+    danger?: string
     style?: Object
     target?: TargetType
     onClick?: () => void
@@ -35,6 +36,8 @@ export default class Button extends React.Component<Props> {
         disabled: false,
         block: false,
         loading: false,
+        // TODO: 添加danger属性
+        danger: false,
         onClick: () => {
         }
     }

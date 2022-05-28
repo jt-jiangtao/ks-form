@@ -1,0 +1,68 @@
+.form {
+  box-sizing: border-box;
+  padding: 15px 0;
+  //border: solid 1px black;
+  margin: 0 25px;
+  display: flex;
+  flex-direction: column;
+
+  .form-header {
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    border-bottom: 1px solid #e2e6ed;
+
+    .form-mycreate {
+      margin: 15px 0;
+    }
+
+    .form-star {
+      color: grey;
+      margin: 10px 30px;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: #1890FF;
+      }
+    }
+  }
+}
+
+.form-list {
+  padding: 20px;
+  border-bottom: 1px solid #e2e6ed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .list-title {
+    flex: 1;
+  }
+
+  .list-time {
+    flex: 2;
+    text-align: center;
+  }
+
+  .list-status {
+    flex: 1;
+    text-align: center;
+  }
+
+  .list-star {
+    flex: 1;
+    text-align: center;
+  }
+
+  .list-operate {
+    flex: 3;
+    text-align: center;
+  }
+}
+
+.form-pagination {
+  position: absolute;
+  margin-top: 10px;
+  right: 25px;
+}
