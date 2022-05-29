@@ -133,7 +133,7 @@ export default function Signup() {
             <div style={{
                 minHeight: 270
             }}
-                className="todo"
+                className="signup-container"
             >
                 <form className="signup-form">
                     <div className="signup-header">

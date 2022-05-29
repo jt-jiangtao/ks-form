@@ -20,6 +20,8 @@
     color: #3d4757;
     border-bottom: 1px solid white;
     position: relative;
+    display: flex;
+    align-items: center;
 
     &:hover{
         border-bottom: 1px solid rgba(25,55,88,.1);

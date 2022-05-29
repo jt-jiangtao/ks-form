@@ -1,5 +1,8 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {IProblem, TProblemType, TResult, TSetting} from "@/types/service/model";
+import {useLocation} from "react-router";
+import {getForm} from "@/services";
+import {parseSearch} from "@/utils/uri";
 
 type DataInfo = {
     title: string,
@@ -42,8 +45,16 @@ type DataInfoContextProps = {
 }
 
 export const DataInfoProvider = (props: DataInfoContextProps) => {
-
+    const location = useLocation()
     const [data, setContextData] = useState<DataInfo>(defaultDataInfo)
+    // PROBLEMS: 由于location错误导致重复请求接口丢失状态
+    useEffect(()=>{
+        getForm({
+            id: parseSearch(location.search, 'id')
+        }).then(res=>{
+            setContextData(res.data.item)
+        })
+    }, [location.search])
     const setData = (newData : any) : void=>{
         setContextData({...data, ...newData})
     }

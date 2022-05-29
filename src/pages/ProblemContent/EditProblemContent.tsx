@@ -7,6 +7,8 @@ import EditInput from "@/components/QuestionComponents/Input/EditInput";
 import {IProblem, TProblemType} from "@/types/service/model";
 import {ToolMenu} from "@/components/QuestionComponents/ToolMenu/ToolMenu";
 import {useLocation} from "react-router";
+import EditSelect from "@/components/QuestionComponents/Select/EditSelect";
+import EditScore from "@/components/QuestionComponents/Score/EditScore";
 
 type FocusType = 'title' | 'subTitle' | number | ''
 
@@ -84,13 +86,29 @@ export default function EditProblemContent(){
 
     const scoreEditWithModule = (item : IProblem<TProblemType>, index : number) => {
       return (
-          <div>scoreEditWithModule</div>
+          <Module
+              titleShow={isCreate}
+              key={`input-${item.id}`}
+              focus={focus === index}
+              title="评分题"
+              tools={<ToolMenu index={index}/>}
+          >
+              <EditScore index={index} focus={focus === index} freshData={freshProblemData} changeFocusElement={changeFocusElement} data={item}/>
+          </Module>
       )
     }
 
     const singleSelectEditWithModule = (item : IProblem<TProblemType>, index : number) => {
       return (
-          <div>singleSelectEditWithModule</div>
+          <Module
+              titleShow={isCreate}
+              key={`input-${item.id}`}
+              focus={focus === index}
+              title="单选题"
+              tools={<ToolMenu index={index}/>}
+          >
+            <EditSelect index={index} focus={focus === index} freshData={freshProblemData} changeFocusElement={changeFocusElement} data={item}/>
+          </Module>
       )
     }
 

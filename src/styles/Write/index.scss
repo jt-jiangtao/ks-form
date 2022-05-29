@@ -1,3 +1,7 @@
+.write-header{
+  position: fixed;
+}
+
 .logo-title {
   display: flex;
   align-items: center;
@@ -18,10 +22,11 @@
 }
 .write-page {
   height: 100%;
-  padding-top: 60px;
+  padding-top: 74px;
   display: flex;
   justify-content: center;
   background-color: #f2f4f7;
+  min-width: 776px;
   .index__count-wrap {
     position: relative;
     margin: 0 16px;

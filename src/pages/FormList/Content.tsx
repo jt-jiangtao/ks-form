@@ -1,10 +1,8 @@
 import Pagination from "@/components/Pagination/Pagination";
-import Select from "@/components/Select/Select";
 import {useEffect, useState} from "react";
 import {deleteForm, endCollectForm, getForm, getFormList, startCollectForm} from "@/services";
 import React from "react";
-import {StarOutlined} from "@ant-design/icons";
-import style from "./content.module.scss"
+import style from "@/styles/FormList/content.module.scss"
 import Table from "@/components/Table/Table";
 import {IForm} from "@/types/service/model";
 import message from "@/components/Message";
@@ -149,9 +147,6 @@ export default function Content(props: ContentProps) {
                         showJumpInput={false}
                         pageSizeOptions={options}
                         changePageCallback={changePageCallback}/>
-            {/*<Select option={option} width={80}*/}
-            {/*        handleSelectCallback={handleSelectCallback}*/}
-            {/*        placeholder={"请选择"} showSearch={true}/>*/}
             </div>
         </>
     )

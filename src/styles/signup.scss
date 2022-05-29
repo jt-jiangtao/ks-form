@@ -1,7 +1,16 @@
+.signup-container{
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  line-height: 50px;
+}
 .signup-form {
   width: 100%;
   padding: 30px;
   color: rgba(0, 0, 0, 0.85);
+  background-color: white;
   .signup-header {
     width: 100%;
     display: flex;
