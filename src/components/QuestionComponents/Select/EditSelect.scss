@@ -23,6 +23,10 @@
     }
 }
 
+.select__title--no-hover:hover{
+    border-bottom: 1px solid #fff !important;
+}
+
 .select__textarea{
     text-indent: 20px;
 }
@@ -50,6 +54,14 @@
     }
 }
 
+.not-focus-hidden{
+    display: none !important;
+}
+
+.not-focus-hidden:hover .option-content__move{
+    display: none;
+}
+
 .option-content{
     position: relative;
     display: flex;
@@ -58,6 +70,9 @@
     padding: 0 24px;
     &:hover .option-content__move{
         display: flex;
+    }
+    &:hover .not-focus-hidden{
+        display: none;
     }
     .option-content__move{
         display: none;

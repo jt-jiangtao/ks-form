@@ -1,7 +1,7 @@
 import HeaderLayout from "@/layout/HeaderLayout";
 import {LeftOutlined} from "@ant-design/icons";
 import folder from "@/assets/icon/folder.svg";
-import {useNavigate} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 import {useContext, useState} from "react";
 import {DataInfoContext} from "@/store/context/DataInfoContext";
 import "@/styles/NewFormCreate/Preview/index.scss"
@@ -10,27 +10,32 @@ import phoneIcon from '@/assets/icon/phone.png'
 import classNames from "classnames";
 import Button from "@/components/Button/Button";
 import EditableProblemContent from "@/pages/ProblemContent/EditableProblemContent";
+import {createForm, deleteForm, startCollectForm} from "@/services";
+import {parseSearch} from "@/utils/uri";
+import message from "@/components/Message";
 
-export default function Preview(){
+export default function Preview() {
     const navigate = useNavigate()
+    const location = useLocation()
     const {data} = useContext(DataInfoContext)
     let [isPC, setIsPC] = useState(true)
+    let [isCreate] = useState<boolean>(location.search.slice(1).split("=").indexOf('id') === -1)
 
     const pcAndPhone = () => {
         return (
             <div className="window">
                 <img
-                    onClick={()=> setIsPC(true)}
+                    onClick={() => setIsPC(true)}
                     className={classNames({
                         "img-active": isPC
                     })}
-                    src={pcIcon} />
+                    src={pcIcon}/>
                 <img
-                    onClick={()=> setIsPC(false)}
+                    onClick={() => setIsPC(false)}
                     className={classNames({
                         "img-active": !isPC
                     })}
-                    src={phoneIcon} />
+                    src={phoneIcon}/>
             </div>
         )
     }
@@ -38,7 +43,7 @@ export default function Preview(){
     const renderPcAndPhoneContent = () => {
         return isPC ?
             <div className="pc-preview-content">
-                <EditableProblemContent data={data} />
+                <EditableProblemContent data={data}/>
             </div>
             :
             <div className="phone-preview-container">
@@ -46,6 +51,38 @@ export default function Preview(){
 
                 </div>
             </div>
+    }
+
+    const createFormWithoutPut = async () => {
+        let form = await createForm(data)
+        await startCollectForm({
+            id: form.data.id
+        }).then(res => {
+            navigate({
+                pathname: "/new-form-result",
+                hash: "#share",
+                search: `?id=${form.data.id}`
+            })
+        })
+    }
+
+    const completeForm = async () => {
+        if (isCreate) {
+            await createFormWithoutPut()
+        } else {
+            let res = await deleteForm({
+                id: parseSearch(location.search, 'id')
+            })
+            if (res.stat === 'ok') {
+                try {
+                    await createFormWithoutPut()
+                } catch (e) {
+                    message.error("完成创建失败")
+                }
+            } else {
+                message.error("完成创建失败")
+            }
+        }
     }
 
     return (
@@ -63,7 +100,9 @@ export default function Preview(){
                 {renderPcAndPhoneContent()}
                 <div className="preview-tools">
                     <Button onClick={() => navigate(-1)}>继续编辑</Button>
-                    <Button type="primary">完成创建</Button>
+                    <Button
+                        onClick={completeForm}
+                        type="primary">完成创建</Button>
                 </div>
             </div>
         </div>

@@ -107,7 +107,7 @@ export default function DataContent(props : DataContentProps){
                         <div className="get-form-content">
                             <div className="form-time">{`提交时间: 2022/5/28 17:24:01`}</div>
                             <div className="form-content">
-                                <WatchProblemContent form={props.data} data={data && data[current]} />
+                                <WatchProblemContent form={props.data} data={data && data[current - 1]} />
                             </div>
                         </div>
                     </>

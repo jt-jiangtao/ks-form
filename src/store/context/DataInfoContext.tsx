@@ -49,13 +49,17 @@ export const DataInfoProvider = (props: DataInfoContextProps) => {
     const [data, setContextData] = useState<DataInfo>(defaultDataInfo)
     // PROBLEMS: 由于location错误导致重复请求接口丢失状态
     useEffect(()=>{
-        getForm({
-            id: parseSearch(location.search, 'id')
-        }).then(res=>{
-            setContextData(res.data.item)
-        })
+        let id = parseSearch(location.search, 'id')
+        if (!!id){
+            getForm({
+                id: parseSearch(location.search, 'id')
+            }).then(res=>{
+                setContextData(res.data.item)
+            })
+        }
     }, [location.search])
     const setData = (newData : any) : void=>{
+        console.log(newData)
         setContextData({...data, ...newData})
     }
     const [focus, setFocus] = useState<FocusType>(defaultFocus)

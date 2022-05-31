@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useRef, useEffect, useCallback, useReducer } from "react";
-import {useLocation, useParams} from "react-router";
+import {useLocation, useNavigate, useParams} from "react-router";
 import HeaderLayout from "@/layout/HeaderLayout";
 import logo from '@/assets/icon/logo.svg'
 import "@/styles/Write/index.scss"
@@ -9,6 +9,16 @@ import EditableProblemContent from "@/pages/ProblemContent/EditableProblemConten
 import {IForm} from "@/types/service/model";
 
 export default function Write() {
+    const navigate = useNavigate()
+    const location = useLocation()
+    if (document.body.clientWidth <= 640){
+        navigate({
+            pathname: `/m/w/${location.pathname.split("/")[location.pathname.split("/").length - 1]}`,
+            search: location.search,
+            hash: location.hash
+        })
+    }
+
     let [data, setData] = useState<IForm>()
     const {id} = useParams()
     useEffect(()=>{
@@ -33,7 +43,7 @@ export default function Write() {
                 <div className="write-place">
                     <div className="write-place-container">
                         <div className="write-new-form-place">
-                            {data && <EditableProblemContent data={data}/>}
+                            {data && <EditableProblemContent canSubmit={true} data={data}/>}
                         </div>
                     </div>
                 </div>

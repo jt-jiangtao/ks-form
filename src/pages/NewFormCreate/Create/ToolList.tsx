@@ -4,7 +4,10 @@ import {useLocation, useNavigate} from "react-router";
 import {useContext, useState} from "react";
 import classNames from "classnames";
 import {DataInfoContext} from "@/store/context/DataInfoContext";
-import {createForm} from "@/services";
+import {createForm, deleteForm, starForm, startCollectForm} from "@/services";
+import message from "@/components/Message";
+import {IForm} from "@/types/service/model";
+import {parseSearch} from "@/utils/uri";
 
 export default function ToolList(){
     let navigate = useNavigate()
@@ -20,17 +23,52 @@ export default function ToolList(){
     }
 
     const saveForm = () => {
-
+        createForm(data).then(res=>{
+            message.success("保存草稿成功")
+        })
     }
 
-    const completeForm = () => {
-        createForm(data).then(res=>{
+    const createFormWithPut = async () => {
+        let form = await createForm(data)
+        await startCollectForm({
+            id: form.data.id
+        }).then(res=> {
             navigate({
                 pathname: "/new-form-result",
                 hash: "#share",
-                search: `?id=${res.data.id}`
+                search: `?id=${form.data.id}`
             })
         })
+    }
+
+    const completeForm = async () => {
+        if (isCreate){
+            await createFormWithPut()
+        }
+    }
+
+    const saveModify = async () => {
+        // 草稿 => 草稿
+        // 已发布 => 发布
+        // 已停止 => 草稿
+        let res = await deleteForm({
+            id: parseSearch(location.search, 'id')
+        })
+        if (res.stat === 'ok') {
+            if ((data as IForm).status === 2 || (data as IForm).status === 4){
+                try {
+                    createForm(data).then(res => {
+                        message.success("保存修改成功")
+                    })
+                } catch (e) {
+                    message.error("保存修改失败")
+                }
+            }else {
+                await createFormWithPut()
+            }
+        } else {
+            message.error("保存修改失败")
+        }
     }
 
     return (
@@ -47,6 +85,7 @@ export default function ToolList(){
                     })}
                 >保存草稿</Button>
                 <Button
+                    onClick={saveModify}
                     className={classNames({
                         'button-hidden': isCreate
                     })}

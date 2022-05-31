@@ -17,6 +17,7 @@ export default function EditTitle(props : EditTitleProps){
         // 当输入框内容相同时，不会触发onblur
         // 加上这段会导致每次都会触发
         // 自动获取焦点
+        setValue(props.title)
         if (!props.focus) inputRef.current?.blur()
         else inputRef.current?.focus()
     }, [props.focus])

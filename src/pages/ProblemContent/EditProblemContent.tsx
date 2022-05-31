@@ -9,6 +9,7 @@ import {ToolMenu} from "@/components/QuestionComponents/ToolMenu/ToolMenu";
 import {useLocation} from "react-router";
 import EditSelect from "@/components/QuestionComponents/Select/EditSelect";
 import EditScore from "@/components/QuestionComponents/Score/EditScore";
+import EditDateTime from "@/components/QuestionComponents/DateTime/EditDateTime";
 
 type FocusType = 'title' | 'subTitle' | number | ''
 
@@ -66,24 +67,6 @@ export default function EditProblemContent(){
         )
     };
 
-    const dateEditWithModule = (item : IProblem<TProblemType>, index : number) => {
-      return (
-          <div>dateEditWithModule</div>
-      )
-    }
-
-    const multiSelectEditWithModule = (item : IProblem<TProblemType>, index : number) => {
-      return (
-          <div>multiSelectEditWithModule</div>
-      )
-    }
-
-    const pullSelectEditWithModule = (item : IProblem<TProblemType>, index : number) => {
-      return (
-          <div>pullSelectEditWithModule</div>
-      )
-    }
-
     const scoreEditWithModule = (item : IProblem<TProblemType>, index : number) => {
       return (
           <Module
@@ -98,7 +81,7 @@ export default function EditProblemContent(){
       )
     }
 
-    const singleSelectEditWithModule = (item : IProblem<TProblemType>, index : number) => {
+    const selectEditWithModule = (item : IProblem<TProblemType>, index : number) => {
       return (
           <Module
               titleShow={isCreate}
@@ -112,9 +95,17 @@ export default function EditProblemContent(){
       )
     }
 
-    const timeEditWithModule = (item : IProblem<TProblemType>, index : number) => {
+    const dateTimeEditWithModule = (item : IProblem<TProblemType>, index : number) => {
       return (
-          <div>timeEditWithModule</div>
+          <Module
+              titleShow={isCreate}
+              key={`input-${item.id}`}
+              focus={focus === index}
+              title="时间题"
+              tools={<ToolMenu index={index}/>}
+          >
+              <EditDateTime index={index} focus={focus === index} freshData={freshProblemData} changeFocusElement={changeFocusElement} data={item}/>
+          </Module>
       )
     }
 
@@ -127,18 +118,15 @@ export default function EditProblemContent(){
                     switch (item.type) {
                         case "input":
                             return inputEditWithModule(item, index)
-                        case "date":
-                            return dateEditWithModule(item, index)
-                        case "multiSelect":
-                            return multiSelectEditWithModule(item, index)
                         case "pullSelect":
-                            return pullSelectEditWithModule(item, index)
+                        case "singleSelect":
+                        case "multiSelect":
+                            return selectEditWithModule(item, index)
                         case "score":
                             return scoreEditWithModule(item, index)
-                        case "singleSelect":
-                            return singleSelectEditWithModule(item, index)
                         case "time":
-                            return timeEditWithModule(item, index)
+                        case "date":
+                            return dateTimeEditWithModule(item, index)
                     }
                     return null
                 })
