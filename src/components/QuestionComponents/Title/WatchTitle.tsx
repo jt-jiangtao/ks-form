@@ -1,5 +1,9 @@
-export default function WatchTitle(){
+type WatchTitleProps = {
+    title : string
+}
+
+export default function WatchTitle(props : WatchTitleProps){
     return (
-        <div>WatchTitle</div>
+        <div className="watch-title">{props.title}</div>
     )
 }

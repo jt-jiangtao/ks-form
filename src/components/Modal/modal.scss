@@ -7,6 +7,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 999;
         opacity: 1;
     }
     &-root-hidden{
@@ -77,5 +78,8 @@
         text-align: right;
         border-top: 1px solid rgba(0,0,0,.06);
         border-radius: 0 0 2px 2px;
+        .btn:not(:first-child){
+            margin-left: 20px;
+        }
     }
 }

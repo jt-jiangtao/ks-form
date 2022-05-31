@@ -7,6 +7,7 @@ type ModuleProps = {
     children: JSX.Element | React.ReactNode,
     tools ?: JSX.Element,
     title ?: JSX.Element | string,
+    titleShow ?: boolean,
     draggable ?: boolean
 }
 
@@ -30,7 +31,11 @@ export default function Module(props : ModuleProps){
                 'module--not-focus': !props.focus
             })}
         >
-            <div className="module__title">
+            <div
+                style={{
+                    display: props.titleShow ? '' : 'none'
+                }}
+                className="module__title">
                 {renderTitle()}
             </div>
             {props.draggable && <div className='module__draggable'/>}
@@ -45,5 +50,6 @@ export default function Module(props : ModuleProps){
 Module.defaultProps = {
     focus:　false,
     title: '标题',
-    draggable: true
+    draggable: true,
+    titleShow: true
 }

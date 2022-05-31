@@ -1,13 +1,13 @@
 import '@/styles/NewFormCreate/Create/questionContent.scss'
 import logo from '@/assets/icon/logo.svg'
 import {FormOutlined} from "@ant-design/icons";
-import EditableProblemContent from "@/pages/ProblemContent/EditableProblemContent";
+import EditProblemContent from "@/pages/ProblemContent/EditProblemContent";
 
 export default function QuestionContent(){
     return (
         <div className="question-content">
             <div className="problem-content">
-                <EditableProblemContent />
+                <EditProblemContent />
             </div>
             <div className="success-edit">
                 <div className="divider"/>

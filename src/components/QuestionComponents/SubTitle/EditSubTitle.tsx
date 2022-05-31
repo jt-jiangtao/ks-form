@@ -2,6 +2,7 @@ import classNames from "classnames";
 import {createRef, useEffect, useRef, useState} from "react";
 import TextLeftIcon from '@/assets/icon/text-left.png'
 import TextCenterIcon from '@/assets/icon/text-center.png'
+import Textarea from "@/components/Textarea";
 
 type EditSubTitleProps = {
     focus: boolean,
@@ -13,24 +14,19 @@ type EditSubTitleProps = {
 export default function EditSubTitle(props: EditSubTitleProps){
     let [subTitleCenter, setSubTitleCenter] = useState(true)
     let [title, setTitle] = useState<string>(props.title)
-    let textarea = createRef<HTMLTextAreaElement>()
-    
+
     useEffect(()=>{
-        if (!props.focus) textarea.current?.blur()
-        else textarea.current?.focus()
-    }, [props.focus])
+        setTitle(props.title)
+    }, [props.title])
 
     const inputDataChange = () => {
         props.freshData(title)
     }
 
-    const fixedTextAreaHeight = () => {
-        setTitle(textarea.current?.value || '')
-        if (textarea.current){
-            textarea.current.style.height = '18px'
-            textarea.current.style.height = (textarea.current?.scrollHeight || 18) + 'px'
-        }
+    const onchange = (event : any) => {
+        setTitle(event.currentTarget.value)
     }
+
 
     const changeFocusElement = (event: any) => {
         event.stopPropagation()
@@ -48,11 +44,10 @@ export default function EditSubTitle(props: EditSubTitleProps){
                 <div className={classNames("subTitle--content", {
                     "subTitle__container--focus": props.focus
                 })}>
-                    <textarea
+                    <Textarea
                         value={title}
                         onBlur={inputDataChange}
-                        ref={textarea}
-                        onChange={fixedTextAreaHeight}
+                        onChange={onchange}
                         className={classNames("content-textarea", {
                         "content-textarea--center": subTitleCenter
                     })} maxLength={300} placeholder="点击设置描述"/>
