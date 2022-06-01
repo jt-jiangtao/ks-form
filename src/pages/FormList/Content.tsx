@@ -1,11 +1,12 @@
 import Pagination from "@/components/Pagination/Pagination";
 import {useEffect, useState} from "react";
-import {deleteForm, endCollectForm, getForm, getFormList, startCollectForm} from "@/services";
+import {deleteForm, endCollectForm, getFormList, startCollectForm} from "@/services";
 import React from "react";
 import style from "@/styles/FormList/content.module.scss"
 import Table from "@/components/Table/Table";
 import {IForm} from "@/types/service/model";
 import message from "@/components/Message";
+import Input from "@/components/Input/Input";
 
 type ContentProps = {
     sidebar?: string
@@ -14,63 +15,66 @@ type ContentProps = {
 export default function Content(props: ContentProps) {
     const [tableItem, setTableItem] = useState<IForm[]>([])
     const [showStar, setShowStar] = useState<boolean>(false)
+    // 每页展示几条数据
+    const options = [4,5,6]
+
     // 一个页面的数据条数
     const [total, setTotal] = useState<number>(0)
-    // 每页展示几条数据
-    const options = [5, 7, 10]
+    const [currentPageSize,setCurrentPageSize] = useState<number>(options[0])
+
 
     useEffect(() => {
-        getFormListByStatus(0,options[0])
+        getFormListByStatus(0,currentPageSize)
     }, [])
 
+    // 封装一下请求数据的方法，根据三个可选的参数来请求
     const getFormListByStatus =(offset?:number, limit?:number,isStar?:boolean)=>{
+        // console.log(currentPageSize)
         getFormList({
             // 首次进来默认展示五条数据
             offset:offset,
-            limit:options[0],
+            limit:limit,
             isStar:isStar
         }).then(res => {
             // console.log(res)
+            console.log(res)
             setTableItem(res.data.items)
             setTotal(res.data.total)
         })
     }
 
     // 仅展示收藏,需要做重新设置数据总数和分页处理
-    function onlyStar() {
+    const onlyStar=()=> {
         if (!showStar) {
-            getFormListByStatus(0,options[0],!showStar)
+            getFormListByStatus(0,currentPageSize,!showStar)
             // 点亮右上角图标
             setShowStar(true)
         } else {
-            getFormListByStatus(0,options[0],showStar)
+            getFormListByStatus(0,currentPageSize)
             setShowStar(false)
         }
     }
 
     const changePageCallback = (pageNum: number) => {
         // 判断当前状态，若showStar为false，则分页时不带参数，默认请求所有的
-        if (!showStar){getFormListByStatus(pageNum-1,options[0])}
+        if (!showStar){getFormListByStatus(pageNum-1,currentPageSize)}
         // 若showStar为true，则分页时带参数，请求所有的带星的
-        else {getFormListByStatus(pageNum-1,options[0],showStar)}
-
+        else {getFormListByStatus(pageNum-1,currentPageSize,showStar)}
     }
 
-    // 下拉菜单中的选项
-    // const option = [
-    //     {
-    //         label: 'Mucy',
-    //         value: 'mucy',
-    //     },
-    //     {
-    //         label: 'Mike',
-    //         value: 'mike',
-    //     },
-    //     {
-    //         label: 'aMck',
-    //         value: 'amck',
-    //     },
-    // ];
+    const changePageSizeCallback=(pageSize:any,pageNum: number)=>{
+        // 判断当前状态，若showStar为false，则分页时不带参数，默认请求所有的
+        if (!showStar){
+            // console.log(pageSize)
+            setCurrentPageSize(pageSize)
+            getFormListByStatus(pageNum-1,pageSize)
+        }
+        // 若showStar为true，则分页时带参数，请求所有的带星的
+        else {
+            setCurrentPageSize(pageSize)
+            getFormListByStatus(pageNum-1,pageSize,showStar)
+        }
+    }
 
     // 删除表单
     const deleteFormItem = (id: string) => {
@@ -146,7 +150,9 @@ export default function Content(props: ContentProps) {
                         showSizeChanger={true}
                         showJumpInput={false}
                         pageSizeOptions={options}
-                        changePageCallback={changePageCallback}/>
+                        changePageCallback={changePageCallback}
+                        changePageSizeCallback={changePageSizeCallback}
+            />
             </div>
         </>
     )

@@ -7,8 +7,7 @@ type ButtonShape = 'default' | 'circle' | 'round'
 type ButtonSize = 'large' | 'middle' | 'small'
 type TargetType = '_self' | '_blank' | '_parent' | '_top' | string
 
-interface Props {
-    style ?: Object
+interface Props {style ?: Object
   type?: ButtonType
   shape?: ButtonShape
   size?: ButtonSize

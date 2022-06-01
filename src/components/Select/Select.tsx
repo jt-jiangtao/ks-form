@@ -9,65 +9,37 @@ interface Options {
 }
 
 interface SelectProps {
-    /**
-     * @description 选择器数据
-     * @default []
-     */
+     // 选择器数据
+     // default []
     option: Array<Options>;
-    /**
-     * @description 宽度
-     * @default 80px
-     */
+     // 宽度
+     // default 80px
     width?: Number;
-    /**
-     * @description 提示
-     * @default false
-     */
+     // 提示
+     // default false
     placeholder?: String;
-    /**
-     * @description 禁用状态
-     * @default false
-     */
+     // 禁用状态
+     // default false
     disabled?: Boolean;
-    /**
-     * @description 加载状态
-     * @default false
-     */
+     // 加载状态
+     // default false
     loading?: Boolean;
-    /**
-     * @description 可输入状态
-     * @default false
-     */
+     // 可输入状态
+     // default false
     showSearch?: Boolean;
-    /**
-     * @description 可输入状态下清除
-     * @default false
-     */
+     // 可输入状态下清除
+     // default false
     clearable?: Boolean;
-    /**
-     * @description 选择后的回调
-     * @default {}
-     */
+     // 选择后的回调
+     // default {}
     handleSelectCallback?: Function;
-    /**
-     * @description 输入后的回调
-     * @default {}
-     */
+     // 输入后的回调
+     // default {}
     handleTextChange?: Function;
 }
 
 const Select: FC<SelectProps> = (props) => {
-    const {
-        option,
-        width,
-        placeholder,
-        disabled,
-        loading,
-        showSearch,
-        clearable,
-        handleSelectCallback,
-        handleTextChange,
-    } = props;
+    const {option, width, placeholder, disabled, loading, showSearch, clearable, handleSelectCallback, handleTextChange,} = props;
     const [selected, setSelected] = useState<string | number | any>('');
     const [selectedValue, setSelectedValue] = useState<string | number | any>('');
     const optionRef = createRef() as any;
@@ -77,7 +49,7 @@ const Select: FC<SelectProps> = (props) => {
         // console.log(option);
     }, []);
     useEffect(() => {
-        console.log(selected);
+        // console.log(selected);
     }, [selected]);
 
     const ownsWidth = useMemo(() => {
@@ -103,7 +75,7 @@ const Select: FC<SelectProps> = (props) => {
         //切换下拉
         e.stopPropagation();
         if (disabled) return;
-        console.log(optionRef.current.style.height);
+        // console.log(optionRef.current.style.height);
         if (optionRef.current.style.height === '0px' || optionRef.current.style.height === '') {
             if (showSearch) {
                 optionRef.current.style.height = `${inputFilterOtpions.length * 100}%`;
@@ -135,7 +107,7 @@ const Select: FC<SelectProps> = (props) => {
         (e: any) => {
             //输入后的回调
             setSelected(e.target.value);
-            console.log(selected);
+            // console.log(selected);
             optionRef.current.style.height =
                 option.filter((item) => {
                     return (item.label as string).includes(e.target.value);
