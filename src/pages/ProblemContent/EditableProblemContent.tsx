@@ -12,6 +12,7 @@ import EditableSelect from "@/components/QuestionComponents/Select/EditableSelec
 import {inputForm} from "@/services";
 import message from "@/components/Message";
 import classNames from "classnames";
+import {useLocation, useNavigate} from "react-router";
 
 type EditableProblemContentProps = {
     data : IForm,
@@ -21,6 +22,8 @@ type EditableProblemContentProps = {
 export default function EditableProblemContent(props : EditableProblemContentProps){
     const {canSubmit = false} = props
     let [data, setData] = useState<IForm>(props.data)
+    const navigate = useNavigate()
+    const location = useLocation()
     useEffect(()=>{
         setData(props.data)
     }, [props.data])
@@ -39,7 +42,12 @@ export default function EditableProblemContent(props : EditableProblemContentPro
         req.formId = data.id
         req.problems = data.problems
         inputForm(req).then(res=>{
-            message.success("提交成功")
+            if (res.stat === 'ok'){
+                navigate({
+                    pathname: location.pathname,
+                    hash: "#success"
+                })
+            }
         })
     }
 

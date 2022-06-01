@@ -109,5 +109,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        .content-wrapper{
+            transform: scale(.73);
+            margin-top: -45px;
+            margin-left: -6px;
+            border: 1px solid #e2e6ed;
+            width: 350px;
+            height: 568px;
+            overflow: hidden;
+            position: relative;
+            .content{
+                margin-right: -14px;
+                height: 100%;
+                overflow-y: scroll;
+            }
+        }
     }
 }
