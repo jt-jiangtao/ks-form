@@ -81,7 +81,13 @@ export type TSetting<T extends TProblemType> = T extends "singleSelect"
   ? ISelectSetting
   : T extends "pullSelect"
   ? ISelectSetting
+  : T extends "time" | "date"
+  ? IDatetimeSetting
   : null;
+
+export interface IDatetimeSetting {
+  type: number
+}
 
 // 选择设置
 export interface ISelectSetting {

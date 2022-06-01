@@ -1,8 +1,10 @@
 import {IForm, IFormResult, IProblem, TProblemType} from "@/types/service/model";
 import WatchTitle from "@/components/QuestionComponents/Title/WatchTitle";
-import EditableInput from "@/components/QuestionComponents/Input/EditableInput";
 import {nanoid} from "nanoid";
 import WatchInput from "@/components/QuestionComponents/Input/WatchInput";
+import WatchScore from "@/components/QuestionComponents/Score/WatchScore";
+import WatchDateTime from "@/components/QuestionComponents/DateTime/WatchDateTime";
+import WatchSelect from "@/components/QuestionComponents/Select/WatchSelect";
 
 type WatchProblemContentProps = {
     form: IForm | undefined,
@@ -20,18 +22,15 @@ export default function WatchProblemContent(props : WatchProblemContentProps){
                     switch (item.type) {
                         case "input":
                             return <WatchInput key={`input-${nanoid(5)}`} index={index} data={item} />
-                        // case "date":
-                        //     return dateEditWithModule(item, index)
-                        // case "multiSelect":
-                        //     return multiSelectEditWithModule(item, index)
-                        // case "pullSelect":
-                        //     return pullSelectEditWithModule(item, index)
-                        // case "score":
-                        //     return scoreEditWithModule(item, index)
-                        // case "singleSelect":
-                        //     return singleSelectEditWithModule(item, index)
-                        // case "time":
-                        //     return timeEditWithModule(item, index)
+                        case "date":
+                        case "time":
+                            return <WatchDateTime key={`input-${nanoid(5)}`} index={index} data={item} />
+                        case "multiSelect":
+                        case "pullSelect":
+                        case "singleSelect":
+                            return <WatchSelect key={`input-${nanoid(5)}`} index={index} data={item} />
+                        case "score":
+                            return <WatchScore key={`input-${nanoid(5)}`} index={index} data={item} />
                     }
                     return null
                 })

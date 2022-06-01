@@ -1,23 +1,46 @@
 import {IForm, TProblemType, TResult} from "@/types/service/model";
 import WatchTitle from "@/components/QuestionComponents/Title/WatchTitle";
 import WatchSubTitle from "@/components/QuestionComponents/SubTitle/WatchSubTitle";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import EditableInput from "@/components/QuestionComponents/Input/EditableInput";
 import {nanoid} from "nanoid";
 import Button from "@/components/Button/Button";
 import "@/styles/ProblemContent/EditableProblemContent.scss"
+import EditableScore from "@/components/QuestionComponents/Score/EditableScore";
+import EditableDateTime from "@/components/QuestionComponents/DateTime/EditableDateTime";
+import EditableSelect from "@/components/QuestionComponents/Select/EditableSelect";
+import {inputForm} from "@/services";
+import message from "@/components/Message";
+import classNames from "classnames";
 
 type EditableProblemContentProps = {
-    data : IForm
+    data : IForm,
+    canSubmit ?: boolean
 }
 
 export default function EditableProblemContent(props : EditableProblemContentProps){
+    const {canSubmit = false} = props
     let [data, setData] = useState<IForm>(props.data)
-
+    useEffect(()=>{
+        setData(props.data)
+    }, [props.data])
     const setResult = (index: number, newData : TResult<TProblemType>) => {
         let copy = JSON.parse(JSON.stringify(data))
         copy.problems[index] = newData
         setData(copy)
+    }
+
+    const submit = () => {
+        if (!canSubmit){
+            message.info("预览状态暂不支持提交")
+            return
+        }
+        let req : any= {}
+        req.formId = data.id
+        req.problems = data.problems
+        inputForm(req).then(res=>{
+            message.success("提交成功")
+        })
     }
 
     return (
@@ -29,24 +52,26 @@ export default function EditableProblemContent(props : EditableProblemContentPro
                     switch (item.type) {
                         case "input":
                             return <EditableInput key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult}/>
-                        // case "date":
-                        //     return dateEditWithModule(item, index)
-                        // case "multiSelect":
-                        //     return multiSelectEditWithModule(item, index)
-                        // case "pullSelect":
-                        //     return pullSelectEditWithModule(item, index)
-                        // case "score":
-                        //     return scoreEditWithModule(item, index)
-                        // case "singleSelect":
-                        //     return singleSelectEditWithModule(item, index)
-                        // case "time":
-                        //     return timeEditWithModule(item, index)
+                        case "date":
+                        case "time":
+                            return <EditableDateTime key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult}/>
+                        case "multiSelect":
+                        case "pullSelect":
+                        case "singleSelect":
+                            return <EditableSelect key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult} />
+                        case "score":
+                            return <EditableScore  key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult} />
                     }
                     return null
                 })
             }
             <div className="submit">
-                <Button type="primary">提交</Button>
+                <Button
+                    className={classNames("submit-btn", {
+                        "forbidden-submit": !canSubmit
+                    })}
+                    onClick={submit}
+                    type="primary">提交</Button>
             </div>
         </>
     )

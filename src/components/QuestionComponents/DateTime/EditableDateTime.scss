@@ -1,0 +1,49 @@
+.editable-datetime{
+    margin: 8px 24px 0 24px;
+    border-bottom: 1px solid rgba(25,55,88,.1);
+    color: #3d4757;
+    display: flex;
+    align-items: center;
+    position: relative;
+    &:hover{
+        border-bottom-color: #1488ed;
+    }
+    .text-wrapper{
+        position: absolute;
+        display: flex;
+        align-items: center;
+        height: 24px;
+        width: 100%;
+        line-height: 24px;
+        color: #3d4757;
+        font-size: 14px;
+        .clock{
+            margin-right: 6px;
+            width: 16px;
+            height: 16px;
+        }
+        .close{
+            display: none;
+            position: absolute;
+            right: 0;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        &:hover .close-show{
+            display: inline-block;
+        }
+    }
+    .picker{
+        color: rgba(0,0,0,.65);
+        line-height: 1.5;
+        display: inline-block;
+    }
+    .time-picker{
+        height: 24px;
+        border: 1px solid #d9d9d9;
+        padding: 4px 20px;
+        font-size: 14px;
+        position: relative;
+    }
+}

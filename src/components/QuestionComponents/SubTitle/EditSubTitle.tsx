@@ -15,8 +15,11 @@ export default function EditSubTitle(props: EditSubTitleProps){
     let [subTitleCenter, setSubTitleCenter] = useState(true)
     let [title, setTitle] = useState<string>(props.title)
 
+    useEffect(()=>{
+        setTitle(props.title)
+    }, [props.title])
+
     const inputDataChange = () => {
-        console.log(title)
         props.freshData(title)
     }
 

@@ -1,4 +1,4 @@
-import {createRef, useEffect, useState} from "react";
+import React, {createRef, useEffect, useRef, useState} from "react";
 import classNames from "classnames";
 
 type TextareaProps = {
@@ -13,13 +13,10 @@ type TextareaProps = {
     editable ?: boolean
 }
 
-Textarea.defaultProps = {
-    placeholder: ''
-}
-
-export default function Textarea(props : TextareaProps){
+const Textarea = React.forwardRef((props : TextareaProps, ref : any)=>{
+    const {editable = true} = props
     let [value, setValue] = useState(props.value)
-    let textarea = createRef<HTMLTextAreaElement>()
+    let textarea = ref || createRef()
 
     const textareaValueChange = () => {
         setValue(textarea.current?.value || '')
@@ -41,9 +38,9 @@ export default function Textarea(props : TextareaProps){
         props.onBlur && props.onBlur(event)
     }
 
-    const onkeydown = (event : any) => {
+    const onkeydown = (event: any) => {
         props.onkeydown && props.onkeydown(event)
-    }
+    };
 
     const onChange = (event : any) => {
         textareaValueChange()
@@ -53,7 +50,7 @@ export default function Textarea(props : TextareaProps){
     return (
         <textarea
             onKeyDown={onkeydown}
-            contentEditable={props.editable}
+            disabled={!editable}
             style={props.style}
             maxLength={props.maxLength}
             className={classNames("form-c-normal-textarea", props.className)}
@@ -63,4 +60,6 @@ export default function Textarea(props : TextareaProps){
             placeholder={props.placeholder}
             value={value} />
     )
-}
+})
+
+export default Textarea

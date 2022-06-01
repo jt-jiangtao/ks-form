@@ -2,4 +2,12 @@
     margin-top: 24px;
     display: flex;
     justify-content: center;
+    .submit-btn{
+        width: 96px;
+        height: 32px;
+    }
+    .forbidden-submit{
+        cursor: not-allowed;
+        opacity: .4;
+    }
 }
