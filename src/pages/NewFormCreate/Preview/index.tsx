@@ -2,7 +2,7 @@ import HeaderLayout from "@/layout/HeaderLayout";
 import {LeftOutlined} from "@ant-design/icons";
 import folder from "@/assets/icon/folder.svg";
 import {useLocation, useNavigate} from "react-router";
-import {useContext, useState} from "react";
+import React, {useContext, useState} from "react";
 import {DataInfoContext} from "@/store/context/DataInfoContext";
 import "@/styles/NewFormCreate/Preview/index.scss"
 import pcIcon from '@/assets/icon/pc.png'
@@ -13,6 +13,8 @@ import EditableProblemContent from "@/pages/ProblemContent/EditableProblemConten
 import {createForm, deleteForm, startCollectForm} from "@/services";
 import {parseSearch} from "@/utils/uri";
 import message from "@/components/Message";
+import logo from "@/assets/icon/logo.svg";
+import "@/styles/Write/index.scss"
 
 export default function Preview() {
     const navigate = useNavigate()
@@ -48,7 +50,21 @@ export default function Preview() {
             :
             <div className="phone-preview-container">
                 <div className="phone-preview-content">
-
+                    <div className="content-wrapper">
+                        <div className="content">
+                            <div className="phone-container">
+                                {data && <EditableProblemContent canSubmit={false} data={data}/>}
+                            </div>
+                            <div className="phone-footer">
+                                <div className="footer-content">
+                                    <img src={logo}/>
+                                    由
+                                    <span className="logo-text">金山文档</span>
+                                    旗下表单提供服务
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
     }

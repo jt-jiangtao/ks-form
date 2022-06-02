@@ -7,10 +7,12 @@ import "@/styles/Write/index.scss"
 import {getForm} from "@/services";
 import EditableProblemContent from "@/pages/ProblemContent/EditableProblemContent";
 import {IForm} from "@/types/service/model";
+import WriteSuccess from "@/pages/Write/WriteSuccess";
 
 export default function Write() {
     const navigate = useNavigate()
     const location = useLocation()
+    let [isSuccess, setIsSuccess] = useState(location.hash === "#success")
     if (document.body.clientWidth <= 640){
         navigate({
             pathname: `/m/w/${location.pathname.split("/")[location.pathname.split("/").length - 1]}`,
@@ -22,6 +24,9 @@ export default function Write() {
     let [data, setData] = useState<IForm>()
     const {id} = useParams()
     useEffect(()=>{
+        setIsSuccess(location.hash === "#success")
+    }, [location])
+    useEffect(()=>{
         getForm({
             id: id || ''
         }).then(res=>{
@@ -30,7 +35,7 @@ export default function Write() {
     }, [id])
 
     return (
-        <React.Fragment>
+        <>
             <HeaderLayout className="write-header">
                 <div className="logo-title">
                     <div className="logo">
@@ -43,11 +48,14 @@ export default function Write() {
                 <div className="write-place">
                     <div className="write-place-container">
                         <div className="write-new-form-place">
-                            {data && <EditableProblemContent canSubmit={true} data={data}/>}
+                            {
+                                isSuccess ? <WriteSuccess />
+                                    : data && <EditableProblemContent canSubmit={true} data={data}/>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-        </React.Fragment>
+        </>
     )
 }

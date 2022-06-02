@@ -1,0 +1,29 @@
+.success-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .success-tip{
+        padding-top: 70px;
+        display: flex;
+        font-size: 16px;
+        color: #767c85;
+        img{
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+        span{
+            display: flex;
+            align-items: center;
+        }
+    }
+    .write-again .write-btn{
+        margin-top: 60px;
+        width: 160px;
+        background-color: #1488ed;
+        border: none;
+        color: #fff;
+        height: 32px;
+    }
+}

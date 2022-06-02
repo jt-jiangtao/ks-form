@@ -3,6 +3,9 @@ import Textarea from "@/components/Textarea";
 import {useCallback, useEffect, useState} from "react";
 import Radio from "@/components/Radio";
 import CheckBox from "@/components/CheckBox";
+import {Select} from "antd";
+
+const Option = Select.Option
 
 type EditableSelectProps = {
     data: IProblem<TProblemType>,
@@ -66,7 +69,23 @@ export default function EditableSelect(props : EditableSelectProps){
           }
           return <CheckBox options={items} defaultValue={def} onChange={multiSelectChange}  />
       }else {
-        // TODO: 封装Select组件
+            // TODO: 封装Select组件
+          return <Select
+              className="pull-select"
+              value={(props.data?.result as ISingleResult)?.value?.title || ''}
+              showSearch
+              allowClear
+              placeholder="Select a person"
+              optionFilterProp="children"
+              onChange={singleSelectChange}
+              filterOption={(input, option) =>
+                  (option!.children as unknown as string).toLowerCase().includes(input.toLowerCase())
+              }
+          >
+              {
+                  items.map((item : any) => <Option value={item.value}>{item.label}</Option>)
+              }
+          </Select>
       }
       return null
     }
