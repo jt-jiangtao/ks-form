@@ -1,0 +1,54 @@
+.datetime{
+    margin: 8px 24px 0 24px;
+    color: #aeb5c0;
+    padding: 0 0 6px 0;
+    border-bottom: 1px dashed #e2e6ed;
+    font-size: 12px;
+    height: 34px;
+    box-sizing: border-box;
+    line-height: 34px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.datetime-container{
+    display: flex;
+    align-items: center;
+    .icon{
+        width: 40px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        color: #1488ED;
+        svg{
+            margin-right: 3px;
+        }
+        .down{
+            width: 12px;
+            height: 12px;
+        }
+    }
+    .icon-hover:hover{
+        background-color: rgba(25,55,88,.08);
+    }
+    .format{
+        margin-left: 6px;
+        color: #949aae;
+        white-space: pre;
+        font-size: 12px;
+    }
+}
+
+.datetime-menu .menu-item{
+    .item-icon{
+        font-size: 14px;
+        padding: 0 5px;
+    }
+    .item-content{
+        font-size: 12px !important;
+        color: #3d4757 !important;
+        white-space: pre;
+    }
+}

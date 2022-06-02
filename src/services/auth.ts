@@ -8,7 +8,7 @@ export function register(data : IRegisterReq){
 }
 
 export function login(data : ILoginReq){
-    return API.post('/api/auth/login', data)
+    return API.post('/api/auth/login', {...data})
         .then(res => res.data)
         .catch(res => res.data)
 }

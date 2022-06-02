@@ -1,0 +1,31 @@
+.input-title-container{
+    color: #3d4757;
+    height: 26px;
+    input{
+        outline: none;
+        width: 100%;
+        border: none;
+        letter-spacing: 0;
+        text-align: center;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: initial;
+        font-weight: 400;
+        color: #3d4757;
+    }
+
+    .input-title-value{
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+        margin: 0;
+    }
+    input, .input-title-value{
+        font-size: 20px!important;
+        font-weight: 700;
+        line-height: 26px;
+    }
+}

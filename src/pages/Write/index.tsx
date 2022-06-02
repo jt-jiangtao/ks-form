@@ -1,44 +1,65 @@
+import React from "react";
+import { useState, useRef, useEffect, useCallback, useReducer } from "react";
+import {useLocation, useNavigate, useParams} from "react-router";
 import HeaderLayout from "@/layout/HeaderLayout";
 import logo from '@/assets/icon/logo.svg'
-import { useLocation, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-import SideBar from "@/pages/NewFormResult/SideBar";
+import "@/styles/Write/index.scss"
+import {getForm} from "@/services";
+import EditableProblemContent from "@/pages/ProblemContent/EditableProblemContent";
+import {IForm} from "@/types/service/model";
+import WriteSuccess from "@/pages/Write/WriteSuccess";
 
-export default function Write(){
-    let location = useLocation();
-    let sidebarHash = ['mycreate', 'share']
-    const parseSideBar = ()=>{
-        if (location.hash.slice(1).length === 0)return 'mycreate'
-        else if(sidebarHash.indexOf(location.hash.slice(1)) !== -1) return location.hash.slice(1)
-        return  'mycreate'
-    }
-    let [sidebar] = useState(parseSideBar)
+export default function Write() {
     const navigate = useNavigate()
+    const location = useLocation()
+    let [isSuccess, setIsSuccess] = useState(location.hash === "#success")
+    if (document.body.clientWidth <= 640){
+        navigate({
+            pathname: `/m/w/${location.pathname.split("/")[location.pathname.split("/").length - 1]}`,
+            search: location.search,
+            hash: location.hash
+        })
+    }
+
+    let [data, setData] = useState<IForm>()
+    const {id} = useParams()
+    useEffect(()=>{
+        setIsSuccess(location.hash === "#success")
+    }, [location])
+    useEffect(()=>{
+        getForm({
+            id: id || ''
+        }).then(res=>{
+            setData(res.data.item)
+        })
+    }, [id])
+
     return (
-        <section>
-            <HeaderLayout className="form-list__header">
-            <div className="return" onClick={()=> navigate("/new-form-list")}>
-            〈
-          </div>
-                <div className="logo-title">
+        <>
+            <HeaderLayout className="write-header">
+                <div className="logo-title"
+                onClick={() => {
+                    navigate("/form-list")
+                }}
+                >
                     <div className="logo">
-                        <img src={logo}/>
-                        <h1 className="title">这里是上个页面传进来的表的名字</h1>
+                        <img src={logo} />
                     </div>
-                    
+                    <div className="title">金山表单</div>
                 </div>
             </HeaderLayout>
-            <main className="m">
-                <div className="sideBar">
-                    <SideBar active={sidebar} />
+            <div className="write-page">
+                <div className="write-place">
+                    <div className="write-place-container">
+                        <div className="write-new-form-place">
+                            {
+                                isSuccess ? <WriteSuccess />
+                                    : data && <EditableProblemContent canSubmit={true} data={data}/>
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div className="result">
-                    Result
-                </div>
-            </main>
-            
-        </section>
+            </div>
+        </>
     )
 }
-
-
