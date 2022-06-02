@@ -29,6 +29,7 @@ interface PaginationProps {
      * @default false
      */
     changePageCallback: Function;
+    changePageSizeCallback?: Function;
 }
 const Pagination: FC<PaginationProps> = (props) => {
     const { changePageCallback, total, pageSizeOptions, showJumpInput, showSizeChanger } = props;
@@ -211,8 +212,11 @@ const Pagination: FC<PaginationProps> = (props) => {
     const handleSelectCallback = (pageSize: any) => {
         console.log(pageSize.value);
         setSizePage(pageSize.value);
+        changePageSizeCallback && changePageSizeCallback(pageSize.value)
     };
-
+    const changePageSizeCallback=(pageSize:any)=>{
+        console.log(pageSize.value)
+    }
 
     return (
         <div className={style.pagination}>

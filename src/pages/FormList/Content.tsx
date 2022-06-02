@@ -55,7 +55,9 @@ export default function Content(props: ContentProps) {
         if (!showStar){getFormListByStatus(pageNum-1,options[0])}
         // 若showStar为true，则分页时带参数，请求所有的带星的
         else {getFormListByStatus(pageNum-1,options[0],showStar)}
-
+    }
+    const changePageSizeCallBack=(pageNum:number)=>{
+        
     }
 
     // 下拉菜单中的选项
@@ -148,7 +150,9 @@ export default function Content(props: ContentProps) {
                         showSizeChanger={true}
                         showJumpInput={false}
                         pageSizeOptions={options}
-                        changePageCallback={changePageCallback}/>
+                        changePageCallback={changePageCallback}
+                        changePageSizeCallback={changePageCallback}
+            />
             {/*<Select option={option} width={80}*/}
             {/*        handleSelectCallback={handleSelectCallback}*/}
             {/*        placeholder={"请选择"} showSearch={true}/>*/}
