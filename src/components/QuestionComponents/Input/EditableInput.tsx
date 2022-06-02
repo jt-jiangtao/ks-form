@@ -1,5 +1,6 @@
 import {IProblem, TProblemType} from "@/types/service/model";
-import {createRef, useEffect, useState} from "react";
+import React, {createRef, useEffect, useState} from "react";
+import classNames from "classnames";
 
 type EditableInputProps = {
     data: IProblem<TProblemType>,
@@ -41,7 +42,11 @@ export default function EditableInput(props : EditableInputProps){
     return (
         <div className="editable-input-container">
             <div className="title-container">
-                <span className="title__number">{`${props.index + 1}.`}</span>
+                <span className="title__number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}</span>
                 <textarea
                     disabled
                     ref={titleTextarea}

@@ -1,5 +1,6 @@
 import {IProblem, TProblemType} from "@/types/service/model";
-import {createRef, useEffect, useState} from "react";
+import React, {createRef, useEffect, useState} from "react";
+import classNames from "classnames";
 
 type WatchInputProps = {
     data: IProblem<TProblemType>
@@ -30,7 +31,11 @@ export default function WatchInput(props : WatchInputProps){
     return (
         <div className="watch-input-container">
             <div className="title-container">
-                <span className="title__number">{`${props.index + 1}.`}</span>
+                <span className="title__number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}</span>
                 <textarea
                     disabled
                     ref={titleTextarea}

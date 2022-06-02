@@ -13,7 +13,6 @@ type WatchProblemContentProps = {
 
 export default function WatchProblemContent(props : WatchProblemContentProps){
     if (!props.form || !props.data)return null
-    console.log(props)
     return (
         <>
             <WatchTitle title={props.form.title} />

@@ -36,7 +36,7 @@ export default function Write() {
 
     return (
         <>
-            <HeaderLayout className="write-header">
+            <HeaderLayout needLog={false} className="write-header">
                 <div className="logo-title">
                     <div className="logo">
                         <img src={logo} />

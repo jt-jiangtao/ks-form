@@ -1,9 +1,10 @@
 import {IMultiResult, IProblem, ISelectSetting, ISingleResult, TProblemType, TSetting} from "@/types/service/model";
 import Textarea from "@/components/Textarea";
-import {useCallback, useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import Radio from "@/components/Radio";
 import CheckBox from "@/components/CheckBox";
 import {Select} from "antd";
+import classNames from "classnames";
 
 const Option = Select.Option
 
@@ -17,7 +18,6 @@ export default function EditableSelect(props : EditableSelectProps){
     let [select, setSelect] = useState(props.data)
 
     useEffect(()=>{
-        console.log(props.data)
         setSelect(props.data)
     }, [props])
 
@@ -95,7 +95,11 @@ export default function EditableSelect(props : EditableSelectProps){
             className="editable-select-wrapper"
         >
             <div className="select__title select__title--no-hover">
-                <div className="number">{`${props.index + 1}.`}</div>
+                <div className="number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}</div>
                 <Textarea
                     editable={false}
                     className="select__textarea"

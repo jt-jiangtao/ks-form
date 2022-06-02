@@ -1,4 +1,5 @@
 .header-layout__wrapper {
+    z-index: 1050;
   width: 100%;
   height: 56px;
   display: -webkit-box;

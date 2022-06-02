@@ -32,7 +32,6 @@ export default function Signin() {
                 pwd: user.pwd
             })
                 .then((res) => {
-                    console.log(res)
                     if (res.stat === "ERR_ACCOUNT_NOT_FOUND") {
                         LoginError.current?.replaceChildren("用户名或密码错误")
                     } else if (res.stat === "ERR_PWD_NOT_CORRECT") {

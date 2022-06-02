@@ -1,4 +1,5 @@
 .header-layout__wrapper{
+    z-index: 1050;
     width: 100%;
     height: 56px;
     display: flex;
@@ -8,6 +9,11 @@
     padding: 0 16px;
     background-color: white;
     position: relative;
+}
+.center-wrapper{
+    position: absolute;
+    left: 50%;
+    top: 0;
 }
 
 .right-wrapper{

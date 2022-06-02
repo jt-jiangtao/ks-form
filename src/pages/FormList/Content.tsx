@@ -78,11 +78,9 @@ export default function Content(props: ContentProps) {
 
     // 删除表单
     const deleteFormItem = (id: string) => {
-        console.log(id)
         const newTableItem = tableItem.filter(item => item.id !== id)
         setTableItem(newTableItem)
         deleteForm({id}).then(res => {
-            console.log(res)
             message.success("删除成功!")
         })
     }

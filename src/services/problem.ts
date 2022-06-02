@@ -14,7 +14,7 @@ export function listBasic(){
 }
 
 export function listStar(){
-    return API.get(`/api/problem/listStar`)
+    return API.post(`/api/problem/listStar`)
         .then(res => res.data)
         .catch(res => res.data)
 }

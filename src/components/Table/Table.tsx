@@ -37,15 +37,13 @@ export default function Table(Props: ITable) {
     const changeIsStar = (id: string) => {
         if (star) {
             cancelStarForm({id}).then(res => {
-                // console.log(res)
-                console.log(isStar)
                 setStar(!star)
-                message.success("取消标星成功！")
+                message.success("取消标星成功！", 1500)
             })
         } else {
             starForm({id}).then(res => {
                 setStar(!star)
-                message.success("标星成功！")
+                message.success("标星成功！", 1500)
             })
         }
     }

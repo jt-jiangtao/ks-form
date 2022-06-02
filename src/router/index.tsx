@@ -77,7 +77,7 @@ const routes : GuideRouteObject[] = [
 
 function beforeEach(pathname: string, meta: any, last: string) {
     if (meta.redirect)return meta.redirect
-    const hasLogin = getCache('login') === 'true'
+    // const hasLogin = getCache('login') === 'true'
     // 权限校验
     // 已登录跳转
     // if (meta.log && !hasLogin) return '/signin'

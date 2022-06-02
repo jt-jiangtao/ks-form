@@ -1,6 +1,7 @@
 import Textarea from "@/components/Textarea";
 import {IProblem, TProblemType, TResult} from "@/types/service/model";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import classNames from "classnames";
 
 type WatchDateTimeProps = {
     data: IProblem<TProblemType>
@@ -21,7 +22,11 @@ export default function WatchDateTime(props : WatchDateTimeProps){
             className="editable-select-wrapper"
         >
             <div className="select__title select__title--no-hover">
-                <div className="number">{`${props.index + 1}.`}</div>
+                <div className="number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}</div>
                 <Textarea
                     editable={false}
                     className="select__textarea"

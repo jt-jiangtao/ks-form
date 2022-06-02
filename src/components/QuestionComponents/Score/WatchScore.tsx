@@ -1,6 +1,8 @@
 import {IProblem, TProblemType} from "@/types/service/model";
 import Textarea from "@/components/Textarea";
 import Stars from "@/components/Stars";
+import classNames from "classnames";
+import React from "react";
 
 type WatchScoreProps = {
     data: IProblem<TProblemType>
@@ -13,7 +15,11 @@ export default function WatchScore(props : WatchScoreProps){
             className="editable-select-wrapper"
         >
             <div className="select__title select__title--no-hover">
-                <div className="number">{`${props.index + 1}.`}</div>
+                <div className="number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}</div>
                 <Textarea
                     editable={false}
                     className="select__textarea"

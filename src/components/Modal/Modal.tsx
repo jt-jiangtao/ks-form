@@ -7,7 +7,9 @@ interface Props {
   title: string | React.ReactNode
   footer: React.ReactNode
   onClose ?: () => void,
-  children ?: JSX.Element | string | React.ReactNode
+  children ?: JSX.Element | string | React.ReactNode,
+  width ?: number,
+  height ?: number
 }
 
 export default class Modal extends React.Component<Props> {
@@ -32,8 +34,13 @@ export default class Modal extends React.Component<Props> {
         <div className={classNames('modal-root', {
           'modal-root-hidden': !this.props.visible
         })}>
-          <div className="modal-mask" onClick={this.props.onClose}></div>
-          <div className="modal-content">
+          <div className="modal-mask" onClick={this.props.onClose}/>
+          <div
+              style={{
+                width: this.props.width + "px",
+                height: this.props.height + "px"
+              }}
+              className="modal-content">
             <div className="close-button" onClick={this.props.onClose}>
                 <div className="close-container">
                     <CloseOutlined />

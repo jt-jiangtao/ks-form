@@ -1,5 +1,7 @@
 import Textarea from "@/components/Textarea";
 import {IMultiResult, IProblem, ISingleResult, TProblemType, TResult} from "@/types/service/model";
+import classNames from "classnames";
+import React from "react";
 
 type WatchSelectProps = {
     data: IProblem<TProblemType>
@@ -26,7 +28,11 @@ export default function WatchSelect(props : WatchSelectProps){
             className="editable-select-wrapper"
         >
             <div className="select__title select__title--no-hover">
-                <div className="number">{`${props.index + 1}.`}</div>
+                <div className="number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}</div>
                 <Textarea
                     editable={false}
                     className="select__textarea"

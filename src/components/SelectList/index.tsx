@@ -6,7 +6,8 @@ type SelectListProps = {
     pullable ?: boolean,
     open ?: boolean,
     title: string
-    children:  JSX.Element | React.ReactNode | React.ReactNode[]
+    children:  JSX.Element | React.ReactNode | React.ReactNode[],
+    manager ?: JSX.Element | React.ReactNode | React.ReactNode[]
 }
 
 
@@ -28,6 +29,7 @@ export default function SelectList(props : SelectListProps){
                         'select-list__icon-rotate': !open
                     })}
                     />
+                {props.manager}
             </div>
             <div className={classNames("select-list__content--" + (open ? 'down' : 'up'), "select-list__content")}>
                 {props.children}

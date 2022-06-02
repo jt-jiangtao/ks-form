@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import classNames from "classnames";
 import './index.scss'
 
@@ -8,7 +8,8 @@ type ModuleProps = {
     tools ?: JSX.Element,
     title ?: JSX.Element | string,
     titleShow ?: boolean,
-    draggable ?: boolean
+    draggable ?: boolean,
+    dataRequired : boolean
 }
 
 
@@ -16,7 +17,7 @@ export default function Module(props : ModuleProps){
     const renderTitle = ()=>{
         return typeof props.title === 'string' ?
             <div className='module__title--string'>{props.title}</div> :
-            <div className='module__title--component'>{props.tools}</div>
+            <div className='module__title--component'>{props.title}</div>
     }
 
     const clickHandler = (event : any) => {
@@ -39,6 +40,9 @@ export default function Module(props : ModuleProps){
                 {renderTitle()}
             </div>
             {props.draggable && <div className='module__draggable'/>}
+            <span className={classNames("required", {
+                "required-show": props.dataRequired
+            })}>*</span>
             {props.children}
             <div className="module__tools">
                 {props.tools}
