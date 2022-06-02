@@ -119,6 +119,8 @@ export default function Table(Props: ITable) {
                     <Button
                         onClick={()=> viewResult(id)}
                         size="middle" style={{marginRight: 10}}>查看结果</Button>
+                    <Button onClick={()=> releaseFormItem(id,index)}
+                        size="middle" style={{marginRight: 10}}>继续收集</Button>
                     <Button type="primary" danger size="middle" onClick={handleClick}>删除</Button>
                     <Modal visible={visible}
                            title="删除表单"
