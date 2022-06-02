@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./table.scss"
-import {cancelStarForm,  starForm} from "@/services";
+import {cancelStarForm, formResult, starForm} from "@/services";
 import message from "@/components/Message";
 import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal/Modal";
@@ -34,11 +34,23 @@ export default function Table(Props: ITable) {
     const [star, setStar] = useState<boolean>(isStar)
     // 模态框是否可见
     const [visible, setVisible] = useState<boolean>(false)
+    // 每个表单收集的数据总份数
+    let [total, setTotal] = useState<number>(0)
     // 时间戳转年月日的函数
     let moment = require('moment')
     // 模态框内容部分
     const children = <div>您确定要删除此表单吗，删除后将无法填写表单和查看表单记录</div>
     // 标星与取消标星，先判断一下当前的状态，再调用不同的方法
+
+    useEffect(()=>{
+        formResult({
+            id:id
+        }).then(res=>{
+            // console.log(res)
+            setTotal(res.data.items.length)
+        })
+    },[])
+
     const changeIsStar = (id: string) => {
         if (star) {
             cancelStarForm({id}).then(res => {
@@ -60,9 +72,9 @@ export default function Table(Props: ITable) {
         if (status == 2) {
             return (<div className="draft">草稿</div>)
         }else if (status == 3) {
-            return (<div className="collecting">正在收集 0份</div>)
+            return (<div className="collecting">{`正在收集 ${total}份`}</div>)
         }else if (status == 4) {
-            return (<div className="over">已结束 收集0份</div>)
+            return (<div className="over">{`已结束 收集${total}份`}</div>)
         }
     }
 

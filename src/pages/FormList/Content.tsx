@@ -1,6 +1,6 @@
 import Pagination from "@/components/Pagination/Pagination";
 import {useEffect, useState} from "react";
-import {deleteForm, endCollectForm, getFormList, startCollectForm} from "@/services";
+import {deleteForm, endCollectForm, formResult, getFormList, startCollectForm} from "@/services";
 import React from "react";
 import style from "@/styles/FormList/content.module.scss"
 import Table from "@/components/Table/Table";
@@ -36,7 +36,6 @@ export default function Content(props: ContentProps) {
             isStar: isStar
         }).then(res => {
             // console.log(res)
-            console.log(res)
             setTableItem(res.data.items)
             setTotal(res.data.total)
         })
