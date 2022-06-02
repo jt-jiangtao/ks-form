@@ -1,0 +1,98 @@
+.question-content{
+    width: 100%;
+    min-height: calc(100vh - 150px);
+    padding: 50px 88px;
+    background-color: #fff;
+    border: 1px solid #e7e9eb;
+    border-radius: 2px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.problem-content{
+    width: 100%;
+}
+
+.success-edit{
+    background: #fff;
+    width: 100%;
+    margin-top: 48px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .divider{
+        flex: 1;
+        height: 1px;
+        border-bottom: 1px dashed #e7e9eb;
+    }
+    .add-success-container{
+        min-width: 168px;
+        text-align: center;
+        margin: 0 8px;
+        cursor: pointer;
+    }
+}
+
+.add-success-container{
+    .success-edit__label{
+        font-size: 14px;
+        font-weight: 500;
+        color: #3d4757;
+        margin-bottom: 4px;
+        .success-edit__label-icon{
+            width: 14px;
+            height: 14px;
+            margin-left: 4px;
+        }
+    }
+    .success-edit__content{
+        font-size: 12px;
+        color: #767c85;
+        min-width: 144px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.brand{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 13px;
+    height: 52px;
+    position: absolute;
+    bottom: -105px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    .brand__logo{
+        color: #3d4757;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        img{
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    }
+    .brand__text{
+        color: #767c85;
+        font-size: 12px;
+        .brand__line{
+            display: inline-block;
+            padding: 0 5px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 1330px) {
+    .question-content{
+        padding-left: 66px;
+        padding-right: 66px;
+    }
+}

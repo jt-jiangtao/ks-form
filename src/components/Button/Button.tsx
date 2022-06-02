@@ -7,20 +7,20 @@ type ButtonShape = 'default' | 'circle' | 'round'
 type ButtonSize = 'large' | 'middle' | 'small'
 type TargetType = '_self' | '_blank' | '_parent' | '_top' | string
 
-interface Props {
-    type?: ButtonType
-    shape?: ButtonShape
-    size?: ButtonSize
-    icon?: JSX.Element
-    disabled?: boolean
-    block?: boolean
-    href?: string
-    danger?: string
-    style?: Object
-    target?: TargetType
-    onClick?: () => void
-    loading?: boolean,
-    children?: JSX.Element | string | React.ReactNode
+interface Props {style ?: Object
+  type?: ButtonType
+  shape?: ButtonShape
+  size?: ButtonSize
+  icon?: JSX.Element | React.ReactNode
+  disabled ?: boolean
+  block?: boolean
+  href?: string
+  target?: TargetType
+  onClick?: (event : any) => void
+  loading?: boolean,
+  className?: string,
+  children ?: JSX.Element | string | React.ReactNode
+    danger ?: boolean
 }
 
 export default class Button extends React.Component<Props> {
@@ -78,30 +78,36 @@ export default class Button extends React.Component<Props> {
         )
     }
 
-    render() {
-        return (
-            <button
-                style={this.props.style}
-                onClick={() => this.props.onClick && this.props.onClick()}
-                disabled={this.props.disabled}
-                className={classNames('btn',
-                    `btn-${this.props.type}`,
-                    `btn-${this.props.size}`,
-                    `btn-${this.props.shape}`,
-                    {
-                        'btn-icon-only': this.iconOnly(),
-                        'btn-block': this.props.block,
-                        'btn-loading': this.props.loading
-                    }
-                )}
-            >
-                {
-                    this.renderIcon()
-                }
-                {
-                    this.props.href ? this.renderLink() : this.renderChildren()
-                }
-            </button>
-        )
-    }
+  // TODO: PROBLEM click事件传参
+  clickEvent = (event : any)=>{
+    this.props.onClick && this.props.onClick(event)
+  }
+
+  render() {
+    return (
+        <button
+            style={this.props.style}
+          onClick={this.clickEvent}
+          disabled={this.props.disabled}
+          className={classNames('btn',
+              `btn-${this.props.type}`,
+              `btn-${this.props.size}`,
+              `btn-${this.props.shape}`,
+              this.props.className,
+          {
+                'btn-icon-only': this.iconOnly(),
+                'btn-block': this.props.block,
+                'btn-loading': this.props.loading
+              }
+              )}
+        >
+          {
+            this.renderIcon()
+          }
+          {
+            this.props.href ? this.renderLink() :  this.renderChildren()
+          }
+        </button>
+    )
+  }
 }

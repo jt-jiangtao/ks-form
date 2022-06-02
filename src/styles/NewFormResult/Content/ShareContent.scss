@@ -1,0 +1,84 @@
+.result-share h3{
+    font-size: 18px;
+    color: rgb(61, 71, 87);
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.result-code{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .copy-link{
+        margin-top: 20px;
+    }
+}
+
+.qr-wrapper{
+    position: relative;
+    width: 200px;
+    height: 236px;
+    display: flex;
+    margin-bottom: 17px;
+    justify-content: center;
+    align-items: center;
+}
+
+// 使用position: absolute;脱离文档流，使得scale位置失效
+.qr-container{
+    width: 272px;
+    height: 323px;
+    border: 0.01rem solid rgb(227, 227, 227);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0.7);
+    position: absolute;
+    margin-top: -48px;
+    margin-left: -35px;
+    left: 0;
+    top: 0;
+
+    .qr__title{
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 16px;
+        font-weight: 500;
+        color: rgb(83, 82, 82);
+        line-height: 21px;
+        padding: 0 23px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        overflow-wrap: break-word;
+        white-space: normal !important;
+    }
+    .qr{
+        margin-top: 32px;
+    }
+    .qr__des{
+        width: 100%;
+        text-align: center;
+        padding: 0 30px;
+        bottom: 22px;
+        font-size: 14px;
+        line-height: 19px;
+        color: rgb(155, 155, 155);
+    }
+}
+
+#result-qr{
+    position: relative;
+    .qr-logo-container{
+        background-color: white;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 45px;
+        height: 45px;
+        left: calc(50% - 22.5px);
+        top: calc(50% - 22.5px);
+        border-radius: 5px;
+    }
+}

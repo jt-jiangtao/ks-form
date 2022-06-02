@@ -1,13 +1,13 @@
 // 表单
 export interface IForm {
-  id: string;
+  id?: string;
   title: string;
   subTitle: string;
-  status: EFormStatus;
-  ctime: number;
-  utime: number;
-  author: string;
-  isStar: boolean
+  status?: EFormStatus;
+  ctime?: number;
+  utime?: number;
+  author?: string;
+  isStar?: boolean
   problems: IProblem<TProblemType>[];
 }
 
@@ -81,7 +81,13 @@ export type TSetting<T extends TProblemType> = T extends "singleSelect"
   ? ISelectSetting
   : T extends "pullSelect"
   ? ISelectSetting
+  : T extends "time" | "date"
+  ? IDatetimeSetting
   : null;
+
+export interface IDatetimeSetting {
+  type: number
+}
 
 // 选择设置
 export interface ISelectSetting {

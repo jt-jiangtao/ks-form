@@ -1,0 +1,74 @@
+.form {
+  box-sizing: border-box;
+  padding: 15px 0;
+  //border: solid 1px black;
+  margin: 0 25px;
+  display: flex;
+  flex-direction: column;
+
+  .form_header {
+    display: flex;
+    font-size: 18px;
+    justify-content: space-between;
+    border-bottom: 1px solid #e2e6ed;
+
+    .form_mycreate {
+      margin: 15px 0;
+    }
+
+    .form_star {
+      color: grey;
+      margin: 10px 30px;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: #1890FF;
+      }
+    }
+  }
+}
+
+.form_list {
+  padding: 20px;
+  border-bottom: 1px solid #e2e6ed;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .list_title {
+    flex: 1;
+  }
+
+  .list_time {
+    flex: 2;
+    text-align: center;
+  }
+
+  .list_status {
+    flex: 1;
+    text-align: center;
+  }
+
+  .list_star {
+    flex: 1;
+    text-align: center;
+  }
+
+  .list_operate {
+    flex: 3;
+    text-align: center;
+  }
+}
+.img_noData{
+  margin-right:85px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form_pagination {
+  position: absolute;
+  margin-top: 10px;
+  right: 25px;
+}

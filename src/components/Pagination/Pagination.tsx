@@ -1,42 +1,33 @@
-import React, { useState, FC, useMemo, memo } from 'react';
-import { EllipsisOutlined, LeftOutlined, RightOutlined, DownOutlined } from '@ant-design/icons';
-import  Select  from "../Select/Select";
+import React, {useState, FC, useMemo, memo} from 'react';
+import {EllipsisOutlined, LeftOutlined, RightOutlined, DownOutlined} from '@ant-design/icons';
+import Select from "../Select/Select";
 import style from "./pagination.module.scss";
 
 interface PaginationProps {
-    /**
-     * @description 总数据条数
-     * @default 0
-     */
+    // 总数据条数
+    // default 0
     total: number;
-    /**
-     * @description 显示每页条数Select
-     * @default false
-     */
+    // 显示每页条数Select
+    // default false
     showSizeChanger?: Boolean;
-    /**
-     * @description 每页条数配置
-     * @default 每页10条数据
-     */
+    // 每页条数配置
+    // default 每页10条数据
     pageSizeOptions?: Array<number>;
-    /**
-     * @description 改变页码后的回调
-     * @default {}
-     */
+    // 改变页码后的回调
+    // default {}
     showJumpInput?: Boolean;
-    /**
-     * @description 显示跳转页面输入框
-     * @default false
-     */
+    // 显示跳转页面输入框
+    // default false
     changePageCallback: Function;
+    // 改变每页条数后的回调
     changePageSizeCallback?: Function;
 }
-const Pagination: FC<PaginationProps> = (props) => {
-    const { changePageCallback, total, pageSizeOptions, showJumpInput, showSizeChanger } = props;
 
+const Pagination: FC<PaginationProps> = (props) => {
+    const {changePageCallback, total, pageSizeOptions, showJumpInput, showSizeChanger, changePageSizeCallback} = props;
     const [nowIndex, setNowIndex] = useState<number>(1);
     const [pageRenderArray, setPageRenderArray] = useState<Array<number>>([]);
-    const [sizePage, setSizePage] = useState<number>(pageSizeOptions ? pageSizeOptions[0] : 10);
+    const [sizePage, setSizePage] = useState<number>(pageSizeOptions ? pageSizeOptions[0] : 4);
 
     const totalPage = useMemo(() => {
         setNowIndex(1);
@@ -210,25 +201,25 @@ const Pagination: FC<PaginationProps> = (props) => {
     };
     //select回调
     const handleSelectCallback = (pageSize: any) => {
-        console.log(pageSize.value);
-        setSizePage(pageSize.value);
-        changePageSizeCallback && changePageSizeCallback(pageSize.value)
-    };
-    const changePageSizeCallback=(pageSize:any)=>{
         console.log(pageSize.value)
-    }
+        setSizePage(pageSize.value)
+        // 加一个回调函数，设置每页展示数据的条数
+        changePageSizeCallback && changePageSizeCallback(pageSize.value, nowIndex);
+    };
+
 
     return (
         <div className={style.pagination}>
             <div className={nowIndex === 1 ? `${style.prev} ${style.disabled}` : `${style.prev}`} onClick={prevPage}>
-                <LeftOutlined />
+                <LeftOutlined/>
             </div>
-            <div className={nowIndex === 1 ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`} onClick={changePage(1)}>
+            <div className={nowIndex === 1 ? `${style.actived} ${style.numberBox}` : `${style.numberBox}`}
+                 onClick={changePage(1)}>
                 1
             </div>
             {nowIndex > 4 && totalPage > 6 && (
                 <div className={style.numberBox} onClick={prevFivePage}>
-                    <EllipsisOutlined />
+                    <EllipsisOutlined/>
                 </div>
             )}
 
@@ -261,7 +252,7 @@ const Pagination: FC<PaginationProps> = (props) => {
                 })}
             {totalPage - nowIndex >= 4 && totalPage > 6 && (
                 <div className={style.numberBox} onClick={nextFivePage}>
-                    <EllipsisOutlined />
+                    <EllipsisOutlined/>
                 </div>
             )}
             {totalPage > 1 && (
@@ -276,34 +267,8 @@ const Pagination: FC<PaginationProps> = (props) => {
                 className={nowIndex === totalPage || totalPage <= 1 ? `${style.next} ${style.disabled}` : `${style.next}`}
                 onClick={nextPage}
             >
-                <RightOutlined />
+                <RightOutlined/>
             </div>
-            {/* {
-                Array.isArray(pageSizeOptions) && showSizeChanger
-                &&
-                <div className={pageSizeSelect} onClick={() => setShowSizeOptions(!showSizeOptions)}>
-                    <>
-                        <span className={size}>{sizePage} 条/页</span>
-                        <DownOutlined />
-
-                    </>
-                    {
-                        showSizeOptions
-                        &&
-                        <div className={options}>
-                            {
-                                pageSizeOptions.map(s => {
-                                    return (
-                                        <div key={s as number} className={option} onClick={() => setSizePage(s as number)}>
-                                            {s} 条/页
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    }
-                </div>
-            } */}
             {Array.isArray(pageSizeOptions) && showSizeChanger && (
                 <Select
                     option={pageSizeOptions.map((item) => {
@@ -312,7 +277,7 @@ const Pagination: FC<PaginationProps> = (props) => {
                             value: item,
                         };
                     })}
-                    placeholder="5条/页"
+                    placeholder="4条/页"
                     width={100}
                     handleSelectCallback={handleSelectCallback}
                 />

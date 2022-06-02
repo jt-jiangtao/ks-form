@@ -13,7 +13,7 @@ export function createForm(data : ICreateFormReq){
         .catch(res => res.data)
 }
 
-export function getForm(data : IListReq){
+export function getForm(data : IIdReq){
     return API.post('/api/form/get',data)
         .then(res => res.data)
         .catch(res => res.data)
@@ -38,13 +38,13 @@ export function cancelStarForm(data : IIdReq){
 }
 
 export function inputForm(data : IInputReq){
-    return API.post('/api/form/input')
+    return API.post('/api/form/input', data)
         .then(res => res.data)
         .catch(res => res.data)
 }
 
 export function formResult(data : IIdReq){
-    return API.post(`/api/form/formResult/${data.id}`)
+    return API.get(`/api/form/formResult/${data.id}`)
         .then(res => res.data)
         .catch(res => res.data)
 }

@@ -1,0 +1,25 @@
+.select-items{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    color: #3d4757;
+    .select-item{
+        width: 33.33%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        img{
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            top: 11px;
+        }
+        .select-label{
+            display: flex;
+            margin-left: 24px;
+            padding: 5px 0;
+            flex: 1;
+            line-height: 24px;
+        }
+    }
+}

@@ -2,14 +2,10 @@ import Button from "@/components/Button/Button";
 import {useLocation, useNavigate} from "react-router";
 import {
     PlusOutlined,
-    UnorderedListOutlined,
     PlusSquareOutlined,
-    FormOutlined,
-    ShareAltOutlined,
-    TeamOutlined,
-    RestOutlined
+    FormOutlined
 } from "@ant-design/icons";
-import style from "./SideBar.module.scss"
+import style from "@/styles/FormList/SideBar.module.scss"
 import {NavLink} from "react-router-dom";
 import classNames from "classnames";
 
@@ -24,7 +20,10 @@ export default function SideBar(props: SideBarProps) {
     return (
         <>
             <Button icon={<PlusOutlined style={{fontWeight: "bolder", fontSize: 16}}/>} type="primary"
-                    onClick={() => navigate("/new-form-create")}>新建</Button>
+                    onClick={() => navigate({
+                        pathname: "/new-form-create",
+                        hash: "#data"
+                    })}>新建</Button>
             <div className={style.submenu}>
                 <NavLink to="#mycreate" className={classNames(style.nvlink,
                     hash === 'mycreate' ? style.isactive : ""
@@ -37,24 +36,6 @@ export default function SideBar(props: SideBarProps) {
                 )}>
                     <FormOutlined style={{marginRight: 10, fontSize: 14}}/>
                     我填写的
-                </NavLink>
-                <NavLink to="#share" className={classNames(style.nvlink,
-                    hash === 'share' ? style.isactive : ""
-                )}>
-                    <ShareAltOutlined style={{marginRight: 10, fontSize: 14}}/>
-                    分享给我的
-                </NavLink>
-                <NavLink to="#collect" className={classNames(style.nvlink,
-                    hash === 'collect' ? style.isactive : ""
-                )}>
-                    <TeamOutlined style={{marginRight: 10, fontSize: 14}}/>
-                    我收集的
-                </NavLink>
-                <NavLink to="#recycle" className={classNames(style.nvlink,
-                    hash === 'recycle' ? style.isactive : ""
-                )}>
-                    <RestOutlined style={{marginRight: 10, fontSize: 14}}/>
-                    回收站
                 </NavLink>
             </div>
         </>

@@ -1,33 +1,31 @@
-import {useLocation} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 import React, {useEffect, useState} from "react";
 import HeaderLayout from "@/layout/HeaderLayout";
 import logo from '@/assets/icon/logo.svg'
 import '@/styles/FormList/index.scss'
 import SideBar from "@/pages/FormList/SideBar";
 import Content from "@/pages/FormList/Content";
-import Myedit from "@/pages/FormList/Myedit";
-import Myshare from "@/pages/FormList/Myshare";
-import Mycollect from "@/pages/FormList/Mycollect";
-import Recycle from "@/pages/FormList/Recycle";
-import {login} from "@/services";
 
 export default function FormList() {
-    useEffect(() => {
-        login({
-            account: "123",
-            pwd: "123"
-        })
-    }, [])
     let hash = useLocation().hash.slice(1)
-
+    let navigate = useNavigate()
     let sidebarHash = ['mycreate', 'myedit', 'share', 'collect', 'recycle']
     let location = useLocation()
     const parseSideBar = () => {
-        if (location.hash.slice(1).length === 0) return 'mycreate'
+        if (location.hash.slice(1).length === 0) navigate({
+            hash: "#mycreate"
+        })
         else if (sidebarHash.indexOf(location.hash.slice(1)) !== -1) return location.hash.slice(1)
-        return 'mycreate'
+        navigate({
+            hash: "#mycreate"
+        })
+        return "mycreate"
     }
-    let [sidebar] = useState(parseSideBar)
+    let [sidebar, setSidebar] = useState(parseSideBar)
+
+    useEffect(()=>{
+        setSidebar(parseSideBar)
+    }, [location])
 
     return (
         <section>
@@ -45,10 +43,6 @@ export default function FormList() {
                 </div>
                 <div className="content">
                     <div>{hash === "mycreate" && <Content/>}</div>
-                    <div>{hash === "myedit" && <Myedit/>}</div>
-                    <div>{hash === "share" && <Myshare/>}</div>
-                    <div>{hash === "collect" && <Mycollect/>}</div>
-                    <div>{hash === "recycle" && <Recycle/>}</div>
                 </div>
             </div>
         </section>

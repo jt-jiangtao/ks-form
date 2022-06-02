@@ -1,26 +1,33 @@
 import React, {useState} from 'react';
-import {IForm} from "@/types/service/model";
 import "./table.scss"
-import moment from 'moment';
-import {cancelStarForm, deleteForm, endCollectForm, getForm, starForm, startCollectForm} from "@/services";
-import SideBar from "@/pages/FormList/SideBar";
+import {cancelStarForm,  starForm} from "@/services";
 import message from "@/components/Message";
 import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal/Modal";
+import {useNavigate} from "react-router";
 
 interface ITable {
+    // 传入的id
     id: string,
+    // 表格每一项的index
     index:number,
     title: string,
+    // 创建时间
     ctime: number,
+    // 是否标星
     isStar: boolean,
+    // 当前状态
     status: number,
+    // 删除表单
     deleteFormItem: (id: string) => void
+    // 发布表单
     releaseFormItem: (id: string,index:number) => void
+    // 停止收集表单
     stopCollectForm: (id: string,index:number) => void
 }
 
 export default function Table(Props: ITable) {
+    const navigate = useNavigate()
     // 解构赋值
     const {index,title, ctime, isStar, status, id, deleteFormItem, releaseFormItem, stopCollectForm} = Props
     // 是否标星的状态
@@ -52,11 +59,9 @@ export default function Table(Props: ITable) {
     const currentStatus = (status: number) => {
         if (status == 2) {
             return (<div className="draft">草稿</div>)
-        }
-        if (status == 3) {
+        }else if (status == 3) {
             return (<div className="collecting">正在收集 0份</div>)
-        }
-        if (status == 4) {
+        }else if (status == 4) {
             return (<div className="over">已结束 收集0份</div>)
         }
     }
@@ -79,8 +84,10 @@ export default function Table(Props: ITable) {
                     <Button style={{marginRight: 10}} onClick={() => {
                         releaseFormItem(id,index)
                     }}>发布</Button>
-                    <Button style={{marginRight: 10}}>编辑</Button>
-                    <Button type="primary" danger="" size="middle" onClick={handleClick}
+                    <Button
+                        onClick={()=> editForm(id)}
+                        style={{marginRight: 10}}>编辑</Button>
+                    <Button type="primary" danger size="middle" onClick={handleClick}
                             style={{marginRight: 10}}>删除</Button>
                     <Modal visible={visible}
                            title="删除表单"
@@ -99,19 +106,38 @@ export default function Table(Props: ITable) {
         if (status == 3) {
             return (
                 <>
-                    <Button style={{marginRight: 10}}>分享</Button>
-                    <Button style={{marginRight: 10}}>查看结果</Button>
+                    <Button
+                        onClick={()=> shareForm(id)}
+                        style={{marginRight: 10}}>分享</Button>
+                    <Button
+                        onClick={()=> viewResult(id)}
+                        style={{marginRight: 10}}>查看结果</Button>
                     <Button style={{marginRight: 10}} onClick={() => stopCollectForm(id,index)}>停止</Button>
-                    <Button type="primary" danger="" size="middle" onClick={handleClick}
+                    <Button type="primary" danger size="middle" onClick={handleClick}
                             style={{marginRight: 10}}>删除</Button>
+                    <Modal visible={visible}
+                           title="删除表单"
+                           children={children}
+                           footer={[
+                               // 实现关闭窗口的逻辑
+                               <Button key="cancel" style={{marginRight: 10}} onClick={() => closeModal()}>取消</Button>,
+                               // 实现关闭窗口的逻辑
+                               <Button key="ok" type="primary" onClick={() => deleteFormItem(id)}>确认</Button>
+                           ]}
+                           onClose={() => closeModal()}
+                    />
                 </>
             )
         }
         if (status == 4) {
             return (
                 <>
-                    <Button size="middle" style={{marginRight: 10}}>查看结果</Button>
-                    <Button type="primary" danger="" size="middle" onClick={handleClick}>删除</Button>
+                    <Button
+                        onClick={()=> viewResult(id)}
+                        size="middle" style={{marginRight: 10}}>查看结果</Button>
+                    <Button onClick={()=> releaseFormItem(id,index)}
+                        size="middle" style={{marginRight: 10}}>继续收集</Button>
+                    <Button type="primary" danger size="middle" onClick={handleClick}>删除</Button>
                     <Modal visible={visible}
                            title="删除表单"
                            children={children}
@@ -127,6 +153,31 @@ export default function Table(Props: ITable) {
             )
         }
     }
+
+    const shareForm = (id : string) => {
+        navigate({
+            pathname: "/new-form-result",
+            search: `?id=${id}`,
+            hash: "#share"
+        })
+    }
+
+    const viewResult = (id : string) => {
+        navigate({
+            pathname: "/new-form-result",
+            search: `?id=${id}`,
+            hash: "#data"
+        })
+    }
+
+    const editForm = (id : string) => {
+        navigate({
+            pathname: "/new-form-create",
+            search: `?id=${id}`,
+            hash: "#data"
+        })
+    }
+
     return (
         <>
             <div className="tablelist">
@@ -154,4 +205,3 @@ export default function Table(Props: ITable) {
         </>
     );
 }
-

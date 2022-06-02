@@ -1,0 +1,39 @@
+.tool-list{
+    position: fixed;
+    width: 290px;
+}
+
+.button-wrapper{
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .btn{
+        flex: 1;
+    }
+
+    .btn:not(:first-child){
+        margin-left: 8px;
+    }
+}
+
+.over-btn .btn-white{
+    color: #3d4757;
+    border: 1px solid #e7e9eb;
+    &:hover{
+        color: #3d4757;
+        background-color: #f9fafd;
+        border: 1px solid #e7e9eb;
+    }
+}
+
+.button-hidden{
+    display: none;
+}
+
+@media screen and (max-width: 1217px) {
+    .tool-list{
+        position: static !important;
+    }
+}
