@@ -44,8 +44,8 @@ export default function Signup() {
                     message.success("注册成功,请登录！", 1000)
                     navigate("/signin")
                 }
-            }).catch(res=>{
-                debugger
+            }).catch(res => {
+            debugger
             console.log(res)
         })
     }
@@ -127,6 +127,7 @@ export default function Signup() {
                     </div>
                     <div className={style.signup_pwd}>
                         <Input width="300" type='password' placeholder='确认密码'
+                               showTogglePwd={true}
                                moreStyle={{marginTop: 7}}
                                handleIptBlur={handleIptBlurConfirmPwd}
                                handleIptChange={handleIptChangeConfirmPwd}/>
