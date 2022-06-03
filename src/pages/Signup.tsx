@@ -28,6 +28,7 @@ export default function Signup() {
     }
     // 注册
     const register = () => {
+        console.log(userInfo)
         console.log(userInfo.account !== "" && userInfo.pwd !== "" && userInfo.confirmPwd !== "" &&
             userInfo.account.trim() !== "" && userInfo.pwd.trim() !== "" && userInfo.confirmPwd.trim() !== ""
             && userInfo.pwd === userInfo.confirmPwd)
@@ -137,7 +138,7 @@ export default function Signup() {
                         {
                             userInfo.account !== "" && userInfo.pwd !== "" && userInfo.confirmPwd !== "" &&
                             userInfo.account.trim() !== "" && userInfo.pwd.trim() !== "" && userInfo.confirmPwd.trim() !== ""
-                            && userInfo.pwd === userInfo.confirmPwd ?
+                            && userInfo.pwd === userInfo.confirmPwd && (userInfo.pwd?.length > 7 && userInfo.pwd?.length as number <= 16) ?
                                 < Button type="primary" style={{width: 300}} onClick={register}>注册</Button>
                                 :
                                 < Button type="default" disabled={true} style={{width: 300}}

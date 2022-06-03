@@ -5,6 +5,7 @@
   margin: 0 25px;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   .form_header {
     display: flex;
@@ -27,6 +28,18 @@
       }
     }
   }
+}
+
+.form_loading {
+  color: #79C4ED;
+  font-size: 25px;
+  position: absolute;
+  top: 180%;
+  left: 46%;
+  transform: translate(-50%, -50%);
+}
+.form_null {
+  display: none;
 }
 
 .form_list {
@@ -59,6 +72,13 @@
     flex: 3;
     text-align: center;
   }
+}
+
+.img_noData {
+  margin-right: 85px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .form_pagination {

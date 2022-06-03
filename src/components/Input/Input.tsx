@@ -1,6 +1,6 @@
 import React, {FC, useState, useMemo, memo, forwardRef} from 'react';
 import {EyeOutlined, EyeInvisibleOutlined} from '@ant-design/icons';
-import style from './input.module.scss'
+import './input.scss'
 
 interface InputProps {
     // 自定义宽度
@@ -78,9 +78,9 @@ const Input: FC<InputProps & NativeInputProps> = (props) => {
         return {...style, ...moreStyle};
     }, [width, moreStyle]);
     return (
-        <div className={style.box} style={{width: width ? width + 'px' : '170px'}}>
+        <div className="box" style={{width: width ? width + 'px' : '170px'}}>
             <input
-                className={style.input}
+                className="input"
                 style={exticStyle}
                 type={iptType}
                 placeholder={placeholder}
@@ -94,12 +94,20 @@ const Input: FC<InputProps & NativeInputProps> = (props) => {
                 //密码框
                 (type === 'password' && showTogglePwd && (
                     pwdIptState ?
-                        <EyeOutlined
-                            style={{position: 'absolute', right: '15px', fontSize: '14px', cursor: 'pointer', color: 'grey'}}
+
+                        <EyeInvisibleOutlined
+                            style={{
+                                position: 'absolute', right: '15px', fontSize: '14px', cursor: 'pointer', color: 'grey'
+                            }}
                             onClick={() => setPwdIptState(!pwdIptState)}/>
                         :
-                        <EyeInvisibleOutlined
-                            style={{position: 'absolute', right: '15px', fontSize: '14px', cursor: 'pointer', color: 'grey'
+                        <EyeOutlined
+                            style={{
+                                position: 'absolute',
+                                right: '15px',
+                                fontSize: '14px',
+                                cursor: 'pointer',
+                                color: 'grey'
                             }}
                             onClick={() => setPwdIptState(!pwdIptState)}/>
                 ))
