@@ -11,6 +11,7 @@ import Menu from "@/components/DropDown/Menu";
 import {NormalUsedProblemContext} from "@/store/context/NormalUsedProblem";
 import {star} from "@/services";
 import message from "@/components/Message";
+import {checkProblem} from "@/utils/validate";
 
 export function ToolMenu(props: { index: number }) {
     const {data, setData, changeFocus} = useContext(DataInfoContext)
@@ -54,7 +55,7 @@ export function ToolMenu(props: { index: number }) {
                 problems: copy
             })
         }else if (item.key === 'normal'){
-            // TODO: 添加为常用题
+            if (!checkProblem(data.problems[props.index]))return
             star({
                 problem: data.problems[props.index]
             }).then(res=>{

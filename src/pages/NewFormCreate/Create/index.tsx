@@ -17,8 +17,8 @@ export default function Create() {
         <NormalUsedProblemProvider>
             <div className="create">
                 <HeaderLayout className="create-header">
-                    <div className="create-back">
-                        <LeftOutlined onClick={() => navigate(-1)} className="back-icon"/>
+                    <div onClick={() => navigate(-1)} className="create-back">
+                        <LeftOutlined className="back-icon"/>
                         <img className="folder-icon" src={folder}/>
                         <h1 className="create-title">{data.title || '新建表单'}</h1>
                     </div>

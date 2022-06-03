@@ -41,7 +41,9 @@ export default function WatchInput(props : WatchInputProps){
                     ref={titleTextarea}
                     className="watch-input-textarea title__content">{props.data.title}</textarea>
             </div>
-            <div className="watch-input-editor">
+            <div className={classNames("watch-input-editor", {
+                "content-hidden": !props.data.result
+            })}>
                 <textarea
                     disabled
                     className="watch-input-textarea"
@@ -49,6 +51,9 @@ export default function WatchInput(props : WatchInputProps){
                     value={props.data.result?.value.toString() || ''}
                     placeholder="请输入" />
             </div>
+            <div className={classNames("none-edit",{
+                "content-hidden": props.data.result
+            })}>此题未填写</div>
         </div>
     );
 }

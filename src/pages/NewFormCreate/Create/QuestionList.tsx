@@ -32,6 +32,7 @@ import EditableDateTime from "@/components/QuestionComponents/DateTime/EditableD
 import EditDateTime from "@/components/QuestionComponents/DateTime/EditDateTime";
 import EditScore from "@/components/QuestionComponents/Score/EditScore";
 import EditSelect from "@/components/QuestionComponents/Select/EditSelect";
+import {checkProblem} from "@/utils/validate";
 
 export type ProblemType =
     | "input"
@@ -46,11 +47,13 @@ export type ProblemType =
 
 const problems = {
     "input": {
+        isNew: true,
         title: '',
         type: 'input',
         required: false
     },
     "singleSelect": {
+        isNew: true,
         title: "",
         type: "singleSelect",
         required: false,
@@ -64,6 +67,7 @@ const problems = {
         }
     },
     "multiSelect": {
+        isNew: true,
         title: "",
         type: "multiSelect",
         required: false,
@@ -77,6 +81,7 @@ const problems = {
         }
     },
     "pullSelect": {
+        isNew: true,
         title: "",
         type: "pullSelect",
         required: false,
@@ -90,6 +95,7 @@ const problems = {
         }
     },
     "date": {
+        isNew: true,
         title: "",
         type: "date",
         required: false,
@@ -98,6 +104,7 @@ const problems = {
         }
     },
     "time": {
+        isNew: true,
         title: "",
         type: "time",
         required: false,
@@ -106,9 +113,34 @@ const problems = {
         }
     },
     "score": {
+        isNew: true,
         title: "",
         type: "score",
         required: false,
+    },
+    "name": {
+        isNew: true,
+        title: '姓名',
+        type: 'input',
+        required: false
+    },
+    "sex": {
+        isNew: true,
+        title: "性别",
+        type: "singleSelect",
+        required: false,
+        setting: {
+            options: [
+                {
+                    title: "男",
+                    status: 2
+                },
+                {
+                    title: "女",
+                    status: 2
+                }
+            ]
+        }
     }
 }
 
@@ -124,7 +156,6 @@ export default function QuestionList() {
     }
     const addDataWithKey = (event: any, key: ProblemType) => {
         event.stopPropagation()
-        if (key === 'sex' || key === 'name') return
         let newData: any = problems[key]
         addData(newData)
     }
@@ -301,6 +332,7 @@ export default function QuestionList() {
     }
 
     const addNormalProblem = () => {
+        if (!checkProblem(manageData))return
         if (normalId === ''){
             starManageData()
         }else {

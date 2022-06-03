@@ -8,6 +8,8 @@ type EditableScoreProps = {
     data: IProblem<TProblemType>,
     changeData: Function,
     index: number
+    error: boolean,
+    setError: Function
 }
 
 export default function EditableScore(props : EditableScoreProps){
@@ -18,6 +20,7 @@ export default function EditableScore(props : EditableScoreProps){
     }, [props])
 
     const onScoreChange = (star : number) => {
+        props.setError(props.index, false)
         let copy = JSON.parse(JSON.stringify(props.data))
         copy['result'] = {
             'value': star
@@ -46,6 +49,9 @@ export default function EditableScore(props : EditableScoreProps){
                     onScoreChange={onScoreChange}
                     score={Number(score.result?.value) || 0} editable={true} maxScore={5} />
             </div>
+            <div className={classNames("error","margin24", {
+                "error-show": (props.data.required && props.error)
+            })}>此题为必填，请输入</div>
         </div>
     )
 }

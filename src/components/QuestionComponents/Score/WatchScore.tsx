@@ -25,11 +25,16 @@ export default function WatchScore(props : WatchScoreProps){
                     className="select__textarea"
                     value={props.data.title} />
             </div>
-            <div className="watch-score-stars">
+            <div className={classNames("watch-score-stars", {
+                "content-hidden": !props.data.result
+            })}>
                 <Stars
                     score={Number(props.data.result?.value) || 0} editable={false} maxScore={5} />
                 <div className="score">{`${(Number(props.data.result?.value) || 0).toFixed(1)}分`}</div>
             </div>
+            <div className={classNames("none-edit", "margin24", {
+                "content-hidden": props.data.result
+            })}>此题未填写</div>
         </div>
     )
 }

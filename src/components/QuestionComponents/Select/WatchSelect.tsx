@@ -38,9 +38,14 @@ export default function WatchSelect(props : WatchSelectProps){
                     className="select__textarea"
                     value={props.data.title} />
             </div>
-            <div className="select-result">
+            <div className={classNames("select-result", {
+                "content-hidden": !props.data.result
+            })}>
                 {renderContent()}
             </div>
+            <div className={classNames("none-edit","margin24",{
+                "content-hidden": props.data.result
+            })}>此题未填写</div>
         </div>
     )
 }

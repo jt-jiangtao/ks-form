@@ -12,6 +12,8 @@ type EditableSelectProps = {
     data: IProblem<TProblemType>,
     changeData: Function,
     index: number
+    error: boolean,
+    setError: Function
 }
 
 export default function EditableSelect(props : EditableSelectProps){
@@ -28,6 +30,7 @@ export default function EditableSelect(props : EditableSelectProps){
     }
 
     const singleSelectChange = (value : string) => {
+        if (!!value) props.setError(props.index, false)
         let copy = JSON.parse(JSON.stringify(props.data))
         copy['result'] = {
             'value': getValueObject(value)
@@ -36,6 +39,7 @@ export default function EditableSelect(props : EditableSelectProps){
     }
 
     const multiSelectChange = (value : string[]) => {
+        if (value.length !== 0) props.setError(props.index, false)
         let copy = JSON.parse(JSON.stringify(props.data))
         let values : any= []
         for (let i = 0; i < value.length; i++) {
@@ -108,6 +112,9 @@ export default function EditableSelect(props : EditableSelectProps){
             <div className="select-container">
                 {renderSelect()}
             </div>
+            <div className={classNames("error","margin24", {
+                "error-show": (props.data.required && props.error)
+            })}>此题为必填，请输入</div>
         </div>
     );
 }

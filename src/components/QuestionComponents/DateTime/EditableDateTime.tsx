@@ -12,6 +12,8 @@ type EditableDateTimeProps = {
     data: IProblem<TProblemType>,
     changeData: Function,
     index: number
+    error: boolean,
+    setError: Function
 }
 
 export default function EditableDateTime(props : EditableDateTimeProps){
@@ -24,6 +26,7 @@ export default function EditableDateTime(props : EditableDateTimeProps){
     }, [props.data])
 
     const dateChange = (time : any, format : any) => {
+        if (!!time) props.setError(props.index, false)
         let copy = JSON.parse(JSON.stringify(props.data))
         copy['result'] = {
             'value': time.format(format)
@@ -96,6 +99,9 @@ export default function EditableDateTime(props : EditableDateTimeProps){
                     {renderDatetimeInput()}
                 </div>
             </div>
+            <div className={classNames("error","margin24", {
+                "error-show": (props.data.required && props.error)
+            })}>此题为必填，请输入</div>
         </div>
     );
 }
