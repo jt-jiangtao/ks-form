@@ -8,8 +8,11 @@ import * as LoginIn from "@/services/index"
 import style from '@/styles/signin.module.scss'
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
+import {refreshUserInfo} from "@/store/actions";
+import {useDispatch} from "react-redux";
 
 export default function Signin() {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
     const LoginError = useRef<HTMLParagraphElement>(null)
     const [user, setUser] = useState<ILoginReq>({
@@ -40,6 +43,7 @@ export default function Signin() {
                         setCache('login', "true")
                         message.success("登陆成功", 1000)
                         navigate("/form-list")
+                        dispatch(refreshUserInfo(true))
                     }
                 })
         }
