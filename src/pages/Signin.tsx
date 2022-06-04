@@ -68,10 +68,10 @@ export default function Signin() {
                 <div className={style.signin_form}>
                     <div className={style.signin_title}>登录</div>
                     <div className={style.signin_user}>
-                        <Input width="300" type='text' placeholder='用户名' handleIptChange={handleIptChangeAccount}/>
+                        <Input width="295" type='text' placeholder='用户名' handleIptChange={handleIptChangeAccount}/>
                     </div>
                     <div className={style.signin_pwd}>
-                        <Input width="300" type='password' showTogglePwd={true} placeholder='密码'
+                        <Input width="295" type='password' showTogglePwd={true} placeholder='密码'
                                handleIptChange={handleIptChangePwd}
                         />
                     </div>
@@ -87,11 +87,11 @@ export default function Signin() {
                     <div className={style.signin_login}>
                         {
                             user.account.trim() !== "" && user.pwd.trim() !== "" ?
-                                <Button type="primary" style={{width: 300}} onClick={login}>
+                                <Button type="primary" style={{width: 295}} onClick={login}>
                                     登录
                                 </Button>
                                 :
-                                <Button type="default" disabled={true} style={{width: 300}} onClick={login}>
+                                <Button type="default" disabled={true} style={{width: 295}} onClick={login}>
                                     登录
                                 </Button>
                         }
