@@ -138,7 +138,9 @@ export default function Account() {
                             onClick={() => setModifyVisible(true)}
                             className={style["link"]}>设置
                         </div>
-                        <Modal visible={modifyVisible} title={"修改密码"} footer={
+                        <Modal visible={modifyVisible} title={"修改密码"}
+                               onClose={()=>setModifyVisible(false)}
+                               footer={
                             <>
                                 <Button
                                     onClick={() => setModifyVisible(false)}

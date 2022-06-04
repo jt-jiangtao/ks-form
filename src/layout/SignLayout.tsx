@@ -1,5 +1,5 @@
 import React from "react";
-import '@/styles/SignLayout.scss'
+import '@/styles/layout/SignLayout.scss'
 
 type SignLayoutProps = {
     children ?: string | null | JSX.Element | React.ReactNode
