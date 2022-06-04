@@ -19,8 +19,8 @@ export default function EditInput(props: EditInputProps){
     }, [props.data.title])
 
     useEffect(()=>{
-        if (!props.focus) textarea.current?.blur()
-        else textarea.current?.focus()
+        // if (!props.focus) textarea.current?.blur()
+        // else textarea.current?.focus()
     },[props])
 
     const textareaValueChange = () => {

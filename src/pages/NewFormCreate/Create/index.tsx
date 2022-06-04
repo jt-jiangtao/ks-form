@@ -9,12 +9,15 @@ import QuestionList from "@/pages/NewFormCreate/Create/QuestionList";
 import QuestionContent from "@/pages/NewFormCreate/Create/QuestionContent";
 import ToolList from "@/pages/NewFormCreate/Create/ToolList";
 import {NormalUsedProblemProvider} from "@/store/context/NormalUsedProblem";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import {DndProvider} from "react-dnd";
 
 export default function Create() {
     const navigate = useNavigate()
     const {data} = useContext(DataInfoContext)
     return (
-        <NormalUsedProblemProvider>
+        <DndProvider backend={HTML5Backend}>
+            <NormalUsedProblemProvider>
             <div className="create">
                 <HeaderLayout className="create-header">
                     <div onClick={() => navigate(-1)} className="create-back">
@@ -40,5 +43,6 @@ export default function Create() {
                 </div>
             </div>
         </NormalUsedProblemProvider>
+        </DndProvider>
     )
 }

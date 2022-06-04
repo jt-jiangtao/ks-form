@@ -15,6 +15,9 @@ import DropDown from "@/components/DropDown/DropDown";
 import downIcon from "@/assets/icon/down.svg"
 import "@/styles/EditProblemContent.scss"
 import right from "@/assets/icon/right.svg"
+import {DndProvider} from "react-dnd";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import {DragModule} from "@/components/QuestionComponents/Module/DragModule";
 
 type FocusType = 'title' | 'subTitle' | number | ''
 
@@ -136,6 +139,8 @@ export default function EditProblemContent() {
     const inputEditWithModule = (item: IProblem<TProblemType>, index: number) => {
         return (
             <Module
+                data={item}
+                index={index}
                 dataRequired={item.required}
                 titleShow={isCreate}
                 key={`input-${item.id}`}
@@ -152,6 +157,8 @@ export default function EditProblemContent() {
     const scoreEditWithModule = (item: IProblem<TProblemType>, index: number) => {
         return (
             <Module
+                data={item}
+                index={index}
                 dataRequired={item.required}
                 titleShow={isCreate}
                 key={`input-${item.id}`}
@@ -168,6 +175,8 @@ export default function EditProblemContent() {
     const selectEditWithModule = (item: IProblem<TProblemType>, index: number) => {
         return (
             <Module
+                data={item}
+                index={index}
                 dataRequired={item.required}
                 titleShow={isCreate}
                 key={`input-${item.id}`}
@@ -184,6 +193,8 @@ export default function EditProblemContent() {
     const dateTimeEditWithModule = (item: IProblem<TProblemType>, index: number) => {
         return (
             <Module
+                data={item}
+                index={index}
                 dataRequired={item.required}
                 titleShow={isCreate}
                 key={`input-${item.id}`}

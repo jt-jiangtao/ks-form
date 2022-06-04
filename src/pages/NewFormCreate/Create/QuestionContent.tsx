@@ -2,11 +2,13 @@ import '@/styles/NewFormCreate/Create/questionContent.scss'
 import logo from '@/assets/icon/logo.svg'
 import {FormOutlined} from "@ant-design/icons";
 import EditProblemContent from "@/pages/ProblemContent/EditProblemContent";
+import {DragModule} from "@/components/QuestionComponents/Module/DragModule";
 
 export default function QuestionContent(){
     return (
         <div className="question-content">
             <div className="problem-content">
+                <DragModule />
                 <EditProblemContent />
             </div>
             <div className="success-edit">
