@@ -98,7 +98,8 @@ export default class Button extends React.Component<Props> {
           {
                 'btn-icon-only': this.iconOnly(),
                 'btn-block': this.props.block,
-                'btn-loading': this.props.loading
+                'btn-loading': this.props.loading,
+                'btn-danger': this.props.danger
               }
               )}
         >

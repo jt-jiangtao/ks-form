@@ -5,9 +5,9 @@ import Button from "@/components/Button/Button";
 import {PlusOutlined} from "@ant-design/icons";
 import draggableIcon from "@/assets/icon/draggable-v.png"
 import closeIcon from "@/assets/icon/close.png"
-import singleSelectIcon from "@/assets/icon/singleSelect.png"
-import multiSelectIcon from "@/assets/icon/multiSelect.png"
+
 import classNames from "classnames";
+import Option from "@/components/QuestionComponents/Select/OptionIndex";
 
 type EditSingleSelectProps = {
     index: number,
@@ -36,12 +36,6 @@ export default function EditSelect(props : EditSingleSelectProps){
     const changeFocusElement = (event : any) => {
         event.stopPropagation()
         props.changeFocusElement(props.index)
-    }
-
-    const renderOptionIndex = (item : ISelectOption, index : number) => {
-        if (select.type === "singleSelect") return <img src={singleSelectIcon} />
-        else if (select.type === "multiSelect") return <img src={multiSelectIcon} />
-        return <span>{`${index + 1}.`}</span>
     }
 
     const textareaKeydown = (event: any) => {
@@ -90,32 +84,21 @@ export default function EditSelect(props : EditSingleSelectProps){
         })
     }
 
+    const changeItems = (dragIndex : number, hoverIndex : number) => {
+        let copy = JSON.parse(JSON.stringify((select.setting as ISelectSetting)?.options || []))
+        let temp = copy[dragIndex]
+        copy[dragIndex] = copy[hoverIndex]
+        copy[hoverIndex] = temp
+        props.freshData(props.index, {
+            "setting": {
+                "options": copy
+            }
+        })
+    }
+
     const renderChoices = (item : ISelectOption, index : number) => {
         return (
-            <div className="option-content">
-                <div className={classNames("option-content__move", {
-                    "not-focus-hidden": !props.focus
-                })}>
-                    <img src={draggableIcon}/>
-                </div>
-                <div className="option-index">
-                    {renderOptionIndex(item, index)}
-                </div>
-                <div className="option-input-container">
-                    <Textarea
-                        placeholder={`选项${index + 1}`}
-                        onkeydown={textareaKeydown}
-                        onBlur={inputDataChange}
-                        onChange={(event : any) =>choiceChange(event, index)}
-                        className="option-input"
-                        value={item.title} />
-                </div>
-                <img
-                    onClick={()=> deleteOption(index)}
-                    className={classNames("close", {
-                    "not-focus-hidden": !props.focus
-                })} src={closeIcon} />
-            </div>
+            <Option changeItems={changeItems} focus={props.focus} deleteOption={deleteOption} item={item} index={index} textareaKeydown={textareaKeydown} inputDataChange={inputDataChange} choiceChange={choiceChange} select={select} />
         );
     }
 

@@ -26,7 +26,6 @@ export default function Content(props: ContentProps) {
 
     useEffect(() => {
         getFormListByStatus(0, currentPageSize)
-        setShowLoading(false)
     }, [])
 
     // 封装一下请求数据的方法，根据三个可选的参数来请求
@@ -41,6 +40,7 @@ export default function Content(props: ContentProps) {
             // console.log(res)
             setTableItem(res.data.items)
             setTotal(res.data.total)
+            setShowLoading(false)
         })
     }
 
@@ -82,7 +82,8 @@ export default function Content(props: ContentProps) {
     }
 
     // 删除表单
-    const deleteFormItem = (id: string) => {
+    const deleteFormItem = (id: string,event : any) => {
+        event.stopPropagation()
         console.log(id)
         const newTableItem = tableItem.filter(item => item.id !== id)
         setTableItem(newTableItem)
@@ -92,7 +93,8 @@ export default function Content(props: ContentProps) {
         })
     }
     // 发布表单出去填写
-    const releaseFormItem = (id: string, index: number) => {
+    const releaseFormItem = (id: string, index: number,event : any) => {
+        event.stopPropagation()
         startCollectForm({id}).then(res => {
             message.success("发布成功!")
         })
@@ -102,7 +104,8 @@ export default function Content(props: ContentProps) {
         setTableItem(newTableItem)
     }
     // 停止收集表单
-    const stopCollectForm = (id: string, index: number) => {
+    const stopCollectForm = (id: string, index: number,event : any) => {
+        event.stopPropagation()
         endCollectForm({id}).then(res => {
             message.success("停止成功!")
         })
@@ -156,7 +159,9 @@ export default function Content(props: ContentProps) {
             {
                 tableItem.length === 0 ?
                     <div className={style.img_noData}>
-                        <img src={require('../../assets/images/noData.png')} alt="noData"/>
+                        <img style={{
+                            display: showLoading ? "none" : 'block'
+                        }} src={require('../../assets/images/noData.png')} alt="noData"/>
                     </div>
                     :
                     <div className={style.form_pagination}>

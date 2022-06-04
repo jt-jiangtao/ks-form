@@ -4,7 +4,7 @@ import {LeftOutlined} from "@ant-design/icons";
 import {DataInfoContext} from "@/store/context/DataInfoContext";
 import '@/styles/NewFormCreate/Create/index.scss'
 import {useNavigate} from "react-router";
-import {useContext} from "react";
+import {useContext, useRef} from "react";
 import QuestionList from "@/pages/NewFormCreate/Create/QuestionList";
 import QuestionContent from "@/pages/NewFormCreate/Create/QuestionContent";
 import ToolList from "@/pages/NewFormCreate/Create/ToolList";
@@ -15,6 +15,7 @@ import {DndProvider} from "react-dnd";
 export default function Create() {
     const navigate = useNavigate()
     const {data} = useContext(DataInfoContext)
+    const scrollRef = useRef<HTMLDivElement>(null)
     return (
         <DndProvider backend={HTML5Backend}>
             <NormalUsedProblemProvider>
@@ -27,13 +28,13 @@ export default function Create() {
                     </div>
                 </HeaderLayout>
                 <div className="create-edit__content">
-                    <div className="create-edit__scroll">
+                    <div ref={scrollRef} className="create-edit__scroll">
                         <div className="create-edit">
                             <div className="left-side">
                                 <QuestionList />
                             </div>
                             <div className="center">
-                                <QuestionContent />
+                                <QuestionContent scrollRef={scrollRef} />
                             </div>
                             <div className="right-side">
                                 <ToolList />

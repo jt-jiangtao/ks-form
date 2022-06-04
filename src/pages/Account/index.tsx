@@ -12,6 +12,7 @@ import Input from "@/components/Input/Input";
 import message from "@/components/Message";
 import {changePwd, setInfo} from "@/services";
 import {useNavigate} from "react-router";
+import {clearCache} from "@/utils/localStorage";
 
 const defaultUserInfo = {
     account: "",
@@ -51,7 +52,7 @@ export default function Account() {
         setNameSetting(false)
         setInfo({
             nickname:newNickName,
-            avatar:"https://img.qwps.cn/620142388_aeaf477d9e15422f926a7f268f03adfe?imageMogr2/thumbnail/180x180!"
+            avatar:user.avatar
         }).then(res=>{
             console.log(res)
             message.success("昵称修改成功",1000)
@@ -71,8 +72,11 @@ export default function Account() {
                 pwd: newPwd,
                 confirmPwd: confirmPwd
             }).then(res => {
-                message.success("密码修改成功,请重新登录", 1000)
-                navigate("/signin")
+                if (res.stat === 'ok'){
+                    message.success("密码修改成功,请重新登录", 1000)
+                    clearCache('login')
+                    navigate("/signin")
+                }
             })
 
         }

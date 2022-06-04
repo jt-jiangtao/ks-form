@@ -3,7 +3,14 @@ import style from "./style/account.module.scss"
 import Modal from "../../components/Modal/Modal"
 import Button from "../../components/Button/Button"
 import {IUser} from "@/types/service/model";
-import {UploadOutlined} from "@ant-design/icons";
+import {LoadingOutlined, PlusOutlined, UploadOutlined} from "@ant-design/icons";
+import {Upload, UploadProps} from "antd";
+import {RcFile, UploadChangeParam} from "antd/es/upload";
+import message from "@/components/Message";
+import {UploadFile} from "antd/es/upload/interface";
+import {setInfo} from "@/services";
+import {refreshUserInfo} from "@/store/actions";
+import {useDispatch, useSelector} from "react-redux";
 
 interface AccountInfoProps {
     userInfo: IUser
@@ -11,14 +18,64 @@ interface AccountInfoProps {
 
 export default function AccountInfo(props: AccountInfoProps) {
     const {nickname, avatar} = props.userInfo
+    const [loading, setLoading] = useState(false);
+    const [imageUrl, setImageUrl] = useState<string>(avatar);
+    const dispatch = useDispatch()
     const getUsedDay = (ctime: number) => {
         return Math.floor((new Date().getTime() - ctime) / (24 * 3600 * 1000))
     }
     const usedDay = getUsedDay(props.userInfo.ctime)
     const [visible, setVisible] = useState(false);
     const closeModel = () => {
-        setVisible(false)
+        if (avatar === imageUrl){
+            message.info("请上传新头像")
+            return
+        }
+        setInfo({
+            nickname: nickname,
+            avatar: imageUrl
+        }).then(res=>{
+            console.log(res)
+            message.success("头像修改成功",1000)
+            dispatch(refreshUserInfo(true))
+            setVisible(false)
+        })
     }
+
+    const beforeUpload = (file: RcFile) => {
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        if (!isJpgOrPng) {
+            message.error('上传图片只能为jpeg和png格式');
+        }
+        const isLt2M = file.size / 1024 / 1024 < 5;
+        if (!isLt2M) {
+            message.error('上传图片必须小于5MB!');
+        }
+        return isJpgOrPng && isLt2M;
+    };
+
+    const handleChange: UploadProps['onChange'] = (info: UploadChangeParam<UploadFile>) => {
+        if (info.file.status === 'uploading') {
+            setLoading(true);
+            return;
+        }
+        if (info.file.status === 'done') {
+            setLoading(false);
+            let response = info.file.response
+            if (response.status === '200'){
+                setImageUrl(response.url)
+            }else{
+                message.error("上传失败")
+            }
+        }
+    }
+
+    const uploadButton = (
+        <div>
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div style={{ marginTop: 8 }}>上传头像</div>
+        </div>
+    );
 
     return (
         <div className={style['account-info']}>
@@ -38,17 +95,25 @@ export default function AccountInfo(props: AccountInfoProps) {
                     <Modal
                         visible={visible}
                         title="上传新头像"
-                        onClose={closeModel}
+                        onClose={()=> setVisible(false)}
                         footer={[
-                            <Button key="cancel" type='default' onClick={closeModel}>取消</Button>,
+                            <Button key="cancel" type='default' onClick={()=> setVisible(false)}>取消</Button>,
                             <Button key="ok" type='primary' onClick={() => {
                                 //上传头像
                                 closeModel()
                             }}>确定</Button>
                         ]}>
-                        <Button
-                            icon={<UploadOutlined style={{color: '#82a5fe'}} />}
-                            type="default">请选择要上传的图片</Button>
+                        <Upload
+                            name="file"
+                            listType="picture-card"
+                            className="avatar-uploader"
+                            showUploadList={false}
+                            action="http://upload.jiangtao.website/upload/image"
+                            beforeUpload={beforeUpload}
+                            onChange={handleChange}
+                        >
+                            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                        </Upload>
                     </Modal>
                 </div>
                 <div className={style['avatar-username']}>

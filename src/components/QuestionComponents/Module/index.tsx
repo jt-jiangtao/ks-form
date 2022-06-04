@@ -25,7 +25,10 @@ export default function Module(props: ModuleProps) {
     const {data, setData, changeFocus} = useContext(DataInfoContext)
     let ref = useRef<HTMLDivElement>(null)
     let [{ handlerId }, drop] = useDrop<
-        ModuleProps,
+        {
+            index: number,
+            props: ModuleProps
+        },
         void,
         { handlerId: Identifier | null }
         >({
@@ -35,7 +38,7 @@ export default function Module(props: ModuleProps) {
                 handlerId: monitor.getHandlerId(),
             }
         },
-        hover(item: ModuleProps,monitor : any) {
+        hover(item: any,monitor : any) {
             if (!ref.current) {
                 return
             }
@@ -71,7 +74,10 @@ export default function Module(props: ModuleProps) {
 
     let [{isDragging}, drag, preview] = useDrag({
         type: "module",
-        item: ()=>(props),
+        item: ()=>({
+            index: props.index,
+            props
+        }),
         collect: (monitor)=>({
             isDragging: monitor.isDragging()
         })
