@@ -8,6 +8,7 @@ type WatchInputProps = {
 }
 
 export default function WatchInput(props : WatchInputProps){
+    console.log(props)
     let textarea = createRef<HTMLTextAreaElement>()
     let titleTextarea = createRef<HTMLTextAreaElement>()
     // TODO: PROBLEM 状态更新时导致textarea样式重新渲染

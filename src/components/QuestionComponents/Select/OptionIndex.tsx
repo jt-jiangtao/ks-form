@@ -1,6 +1,6 @@
 import singleSelectIcon from "@/assets/icon/singleSelect.png";
 import multiSelectIcon from "@/assets/icon/multiSelect.png";
-import {IProblem, ISelectOption, TProblemType} from "@/types/service/model";
+import {IProblem, ISelectOption, ISelectSetting, TProblemType} from "@/types/service/model";
 import Textarea from "@/components/Textarea";
 import classNames from "classnames";
 import draggableIcon from "@/assets/icon/draggable-v.png";
@@ -14,17 +14,18 @@ import {debounce} from "lodash";
 type OptionIndexProps = {
     item : ISelectOption
     index : number,
+    selectIndex : number,
     textareaKeydown : Function,
     inputDataChange : Function,
     choiceChange : Function,
     deleteOption : Function,
     select : IProblem<TProblemType>,
     focus: boolean,
-    changeItems : Function
+    freshData : Function
 }
 
 export default function Option(props : OptionIndexProps){
-    const {changeItems, focus, deleteOption, select, item, index, textareaKeydown, inputDataChange, choiceChange} = props
+    const {focus, deleteOption, select, item, index, textareaKeydown, inputDataChange, choiceChange} = props
     let ref = useRef<HTMLDivElement>(null)
     const renderOptionIndex = (item : ISelectOption, index : number) => {
         if (select.type === "singleSelect") return <img src={singleSelectIcon} />
@@ -60,6 +61,7 @@ export default function Option(props : OptionIndexProps){
                 (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
             const clientOffset = monitor.getClientOffset()
             const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top
+            console.log(hoverClientY, hoverMiddleY)
             if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
                 return
             }
@@ -72,7 +74,15 @@ export default function Option(props : OptionIndexProps){
     })
 
     const changeItemsFun = debounce((dragIndex : number, hoverIndex : number) => {
-        changeItems(dragIndex, hoverIndex)
+        let options = (select.setting as ISelectSetting)?.options
+        let temp = options[dragIndex]
+        options[dragIndex] = options[hoverIndex]
+        options[hoverIndex] = temp
+        props.freshData(props.selectIndex, {
+            "setting": {
+                "options": options
+            }
+        })
     }, 100)
 
 
@@ -98,7 +108,8 @@ export default function Option(props : OptionIndexProps){
             style={{
                 opacity: isDragging ? 0 : 1
             }}
-            ref={ref} className="option-content">
+            ref={ref}
+            className="option-content">
             <div className={classNames("option-content__move", {
                 "not-focus-hidden": !focus
             })}>

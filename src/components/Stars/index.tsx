@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {StarFilled} from "@ant-design/icons";
+import {nanoid} from "nanoid";
 
 type StarsProps = {
     editable ?: boolean,
@@ -39,6 +40,7 @@ export default function Stars(props : StarsProps){
         for (let i = 1; i <= props.maxScore; i++) {
             starContainer.push(
                 <span
+                    key={`star-${nanoid(5)}`}
                     className="star"
                     onClick={()=> onclick(i)}
                     onMouseEnter={()=> onMouseEnter(i)}

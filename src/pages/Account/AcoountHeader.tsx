@@ -1,7 +1,7 @@
 import { logout } from '@/services'
 import { useNavigate } from "react-router";
 import React, { useState } from 'react'
-import style from "./style/account.module.scss"
+import style from "@/styles/Account/account.module.scss"
 import Modal from '@/components/Modal/Modal';
 import Button from '@/components/Button/Button';
 

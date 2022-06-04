@@ -15,11 +15,11 @@ import multiSelectIcon from "@/assets/icon/multiSelect.png";
 const layerStyles: CSSProperties = {
     position: "absolute",
     pointerEvents: "none",
-    zIndex: 100,
+    zIndex: 999,
     left: 0,
     top: 0,
     width: "100%",
-    height: "100%",
+    height: "100%"
 };
 
 function getItemStyles(
@@ -95,9 +95,6 @@ export const DragModule: FC<DragModuleProps> = (props) => {
             case "select":
                 return (
                     <div
-                        style={{
-                            zIndex: 0
-                        }}
                         className="option-content">
                         <div className={classNames("option-content__move", {
                             "not-focus-hidden": false
