@@ -86,6 +86,8 @@ export default function Content(props: ContentProps) {
         deleteForm({id}).then(res => {
             console.log(res)
             message.success("删除成功!")
+            // 删除成功后重新请求一遍数据
+            getFormListByStatus(0, currentPageSize)
         })
     }
     // 发布表单出去填写
