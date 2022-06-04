@@ -35,7 +35,6 @@ export default function AccountInfo(props: AccountInfoProps) {
             nickname: nickname,
             avatar: imageUrl
         }).then(res=>{
-            console.log(res)
             message.success("头像修改成功",1000)
             dispatch(refreshUserInfo(true))
             setVisible(false)

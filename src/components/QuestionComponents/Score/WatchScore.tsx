@@ -26,14 +26,14 @@ export default function WatchScore(props : WatchScoreProps){
                     value={props.data.title} />
             </div>
             <div className={classNames("watch-score-stars", {
-                "content-hidden": !props.data.result
+                "content-hidden": !props.data.result || props.data.result.value === ''
             })}>
                 <Stars
                     score={Number(props.data.result?.value) || 0} editable={false} maxScore={5} />
                 <div className="score">{`${(Number(props.data.result?.value) || 0).toFixed(1)}分`}</div>
             </div>
             <div className={classNames("none-edit", "margin24", {
-                "content-hidden": props.data.result
+                "content-hidden": props.data.result && props.data.result.value !== ''
             })}>此题未填写</div>
         </div>
     )

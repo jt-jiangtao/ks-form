@@ -39,12 +39,12 @@ export default function WatchSelect(props : WatchSelectProps){
                     value={props.data.title} />
             </div>
             <div className={classNames("select-result", {
-                "content-hidden": !props.data.result
+                "content-hidden": !props.data.result || !props.data.result.value || (props.data.result as IMultiResult).value.length === 0
             })}>
                 {renderContent()}
             </div>
             <div className={classNames("none-edit","margin24",{
-                "content-hidden": props.data.result
+                "content-hidden": props.data.result && props.data.result.value && (props.data.result as IMultiResult).value.length !== 0
             })}>此题未填写</div>
         </div>
     )

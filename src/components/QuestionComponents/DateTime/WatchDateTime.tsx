@@ -17,8 +17,6 @@ export default function WatchDateTime(props : WatchDateTimeProps){
         setValue((props.data.result as TResult<TProblemType>)?.value || '')
     }, [props])
 
-    console.log(!value)
-
     return (
         <div
             className="editable-select-wrapper"
@@ -35,7 +33,7 @@ export default function WatchDateTime(props : WatchDateTimeProps){
                     value={datetime.title}/>
             </div>
             <div className={classNames("margin24",{
-                "content-hidden": !value,
+                "content-hidden": !value || value === '',
                 "editable-datetime": !value
             })}>
                 <div className="picker">
@@ -43,7 +41,7 @@ export default function WatchDateTime(props : WatchDateTimeProps){
                 </div>
             </div>
             <div className={classNames("none-edit", "margin24", {
-                "content-hidden": !!value
+                "content-hidden": !!value && value !== ''
             })}>此题未填写</div>
         </div>
     );

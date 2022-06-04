@@ -46,10 +46,8 @@ const Select: FC<SelectProps> = (props) => {
 
     useEffect(() => {
         optionRef.current.height = `0px`;
-        // console.log(option);
     }, []);
     useEffect(() => {
-        // console.log(selected);
     }, [selected]);
 
     const ownsWidth = useMemo(() => {
@@ -74,7 +72,6 @@ const Select: FC<SelectProps> = (props) => {
         //切换下拉
         e.stopPropagation();
         if (disabled) return;
-        // console.log(optionRef.current.style.height);
         if (optionRef.current.style.height === '0px' || optionRef.current.style.height === '') {
             if (showSearch) {
                 optionRef.current.style.height = `${inputFilterOtpions.length * 100}%`;
@@ -106,7 +103,6 @@ const Select: FC<SelectProps> = (props) => {
         (e: any) => {
             //输入后的回调
             setSelected(e.target.value);
-            // console.log(selected);
             optionRef.current.style.height =
                 option.filter((item) => {
                     return (item.label as string).includes(e.target.value);

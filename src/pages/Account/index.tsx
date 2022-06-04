@@ -54,7 +54,6 @@ export default function Account() {
             nickname:newNickName,
             avatar:user.avatar
         }).then(res=>{
-            console.log(res)
             message.success("昵称修改成功",1000)
             dispatch(refreshUserInfo(true))
         })
