@@ -42,7 +42,7 @@ export default function WatchInput(props : WatchInputProps){
                     className="watch-input-textarea title__content">{props.data.title}</textarea>
             </div>
             <div className={classNames("watch-input-editor", {
-                "content-hidden": !props.data.result
+                "content-hidden": !props.data.result || props.data.result.value === ''
             })}>
                 <textarea
                     disabled
@@ -52,7 +52,7 @@ export default function WatchInput(props : WatchInputProps){
                     placeholder="请输入" />
             </div>
             <div className={classNames("none-edit",{
-                "content-hidden": props.data.result
+                "content-hidden": props.data.result && props.data.result.value !== ''
             })}>此题未填写</div>
         </div>
     );

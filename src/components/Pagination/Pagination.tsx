@@ -193,7 +193,6 @@ const Pagination: FC<PaginationProps> = (props) => {
                     setPageRenderArray([]);
                 }
             }
-            console.log(pageRenderArray, totalPage);
             setNowIndex(jumpPage);
             changePageCallback(jumpPage);
             e.target.value = '';
@@ -201,7 +200,6 @@ const Pagination: FC<PaginationProps> = (props) => {
     };
     //select回调
     const handleSelectCallback = (pageSize: any) => {
-        console.log(pageSize.value)
         setSizePage(pageSize.value)
         // 加一个回调函数，设置每页展示数据的条数
         changePageSizeCallback && changePageSizeCallback(pageSize.value, nowIndex);

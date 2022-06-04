@@ -33,7 +33,6 @@ export default function AccountHeader() {
                     <Button key="cancel" type='default' onClick={close}>取消</Button>,
                     <Button key="ok" type='primary' onClick={()=>{
                         logout().then(res=>{
-                            console.log("退出成功"+res.stat)
                         })
                         navigate('/signin')
                         close()

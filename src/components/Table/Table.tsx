@@ -46,7 +46,6 @@ export default function Table(Props: ITable) {
         formResult({
             id:id
         }).then(res=>{
-            // console.log(res)
             setTotal(res.data.items.length)
         })
     },[])
@@ -55,8 +54,6 @@ export default function Table(Props: ITable) {
         event.stopPropagation()
         if (star) {
             cancelStarForm({id}).then(res => {
-                // console.log(res)
-                console.log(isStar)
                 setStar(!star)
                 message.success("取消标星成功！")
             })

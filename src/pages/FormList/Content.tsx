@@ -30,14 +30,12 @@ export default function Content(props: ContentProps) {
 
     // 封装一下请求数据的方法，根据三个可选的参数来请求
     const getFormListByStatus = (offset?: number, limit?: number, isStar?: boolean) => {
-        // console.log(currentPageSize)
         getFormList({
             // 首次进来默认展示五条数据
             offset: offset,
             limit: limit,
             isStar: isStar
         }).then(res => {
-            // console.log(res)
             setTableItem(res.data.items)
             setTotal(res.data.total)
             setShowLoading(false)
@@ -70,7 +68,6 @@ export default function Content(props: ContentProps) {
     const changePageSizeCallback = (pageSize: any, pageNum: number) => {
         // 判断当前状态，若showStar为false，则分页时不带参数，默认请求所有的
         if (!showStar) {
-            // console.log(pageSize)
             setCurrentPageSize(pageSize)
             getFormListByStatus(pageNum - 1, pageSize)
         }
@@ -84,7 +81,6 @@ export default function Content(props: ContentProps) {
     // 删除表单
     const deleteFormItem = (id: string,event : any) => {
         event.stopPropagation()
-        console.log(id)
         const newTableItem = tableItem.filter(item => item.id !== id)
         setTableItem(newTableItem)
         deleteForm({id}).then(res => {
