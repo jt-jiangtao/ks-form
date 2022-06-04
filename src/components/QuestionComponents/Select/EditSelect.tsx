@@ -3,11 +3,10 @@ import Textarea from "@/components/Textarea";
 import {createRef, useEffect, useState} from "react";
 import Button from "@/components/Button/Button";
 import {PlusOutlined} from "@ant-design/icons";
-import draggableIcon from "@/assets/icon/draggable-v.png"
-import closeIcon from "@/assets/icon/close.png"
-import singleSelectIcon from "@/assets/icon/singleSelect.png"
-import multiSelectIcon from "@/assets/icon/multiSelect.png"
+
 import classNames from "classnames";
+import Option from "@/components/QuestionComponents/Select/OptionIndex";
+import {nanoid} from "nanoid";
 
 type EditSingleSelectProps = {
     index: number,
@@ -22,26 +21,19 @@ export default function EditSelect(props : EditSingleSelectProps){
     let [select, setSelect] = useState(props.data)
     let textarea = createRef<HTMLTextAreaElement>()
     let [title, setTitle] = useState(props.data.title)
-
     useEffect(()=>{
         setSelect(props.data)
         setTitle(props.data.title)
     }, [props.data])
 
     useEffect(()=>{
-        if (!props.focus) textarea.current?.blur()
-        else textarea.current?.focus()
+        // if (!props.focus) textarea.current?.blur()
+        // else textarea.current?.focus()
     },[props.focus])
 
     const changeFocusElement = (event : any) => {
         event.stopPropagation()
         props.changeFocusElement(props.index)
-    }
-
-    const renderOptionIndex = (item : ISelectOption, index : number) => {
-        if (select.type === "singleSelect") return <img src={singleSelectIcon} />
-        else if (select.type === "multiSelect") return <img src={multiSelectIcon} />
-        return <span>{`${index + 1}.`}</span>
     }
 
     const textareaKeydown = (event: any) => {
@@ -83,7 +75,8 @@ export default function EditSelect(props : EditSingleSelectProps){
         let copy = JSON.parse(JSON.stringify(select))
         copy.setting.options.push({
             title: '',
-            status: 2
+            status: 2,
+            id: nanoid(8)
         })
         props.freshData(props.index, {
             "setting": copy.setting
@@ -92,30 +85,7 @@ export default function EditSelect(props : EditSingleSelectProps){
 
     const renderChoices = (item : ISelectOption, index : number) => {
         return (
-            <div className="option-content">
-                <div className={classNames("option-content__move", {
-                    "not-focus-hidden": !props.focus
-                })}>
-                    <img src={draggableIcon}/>
-                </div>
-                <div className="option-index">
-                    {renderOptionIndex(item, index)}
-                </div>
-                <div className="option-input-container">
-                    <Textarea
-                        placeholder={`选项${index + 1}`}
-                        onkeydown={textareaKeydown}
-                        onBlur={inputDataChange}
-                        onChange={(event : any) =>choiceChange(event, index)}
-                        className="option-input"
-                        value={item.title} />
-                </div>
-                <img
-                    onClick={()=> deleteOption(index)}
-                    className={classNames("close", {
-                    "not-focus-hidden": !props.focus
-                })} src={closeIcon} />
-            </div>
+            <Option key={`option-${item.id}`} selectIndex={props.index} freshData={props.freshData} focus={props.focus} deleteOption={deleteOption} item={item} index={index} textareaKeydown={textareaKeydown} inputDataChange={inputDataChange} choiceChange={choiceChange} select={select} />
         );
     }
 

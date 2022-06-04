@@ -1,5 +1,6 @@
 import React, {ReactNode} from "react";
 import classNames from "classnames";
+import {nanoid} from "nanoid";
 
 type MenuData = {
     label: React.ReactNode | string,
@@ -37,6 +38,7 @@ export default function Menu(props: MenuProps) {
             } else {
                 menus.push((
                     <div
+                        key={`menu-item-${nanoid(5)}`}
                         onClick={(event) => onclick(event, item)}
                         className="menu-item">
                         {item.icon && <span className="item-icon">{item.icon}</span>}

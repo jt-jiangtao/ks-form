@@ -1,7 +1,6 @@
 import AccountHeader from "./AcoountHeader"
-import { useEffect, useState } from "react"
-import { getInfo } from "@/services"
-import style from  "./style/account.module.scss"
+import {useEffect, useRef, useState} from "react"
+import style from "@/styles/Account/account.module.scss"
 import AccountInfo from "@/pages/Account/AccountInfo";
 import {IUser} from "@/types/service/model";
 import AccountBox from "@/pages/Account/AccountBox";
@@ -9,6 +8,11 @@ import Button from "@/components/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {refreshUserInfo} from "@/store/actions";
 import Modal from "@/components/Modal/Modal";
+import Input from "@/components/Input/Input";
+import message from "@/components/Message";
+import {changePwd, setInfo} from "@/services";
+import {useNavigate} from "react-router";
+import {clearCache} from "@/utils/localStorage";
 
 const defaultUserInfo = {
     account: "",
@@ -24,23 +28,69 @@ const defaultUserInfo = {
 export default function Account() {
     let [nameSetting, setNameSetting] = useState<boolean>(false)
     const dispatch = useDispatch()
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(refreshUserInfo())
     }, [])
-    const {user} = useSelector((state : any) => {
+    const {user} = useSelector((state: any) => {
         return state.userInfo
     })
+    const navigate = useNavigate()
+    const confirmPwd__error = useRef<HTMLParagraphElement>(null)
+    const [newNickName,setNewNickName] = useState<string>("")
+    const [newPwd, setNewPwd] = useState<string>("")
+    const [confirmPwd, setConfirmPwd] = useState<string>("")
     const [userInfo, setUserInfo] = useState<IUser>(user || defaultUserInfo)
-    useEffect(()=>{
+    useEffect(() => {
         setUserInfo(user || defaultUserInfo)
     }, [user])
 
     const modifyUsername = () => {
-      setNameSetting(true)
+        setNameSetting(true)
     }
 
     const confirmModify = () => {
-      setNameSetting(false)
+        setNameSetting(false)
+        setInfo({
+            nickname:newNickName,
+            avatar:user.avatar
+        }).then(res=>{
+            message.success("昵称修改成功",1000)
+            dispatch(refreshUserInfo(true))
+        })
+    }
+    const handleIptChangeNickname=(e:string)=>{
+        setNewNickName(e)
+    }
+    const modifyPwd = () => {
+        if (newPwd !== confirmPwd) {
+            confirmPwd__error.current?.replaceChildren("两次输入的密码不一致")
+        } else {
+            confirmPwd__error.current?.replaceChildren("")
+            changePwd({
+                oldPwd: userInfo.pwd,
+                pwd: newPwd,
+                confirmPwd: confirmPwd
+            }).then(res => {
+                if (res.stat === 'ok'){
+                    message.success("密码修改成功,请重新登录", 1000)
+                    clearCache('login')
+                    navigate("/signin")
+                }
+            })
+
+        }
+    }
+
+    const handleIptChangeOld = (e: string) => {
+        const newUserInfo = {...userInfo}
+        newUserInfo.pwd = e
+        setUserInfo(newUserInfo)
+    }
+    const handleIptChangeNew = (e: string) => {
+        setNewPwd(e)
+    }
+    const handleIptChangeConfirm = (e: string) => {
+        setConfirmPwd(e)
     }
 
     let [modifyVisible, setModifyVisible] = useState(false)
@@ -56,25 +106,26 @@ export default function Account() {
                         <div className={style["username"]}>
                             {
                                 nameSetting ?
-                                    <input
-                                        value={userInfo.nickname}
-                                        className={style["account-input"]} />
+                                    <Input width="340" moreStyle={{height: 35}} type="text"
+                                           value={userInfo.nickname}
+                                           handleIptChange={handleIptChangeNickname}
+                                    />
                                     : <span>{userInfo.nickname}</span>
                             }
                         </div>
-                        <div className={[`${style["link"]}`,`${style["operate"]}`].join(' ')}>
+                        <div className={[`${style["link"]}`, `${style["operate"]}`].join(' ')}>
                             {
                                 nameSetting ?
                                     <>
                                         <Button
-                                            onClick={()=> setNameSetting(false)}
+                                            onClick={() => setNameSetting(false)}
                                             className={style["button"]} type="default">取消</Button>
                                         <Button
                                             onClick={confirmModify}
                                             className={style["button"]} type="primary">确认</Button>
                                     </>
                                     : <span
-                                    onClick={modifyUsername}
+                                        onClick={modifyUsername}
                                     >修改</span>
                             }
                         </div>
@@ -84,23 +135,36 @@ export default function Account() {
                     <div className={style["setting"]}>
                         <div className={style["title"]}>设置密码</div>
                         <div
-                            onClick={()=>setModifyVisible(true)}
-                            className={style["link"]}>设置</div>
+                            onClick={() => setModifyVisible(true)}
+                            className={style["link"]}>设置
+                        </div>
                         <Modal visible={modifyVisible} title={"修改密码"} footer={
                             <>
                                 <Button
-                                    onClick={()=>setModifyVisible(false)}
+                                    onClick={() => setModifyVisible(false)}
                                     type="default">取消</Button>
-                                <Button type="primary">确认</Button>
+                                <Button type="primary" onClick={modifyPwd}>确认</Button>
                             </>
-                        } >
-                            <div className={style["modify-password-title"]}>请设置登录密码</div>
+                        }>
                             <div className={style["password-input"]}>
-                                <input className={style["account-input"]}/>
+                                <Input width="472" placeholder="请输入旧密码" type="password"
+                                       handleIptChange={handleIptChangeOld}
+                                       showTogglePwd={true}
+                                />
                             </div>
                             <div className={style["password-input"]}>
-                                <input className={style["account-input"]}/>
+                                <Input width="472" placeholder="新密码" type="password"
+                                       showTogglePwd={true}
+                                       handleIptChange={handleIptChangeNew}
+                                />
                             </div>
+                            <div className={style["password-input-confirm"]}>
+                                <Input width="472" placeholder="确认新密码" type="password"
+                                       showTogglePwd={true}
+                                       handleIptChange={handleIptChangeConfirm}
+                                />
+                            </div>
+                            <p className={style.confirmPwd__error} ref={confirmPwd__error}/>
                         </Modal>
                     </div>
                 </AccountBox>

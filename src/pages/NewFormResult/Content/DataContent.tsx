@@ -97,7 +97,7 @@ export default function DataContent(props : DataContentProps){
                                 </div>
                                 <div
                                     onClick={() => setCurrentIndex(current + 1)}
-                                    className={classNames("next", "operate-color", {
+                                    className={classNames("next-btn", "operate-color", {
                                         "opacity7": current === total
                                     })}>
                                     <RightOutlined/>
@@ -105,7 +105,7 @@ export default function DataContent(props : DataContentProps){
                             </div>
                         </div>
                         <div className="get-form-content">
-                            <div className="form-time">{`提交时间: 2022/5/28 17:24:01`}</div>
+                            <div className="form-time">{`提交用户: ${props.data?.author}`}</div>
                             <div className="form-content">
                                 <WatchProblemContent form={props.data} data={data && data[current - 1]} />
                             </div>

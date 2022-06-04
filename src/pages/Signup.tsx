@@ -44,8 +44,8 @@ export default function Signup() {
                     message.success("注册成功,请登录！", 1000)
                     navigate("/signin")
                 }
-            }).catch(res=>{
-                debugger
+            }).catch(res => {
+            debugger
             console.log(res)
         })
     }
@@ -109,7 +109,7 @@ export default function Signup() {
                         <span className={style.signup_title}>账号注册</span>
                     </div>
                     <div className={style.signup_user}>
-                        <Input width="300" type='text' placeholder='用户名'
+                        <Input width="295" type='text' placeholder='用户名'
                                handleIptBlur={handleIptBlurAccount}
                                moreStyle={{marginTop: 7, marginBottom: 7}}
                                handleIptChange={handleIptChangeAccount}
@@ -117,7 +117,7 @@ export default function Signup() {
                         <p className={style.account__error} ref={account__error}/>
                     </div>
                     <div className={style.signup_pwd}>
-                        <Input width="300" type='password' placeholder='密码'
+                        <Input width="295" type='password' placeholder='密码'
                                showTogglePwd={true}
                                moreStyle={{marginTop: 7, marginBottom: 7}}
                                handleIptBlur={handleIptBlurPwd}
@@ -126,7 +126,8 @@ export default function Signup() {
                         <p className={style.pwd__error} ref={pwd__error}/>
                     </div>
                     <div className={style.signup_pwd}>
-                        <Input width="300" type='password' placeholder='确认密码'
+                        <Input width="295" type='password' placeholder='确认密码'
+                               showTogglePwd={true}
                                moreStyle={{marginTop: 7}}
                                handleIptBlur={handleIptBlurConfirmPwd}
                                handleIptChange={handleIptChangeConfirmPwd}/>
@@ -137,10 +138,10 @@ export default function Signup() {
                         {
                             userInfo.account !== "" && userInfo.pwd !== "" && userInfo.confirmPwd !== "" &&
                             userInfo.account.trim() !== "" && userInfo.pwd.trim() !== "" && userInfo.confirmPwd.trim() !== ""
-                            && userInfo.pwd === userInfo.confirmPwd ?
-                                < Button type="primary" style={{width: 300}} onClick={register}>注册</Button>
+                            && userInfo.pwd === userInfo.confirmPwd && (userInfo.pwd?.length > 7 && userInfo.pwd?.length as number <= 16) ?
+                                < Button type="primary" style={{width: 295}} onClick={register}>注册</Button>
                                 :
-                                < Button type="default" disabled={true} style={{width: 300}}
+                                < Button type="default" disabled={true} style={{width: 295}}
                                          onClick={register}>注册</Button>
                         }
                     </div>

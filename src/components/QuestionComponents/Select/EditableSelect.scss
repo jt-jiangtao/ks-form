@@ -16,3 +16,19 @@
         height: 35px !important;
     }
 }
+
+.error{
+    margin-top: 6px;
+    color: #eb5451;
+    font-size: 12px;
+    display: none;
+}
+
+.error-show{
+    display: block;
+}
+
+.margin24{
+    margin-left: 24px;
+    margin-right: 24px;
+}

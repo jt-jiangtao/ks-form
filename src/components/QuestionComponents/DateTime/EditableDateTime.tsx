@@ -1,6 +1,6 @@
 import Textarea from "@/components/Textarea";
 import {IDatetimeSetting, IProblem, TProblemType, TResult} from "@/types/service/model";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {DatePicker, TimePicker} from "antd";
 import moment from "moment";
 import closeIcon from "@/assets/icon/closeIcon.png"
@@ -12,6 +12,8 @@ type EditableDateTimeProps = {
     data: IProblem<TProblemType>,
     changeData: Function,
     index: number
+    error: boolean,
+    setError: Function
 }
 
 export default function EditableDateTime(props : EditableDateTimeProps){
@@ -24,6 +26,7 @@ export default function EditableDateTime(props : EditableDateTimeProps){
     }, [props.data])
 
     const dateChange = (time : any, format : any) => {
+        if (!!time) props.setError(props.index, false)
         let copy = JSON.parse(JSON.stringify(props.data))
         copy['result'] = {
             'value': time.format(format)
@@ -69,7 +72,12 @@ export default function EditableDateTime(props : EditableDateTimeProps){
             className="editable-select-wrapper"
         >
             <div className="select__title select__title--no-hover">
-                <div className="number">{`${props.index + 1}.`}</div>
+                <div className="number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}
+                </div>
                 <Textarea
                     editable={false}
                     className="select__textarea"
@@ -91,6 +99,9 @@ export default function EditableDateTime(props : EditableDateTimeProps){
                     {renderDatetimeInput()}
                 </div>
             </div>
+            <div className={classNames("error","margin24", {
+                "error-show": (props.data.required && props.error)
+            })}>此题为必填，请输入</div>
         </div>
     );
 }

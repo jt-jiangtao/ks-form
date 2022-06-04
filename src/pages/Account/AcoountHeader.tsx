@@ -1,7 +1,7 @@
 import { logout } from '@/services'
 import { useNavigate } from "react-router";
 import React, { useState } from 'react'
-import style from "./style/account.module.scss"
+import style from "@/styles/Account/account.module.scss"
 import Modal from '@/components/Modal/Modal';
 import Button from '@/components/Button/Button';
 
@@ -33,7 +33,6 @@ export default function AccountHeader() {
                     <Button key="cancel" type='default' onClick={close}>取消</Button>,
                     <Button key="ok" type='primary' onClick={()=>{
                         logout().then(res=>{
-                            console.log("退出成功"+res.stat)
                         })
                         navigate('/signin')
                         close()

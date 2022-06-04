@@ -8,10 +8,14 @@ import more from '@/assets/icon/more.svg'
 import {nanoid} from "nanoid";
 import DropDown from "@/components/DropDown/DropDown";
 import Menu from "@/components/DropDown/Menu";
-import {log} from "util";
+import {NormalUsedProblemContext} from "@/store/context/NormalUsedProblem";
+import {star} from "@/services";
+import message from "@/components/Message";
+import {checkProblem} from "@/utils/validate";
 
 export function ToolMenu(props: { index: number }) {
-    const {data, focus, setData, changeFocus} = useContext(DataInfoContext)
+    const {data, setData, changeFocus} = useContext(DataInfoContext)
+    const {freshNormalUsedProblem}= useContext(NormalUsedProblemContext)
 
     const copyHandler = () => {
         let copy = JSON.parse(JSON.stringify(data.problems))
@@ -51,7 +55,15 @@ export function ToolMenu(props: { index: number }) {
                 problems: copy
             })
         }else if (item.key === 'normal'){
-            // TODO: 添加为常用题
+            if (!checkProblem(data.problems[props.index]))return
+            star({
+                problem: data.problems[props.index]
+            }).then(res=>{
+                if (res.stat === "ok"){
+                    freshNormalUsedProblem()
+                    message.success("添加常用题成功")
+                }
+            })
         }
     }
 

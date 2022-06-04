@@ -3,6 +3,7 @@ import {IProblem, TProblemType, TResult, TSetting} from "@/types/service/model";
 import {useLocation} from "react-router";
 import {getForm} from "@/services";
 import {parseSearch} from "@/utils/uri";
+import {nanoid} from "nanoid";
 
 type DataInfo = {
     title: string,
@@ -12,6 +13,7 @@ type DataInfo = {
 
 type FocusType = 'title' | 'subTitle' | number | ''
 
+// PROBLEM: id为空
 export const defaultDataInfo: DataInfo = {
     "title": "",
     "subTitle": "",
@@ -20,7 +22,7 @@ export const defaultDataInfo: DataInfo = {
             "title": "",
             "type": "input",
             "required": false,
-            "id": "",
+            "id": nanoid(10),
             isNew: true
         }
     ]
@@ -59,7 +61,6 @@ export const DataInfoProvider = (props: DataInfoContextProps) => {
         }
     }, [location.search])
     const setData = (newData : any) : void=>{
-        console.log(newData)
         setContextData({...data, ...newData})
     }
     const [focus, setFocus] = useState<FocusType>(defaultFocus)

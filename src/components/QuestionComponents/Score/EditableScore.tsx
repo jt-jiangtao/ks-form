@@ -1,12 +1,15 @@
 import {IProblem, TProblemType} from "@/types/service/model";
 import Textarea from "@/components/Textarea";
 import Stars from "@/components/Stars";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+import classNames from "classnames";
 
 type EditableScoreProps = {
     data: IProblem<TProblemType>,
     changeData: Function,
     index: number
+    error: boolean,
+    setError: Function
 }
 
 export default function EditableScore(props : EditableScoreProps){
@@ -17,6 +20,7 @@ export default function EditableScore(props : EditableScoreProps){
     }, [props])
 
     const onScoreChange = (star : number) => {
+        props.setError(props.index, false)
         let copy = JSON.parse(JSON.stringify(props.data))
         copy['result'] = {
             'value': star
@@ -29,7 +33,12 @@ export default function EditableScore(props : EditableScoreProps){
             className="editable-select-wrapper"
         >
             <div className="select__title select__title--no-hover">
-                <div className="number">{`${props.index + 1}.`}</div>
+                <div className="number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}
+                </div>
                 <Textarea
                     editable={false}
                     className="select__textarea"
@@ -40,6 +49,9 @@ export default function EditableScore(props : EditableScoreProps){
                     onScoreChange={onScoreChange}
                     score={Number(score.result?.value) || 0} editable={true} maxScore={5} />
             </div>
+            <div className={classNames("error","margin24", {
+                "error-show": (props.data.required && props.error)
+            })}>此题为必填，请输入</div>
         </div>
     )
 }

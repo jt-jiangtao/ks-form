@@ -193,6 +193,24 @@
         display: inline-block;
         text-align: center;
     }
+
+    &-danger{
+        color: #fff;
+        border-color: #ff4d4f;
+        background: #ff4d4f;
+        text-shadow: 0 -1px 0 rgba(0,0,0,.12);
+        box-shadow: 0 2px #0000000b;
+        &:not([disabled]):hover,&:not([disabled]):focus{
+            color: #fff;
+            border-color: #ff7875;
+            background: #ff7875;
+        }
+        &:active{
+            color: #fff;
+            border-color: #d9363e;
+            background: #d9363e;
+        }
+    }
 }
 
 @keyframes loading {

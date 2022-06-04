@@ -49,3 +49,14 @@
         color: #aeb5c0;
     }
 }
+
+.error{
+    margin-top: 6px;
+    color: #eb5451;
+    font-size: 12px;
+    display: none;
+}
+
+.error-show{
+    display: block;
+}

@@ -4,3 +4,19 @@
     align-items: center;
     margin: 0 24px;
 }
+
+.error{
+    margin-top: 6px;
+    color: #eb5451;
+    font-size: 12px;
+    display: none;
+}
+
+.error-show{
+    display: block;
+}
+
+.margin24{
+    margin-right: 24px;
+    margin-left: 24px;
+}
