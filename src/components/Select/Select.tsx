@@ -57,8 +57,7 @@ const Select: FC<SelectProps> = (props) => {
         if (width) {
             return {
                 width: `${width}px`,
-            };
-        }
+            };}
         return {};
     }, [width]);
     const disabledStyle = useMemo(() => {
