@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import "./table.scss"
+import "./table.scss";
 import {cancelStarForm, formResult, starForm} from "@/services";
 import message from "@/components/Message";
 import Button from "@/components/Button/Button";
@@ -19,11 +19,11 @@ interface ITable {
     // 当前状态
     status: number,
     // 删除表单
-    deleteFormItem: (id: string) => void
+    deleteFormItem: (id: string, event : any) => void
     // 发布表单
-    releaseFormItem: (id: string,index:number) => void
+    releaseFormItem: (id: string,index:number, event : any) => void
     // 停止收集表单
-    stopCollectForm: (id: string,index:number) => void
+    stopCollectForm: (id: string,index:number, event : any) => void
 }
 
 export default function Table(Props: ITable) {
@@ -46,16 +46,14 @@ export default function Table(Props: ITable) {
         formResult({
             id:id
         }).then(res=>{
-            // console.log(res)
             setTotal(res.data.items.length)
         })
     },[])
 
-    const changeIsStar = (id: string) => {
+    const changeIsStar = (id: string, event: any) => {
+        event.stopPropagation()
         if (star) {
             cancelStarForm({id}).then(res => {
-                // console.log(res)
-                console.log(isStar)
                 setStar(!star)
                 message.success("取消标星成功！")
             })
@@ -69,35 +67,37 @@ export default function Table(Props: ITable) {
 
     // 当前状态
     const currentStatus = (status: number) => {
-        if (status == 2) {
+        if (status === 2) {
             return (<div className="draft">草稿</div>)
-        }else if (status == 3) {
+        }else if (status === 3) {
             return (<div className="collecting">{`正在收集 ${total}份`}</div>)
-        }else if (status == 4) {
+        }else if (status === 4) {
             return (<div className="over">{`已结束 收集${total}份`}</div>)
         }
     }
 
     // 打开模态框
-    const handleClick = () => {
+    const handleClick = (event : any) => {
+        event.stopPropagation()
         setVisible(!visible)
     }
 
     // 关闭模态框
-    const closeModal = () => {
+    const closeModal = (event : any) => {
+        event.stopPropagation()
         setVisible(false)
     }
 
     // 操作栏
     const operation = (status: number) => {
-        if (status == 2) {
+        if (status === 2) {
             return (
                 <>
-                    <Button style={{marginRight: 10}} onClick={() => {
-                        releaseFormItem(id,index)
+                    <Button style={{marginRight: 10}} onClick={(event : any) => {
+                        releaseFormItem(id,index, event)
                     }}>发布</Button>
                     <Button
-                        onClick={()=> editForm(id)}
+                        onClick={(event : any)=> editForm(id, event)}
                         style={{marginRight: 10}}>编辑</Button>
                     <Button type="primary" danger size="middle" onClick={handleClick}
                             style={{marginRight: 10}}>删除</Button>
@@ -106,25 +106,25 @@ export default function Table(Props: ITable) {
                            children={children}
                            footer={[
                                // 实现关闭窗口的逻辑
-                               <Button key="cancel" style={{marginRight: 10}} onClick={() => closeModal()}>取消</Button>,
+                               <Button key="cancel" style={{marginRight: 10}} onClick={closeModal}>取消</Button>,
                                // 实现关闭窗口的逻辑
-                               <Button key="ok" type="primary" onClick={() => deleteFormItem(id)}>确认</Button>
+                               <Button key="ok" type="primary" onClick={(event : any) => deleteFormItem(id, event)}>确认</Button>
                            ]}
-                           onClose={() => closeModal()}
+                           onClose={closeModal}
                     />
                 </>
             )
         }
-        if (status == 3) {
+        if (status === 3) {
             return (
                 <>
                     <Button
-                        onClick={()=> shareForm(id)}
+                        onClick={(event : any)=> shareForm(id, event)}
                         style={{marginRight: 10}}>分享</Button>
                     <Button
-                        onClick={()=> viewResult(id)}
+                        onClick={(event : any)=> viewResult(id, event)}
                         style={{marginRight: 10}}>查看结果</Button>
-                    <Button style={{marginRight: 10}} onClick={() => stopCollectForm(id,index)}>停止</Button>
+                    <Button style={{marginRight: 10}} onClick={(event : any) => stopCollectForm(id,index, event)}>停止</Button>
                     <Button type="primary" danger size="middle" onClick={handleClick}
                             style={{marginRight: 10}}>删除</Button>
                     <Modal visible={visible}
@@ -132,41 +132,42 @@ export default function Table(Props: ITable) {
                            children={children}
                            footer={[
                                // 实现关闭窗口的逻辑
-                               <Button key="cancel" style={{marginRight: 10}} onClick={() => closeModal()}>取消</Button>,
+                               <Button key="cancel" style={{marginRight: 10}} onClick={closeModal}>取消</Button>,
                                // 实现关闭窗口的逻辑
-                               <Button key="ok" type="primary" onClick={() => deleteFormItem(id)}>确认</Button>
+                               <Button key="ok" type="primary" onClick={(event : any) => deleteFormItem(id, event)}>确认</Button>
                            ]}
-                           onClose={() => closeModal()}
+                           onClose={closeModal}
                     />
                 </>
             )
         }
-        if (status == 4) {
+        if (status === 4) {
             return (
                 <>
                     <Button
-                        onClick={()=> viewResult(id)}
+                        onClick={(event: any)=> viewResult(id, event)}
                         size="middle" style={{marginRight: 10}}>查看结果</Button>
-                    <Button onClick={()=> releaseFormItem(id,index)}
-                        size="middle" style={{marginRight: 10}}>继续收集</Button>
+                    <Button onClick={(event : any)=> releaseFormItem(id,index, event)}
+                            size="middle" style={{marginRight: 10}}>继续收集</Button>
                     <Button type="primary" danger size="middle" onClick={handleClick}>删除</Button>
                     <Modal visible={visible}
                            title="删除表单"
                            children={children}
                            footer={[
                                // 实现关闭窗口的逻辑
-                               <Button key="cancel" style={{marginRight: 10}} onClick={() => closeModal()}>取消</Button>,
+                               <Button key="cancel" style={{marginRight: 10}} onClick={closeModal}>取消</Button>,
                                // 实现关闭窗口的逻辑
-                               <Button key="ok" type="primary" onClick={() => deleteFormItem(id)}>确认</Button>
+                               <Button key="ok" type="primary" onClick={(event : any) => deleteFormItem(id, event)}>确认</Button>
                            ]}
-                           onClose={() => closeModal()}
+                           onClose={closeModal}
                     />
                 </>
             )
         }
     }
 
-    const shareForm = (id : string) => {
+    const shareForm = (id : string, event : any) => {
+        event.stopPropagation()
         navigate({
             pathname: "/new-form-result",
             search: `?id=${id}`,
@@ -174,7 +175,8 @@ export default function Table(Props: ITable) {
         })
     }
 
-    const viewResult = (id : string) => {
+    const viewResult = (id : string, event :any) => {
+        event.stopPropagation()
         navigate({
             pathname: "/new-form-result",
             search: `?id=${id}`,
@@ -182,7 +184,8 @@ export default function Table(Props: ITable) {
         })
     }
 
-    const editForm = (id : string) => {
+    const editForm = (id : string, event : any) => {
+        event.stopPropagation()
         navigate({
             pathname: "/new-form-create",
             search: `?id=${id}`,
@@ -190,9 +193,25 @@ export default function Table(Props: ITable) {
         })
     }
 
+    const detailInfo = (status: number) => {
+        if (status === 4 || status === 3){
+            navigate({
+                pathname: "/new-form-result",
+                search: `?id=${id}`,
+                hash: "#data"
+            })
+        }else if (status === 2){
+            navigate({
+                pathname: "/new-form-create",
+                search: `?id=${id}`,
+                hash: "#data"
+            })
+        }
+    };
+
     return (
         <>
-            <div className="tablelist">
+            <div onClick={()=> detailInfo(status)} className="tablelist">
                 <div className="tablelist-title">{title}</div>
                 <div className="tablelist-time">
                     {moment(ctime).format('YYYY年MM月DD日 HH:mm')}
@@ -206,8 +225,8 @@ export default function Table(Props: ITable) {
                         require('../../assets/images/star-yellow.png')
                         : require('../../assets/images/star.png')}
                          style={{width: 20}}
-                         onClick={() => {
-                             changeIsStar(id)
+                         onClick={(event : any) => {
+                             changeIsStar(id, event)
                          }}/>
                 </div>
                 <div className="tablelist-operate">

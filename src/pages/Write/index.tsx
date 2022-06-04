@@ -36,8 +36,8 @@ export default function Write() {
 
     return (
         <>
-            <HeaderLayout className="write-header">
-                <div className="logo-title">
+            <HeaderLayout needLog={false} className="write-header">
+                <div onClick={() => navigate("/form-list")} className="logo-title">
                     <div className="logo">
                         <img src={logo} />
                     </div>

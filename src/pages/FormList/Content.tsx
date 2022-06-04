@@ -1,11 +1,13 @@
 import Pagination from "@/components/Pagination/Pagination";
 import {useEffect, useState} from "react";
-import {deleteForm, endCollectForm, formResult, getFormList, startCollectForm} from "@/services";
 import React from "react";
+import {Spin} from "antd";
+import {deleteForm, endCollectForm, getFormList, startCollectForm} from "@/services";
 import style from "@/styles/FormList/content.module.scss"
 import Table from "@/components/Table/Table";
 import {IForm} from "@/types/service/model";
 import message from "@/components/Message";
+
 
 type ContentProps = {
     sidebar?: string
@@ -14,6 +16,7 @@ type ContentProps = {
 export default function Content(props: ContentProps) {
     const [tableItem, setTableItem] = useState<IForm[]>([])
     const [showStar, setShowStar] = useState<boolean>(false)
+    const [showLoading, setShowLoading] = useState<boolean>(true)
     // 每页展示几条数据
     const options = [4, 5, 6]
 
@@ -21,23 +24,21 @@ export default function Content(props: ContentProps) {
     const [total, setTotal] = useState<number>(0)
     const [currentPageSize, setCurrentPageSize] = useState<number>(options[0])
 
-
     useEffect(() => {
         getFormListByStatus(0, currentPageSize)
     }, [])
 
     // 封装一下请求数据的方法，根据三个可选的参数来请求
     const getFormListByStatus = (offset?: number, limit?: number, isStar?: boolean) => {
-        // console.log(currentPageSize)
         getFormList({
             // 首次进来默认展示五条数据
             offset: offset,
             limit: limit,
             isStar: isStar
         }).then(res => {
-            // console.log(res)
             setTableItem(res.data.items)
             setTotal(res.data.total)
+            setShowLoading(false)
         })
     }
 
@@ -67,7 +68,6 @@ export default function Content(props: ContentProps) {
     const changePageSizeCallback = (pageSize: any, pageNum: number) => {
         // 判断当前状态，若showStar为false，则分页时不带参数，默认请求所有的
         if (!showStar) {
-            // console.log(pageSize)
             setCurrentPageSize(pageSize)
             getFormListByStatus(pageNum - 1, pageSize)
         }
@@ -79,17 +79,20 @@ export default function Content(props: ContentProps) {
     }
 
     // 删除表单
-    const deleteFormItem = (id: string) => {
-        console.log(id)
+    const deleteFormItem = (id: string,event : any) => {
+        event.stopPropagation()
         const newTableItem = tableItem.filter(item => item.id !== id)
         setTableItem(newTableItem)
         deleteForm({id}).then(res => {
             console.log(res)
             message.success("删除成功!")
+            // 删除成功后重新请求一遍数据
+            getFormListByStatus(0, currentPageSize)
         })
     }
     // 发布表单出去填写
-    const releaseFormItem = (id: string, index: number) => {
+    const releaseFormItem = (id: string, index: number,event : any) => {
+        event.stopPropagation()
         startCollectForm({id}).then(res => {
             message.success("发布成功!")
         })
@@ -99,7 +102,8 @@ export default function Content(props: ContentProps) {
         setTableItem(newTableItem)
     }
     // 停止收集表单
-    const stopCollectForm = (id: string, index: number) => {
+    const stopCollectForm = (id: string, index: number,event : any) => {
+        event.stopPropagation()
         endCollectForm({id}).then(res => {
             message.success("停止成功!")
         })
@@ -129,6 +133,9 @@ export default function Content(props: ContentProps) {
                     <div className={style.list_star}>标星</div>
                     <div className={style.list_operate}>操作</div>
                 </div>
+                <div className={showLoading ? `${style.form_loading}` : `${style.form_null}`}>
+                    <Spin size="large"/>
+                </div>
                 {
                     tableItem.map((item, index) => {
                         return (
@@ -150,7 +157,9 @@ export default function Content(props: ContentProps) {
             {
                 tableItem.length === 0 ?
                     <div className={style.img_noData}>
-                        <img src={require('../../assets/images/noData.png')} alt="noData"/>
+                        <img style={{
+                            display: showLoading ? "none" : 'block'
+                        }} src={require('../../assets/images/noData.png')} alt="noData"/>
                     </div>
                     :
                     <div className={style.form_pagination}>

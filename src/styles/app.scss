@@ -17,6 +17,27 @@ button, html{
     outline: 0;
 }
 
+.required-title-with{
+    position: absolute;
+    top: -2px;
+    left: -8px;
+    color: #eb5451;
+    font-size: 14px;
+    visibility: hidden;
+}
+
+.required{
+    position: absolute;
+    top: 25px;
+    left: 16px;
+    color: #eb5451;
+    font-size: 14px;
+    visibility: hidden;
+}
+
+.required-show{
+    visibility: visible;
+}
 
 @import "scroll";
 @import "~antd/dist/antd.css";

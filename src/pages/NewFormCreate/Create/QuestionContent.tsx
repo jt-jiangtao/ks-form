@@ -2,11 +2,18 @@ import '@/styles/NewFormCreate/Create/questionContent.scss'
 import logo from '@/assets/icon/logo.svg'
 import {FormOutlined} from "@ant-design/icons";
 import EditProblemContent from "@/pages/ProblemContent/EditProblemContent";
+import {DragModule} from "@/components/QuestionComponents/Module/DragModule";
+import {RefObject} from "react";
 
-export default function QuestionContent(){
+type QuestionContentProps = {
+    scrollRef: RefObject<HTMLDivElement>
+}
+
+export default function QuestionContent(props : QuestionContentProps){
     return (
         <div className="question-content">
             <div className="problem-content">
+                <DragModule scrollRef={props.scrollRef} />
                 <EditProblemContent />
             </div>
             <div className="success-edit">

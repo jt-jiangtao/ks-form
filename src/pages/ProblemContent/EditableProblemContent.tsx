@@ -13,6 +13,7 @@ import {inputForm} from "@/services";
 import message from "@/components/Message";
 import classNames from "classnames";
 import {useLocation, useNavigate} from "react-router";
+import {checkUnWriteProblem} from "@/utils/validate";
 
 type EditableProblemContentProps = {
     data : IForm,
@@ -20,6 +21,10 @@ type EditableProblemContentProps = {
 }
 
 export default function EditableProblemContent(props : EditableProblemContentProps){
+    let [errors, setErrors] = useState<boolean[]>([])
+    useEffect(()=>{
+        props.data.problems && setErrors(new Array(props.data.problems.length || 0).fill(false))
+    }, [props.data.problems])
     const {canSubmit = false} = props
     let [data, setData] = useState<IForm>(props.data)
     const navigate = useNavigate()
@@ -38,6 +43,12 @@ export default function EditableProblemContent(props : EditableProblemContentPro
             message.info("预览状态暂不支持提交")
             return
         }
+        let errorRes = checkUnWriteProblem(data.problems)
+        setErrors(errorRes)
+        if (!errorRes.every(item => !item)) {
+            message.info("请填写必选题")
+            return;
+        }
         let req : any= {}
         req.formId = data.id
         req.problems = data.problems
@@ -51,6 +62,12 @@ export default function EditableProblemContent(props : EditableProblemContentPro
         })
     }
 
+    const changeError = (index: number, value: boolean) => {
+        let copy = JSON.parse(JSON.stringify(errors))
+        copy[index] = value
+        setErrors(copy)
+    };
+
     return (
         <>
             <WatchTitle title={data.title} />
@@ -59,16 +76,16 @@ export default function EditableProblemContent(props : EditableProblemContentPro
                 data.problems.map((item, index) => {
                     switch (item.type) {
                         case "input":
-                            return <EditableInput key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult}/>
+                            return <EditableInput error={errors[index]} setError={changeError} key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult}/>
                         case "date":
                         case "time":
-                            return <EditableDateTime key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult}/>
+                            return <EditableDateTime error={errors[index]} setError={changeError} key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult}/>
                         case "multiSelect":
                         case "pullSelect":
                         case "singleSelect":
-                            return <EditableSelect key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult} />
+                            return <EditableSelect error={errors[index]} setError={changeError} key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult} />
                         case "score":
-                            return <EditableScore  key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult} />
+                            return <EditableScore error={errors[index]} setError={changeError}  key={`input-${nanoid(5)}`} index={index} data={item} changeData={setResult} />
                     }
                     return null
                 })

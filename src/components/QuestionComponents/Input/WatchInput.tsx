@@ -1,5 +1,6 @@
 import {IProblem, TProblemType} from "@/types/service/model";
-import {createRef, useEffect, useState} from "react";
+import React, {createRef, useEffect, useState} from "react";
+import classNames from "classnames";
 
 type WatchInputProps = {
     data: IProblem<TProblemType>
@@ -30,13 +31,19 @@ export default function WatchInput(props : WatchInputProps){
     return (
         <div className="watch-input-container">
             <div className="title-container">
-                <span className="title__number">{`${props.index + 1}.`}</span>
+                <span className="title__number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}</span>
                 <textarea
                     disabled
                     ref={titleTextarea}
                     className="watch-input-textarea title__content">{props.data.title}</textarea>
             </div>
-            <div className="watch-input-editor">
+            <div className={classNames("watch-input-editor", {
+                "content-hidden": !props.data.result || props.data.result.value === ''
+            })}>
                 <textarea
                     disabled
                     className="watch-input-textarea"
@@ -44,6 +51,9 @@ export default function WatchInput(props : WatchInputProps){
                     value={props.data.result?.value.toString() || ''}
                     placeholder="请输入" />
             </div>
+            <div className={classNames("none-edit",{
+                "content-hidden": props.data.result && props.data.result.value !== ''
+            })}>此题未填写</div>
         </div>
     );
 }

@@ -59,7 +59,6 @@ export const DataInfoProvider = (props: DataInfoContextProps) => {
         }
     }, [location.search])
     const setData = (newData : any) : void=>{
-        console.log(newData)
         setContextData({...data, ...newData})
     }
     const [focus, setFocus] = useState<FocusType>(defaultFocus)

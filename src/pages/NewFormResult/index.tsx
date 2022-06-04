@@ -44,8 +44,8 @@ export default function NewFormResult() {
     return (
         <div className="result-container">
             <HeaderLayout className="result-header">
-                <div className="preview-back">
-                    <LeftOutlined onClick={() => navigate("/form-list")} className="back-icon"/>
+                <div onClick={() => navigate("/form-list")} className="preview-back">
+                    <LeftOutlined className="back-icon"/>
                     <img className="folder-icon" src={folder}/>
                     <h1 className="create-title">{form?.title || '新建表单'}</h1>
                 </div>

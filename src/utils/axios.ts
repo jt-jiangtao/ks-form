@@ -1,5 +1,6 @@
 import axios from "axios";
 import message from "@/components/Message";
+import {clearCache} from "@/utils/localStorage";
 
 const createAxios = (config : any) => {
     let instance = axios.create(config)
@@ -9,9 +10,10 @@ const createAxios = (config : any) => {
             // 统一错误处理
             message.error(error.response.data.msg)
             // 拦截未登录
-            // if (error.response.Create.stat === 'ERR_USER_NOT_LOGIN' && window.location.pathname !== '/signin') {
-            //     window.location.href = `/signin?cb=${window.location.pathname}`
-            // }
+            if (error.response.data.stat === 'ERR_USER_NOT_LOGIN' && window.location.pathname !== '/signin') {
+                clearCache('login')
+                window.location.href = `/signin?cb=${window.location.pathname}`
+            }
             return Promise.reject({
                 data: error.response.data
             })

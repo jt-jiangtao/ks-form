@@ -8,22 +8,25 @@ import {createForm, deleteForm, starForm, startCollectForm} from "@/services";
 import message from "@/components/Message";
 import {IForm} from "@/types/service/model";
 import {parseSearch} from "@/utils/uri";
+import {checkProblems} from "@/utils/validate";
 
-export default function ToolList(){
+export default function ToolList() {
     let navigate = useNavigate()
     let location = useLocation()
     let [isCreate] = useState<boolean>(location.search.slice(1).split("=").indexOf('id') === -1)
     const {data} = useContext(DataInfoContext)
 
     const previewForm = () => {
-      navigate({
-          hash: "#preview",
-          search: location.search
-      })
+        if (!checkProblems(data)) return
+        navigate({
+            hash: "#preview",
+            search: location.search
+        })
     }
 
     const saveForm = () => {
-        createForm(data).then(res=>{
+        if (!checkProblems(data)) return
+        createForm(data).then(res => {
             message.success("保存草稿成功")
         })
     }
@@ -32,7 +35,7 @@ export default function ToolList(){
         let form = await createForm(data)
         await startCollectForm({
             id: form.data.id
-        }).then(res=> {
+        }).then(res => {
             navigate({
                 pathname: "/new-form-result",
                 hash: "#share",
@@ -42,12 +45,14 @@ export default function ToolList(){
     }
 
     const completeForm = async () => {
-        if (isCreate){
+        if (!checkProblems(data)) return
+        if (isCreate) {
             await createFormWithPut()
         }
     }
 
     const saveModify = async () => {
+        if (!checkProblems(data)) return
         // 草稿 => 草稿
         // 已发布 => 发布
         // 已停止 => 草稿
@@ -55,7 +60,7 @@ export default function ToolList(){
             id: parseSearch(location.search, 'id')
         })
         if (res.stat === 'ok') {
-            if ((data as IForm).status === 2 || (data as IForm).status === 4){
+            if ((data as IForm).status === 2 || (data as IForm).status === 4) {
                 try {
                     createForm(data).then(res => {
                         message.success("保存修改成功")
@@ -63,7 +68,7 @@ export default function ToolList(){
                 } catch (e) {
                     message.error("保存修改失败")
                 }
-            }else {
+            } else {
                 await createFormWithPut()
             }
         } else {

@@ -11,7 +11,7 @@ interface Props {style ?: Object
   type?: ButtonType
   shape?: ButtonShape
   size?: ButtonSize
-  icon?: JSX.Element | React.ReactNode
+  icon?: JSX.Element | React.ReactNode | string
   disabled ?: boolean
   block?: boolean
   href?: string
@@ -74,7 +74,8 @@ export default class Button extends React.Component<Props> {
       </span>
         }
         return (
-            this.props.icon && <span className="btn-icon-container">{this.props.icon}</span>
+            this.props.icon === 'string' ? this.props.icon
+            : this.props.icon && <span className="btn-icon-container">{this.props.icon}</span>
         )
     }
 
@@ -97,7 +98,8 @@ export default class Button extends React.Component<Props> {
           {
                 'btn-icon-only': this.iconOnly(),
                 'btn-block': this.props.block,
-                'btn-loading': this.props.loading
+                'btn-loading': this.props.loading,
+                'btn-danger': this.props.danger
               }
               )}
         >

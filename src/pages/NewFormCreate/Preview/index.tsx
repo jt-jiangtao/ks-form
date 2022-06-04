@@ -15,6 +15,7 @@ import {parseSearch} from "@/utils/uri";
 import message from "@/components/Message";
 import logo from "@/assets/icon/logo.svg";
 import "@/styles/Write/index.scss"
+import {checkProblems} from "@/utils/validate";
 
 export default function Preview() {
     const navigate = useNavigate()
@@ -83,6 +84,7 @@ export default function Preview() {
     }
 
     const completeForm = async () => {
+        if (!checkProblems(data)) return
         if (isCreate) {
             await createFormWithoutPut()
         } else {
@@ -106,8 +108,8 @@ export default function Preview() {
             <HeaderLayout
                 center={pcAndPhone()}
                 className="preview-header">
-                <div className="preview-back">
-                    <LeftOutlined onClick={() => navigate(-1)} className="back-icon"/>
+                <div onClick={() => navigate(-1)} className="preview-back">
+                    <LeftOutlined className="back-icon"/>
                     <img className="folder-icon" src={folder}/>
                     <h1 className="create-title">{data.title || '新建表单'}</h1>
                 </div>

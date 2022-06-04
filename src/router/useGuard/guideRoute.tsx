@@ -4,6 +4,25 @@ import {BrowserRouter, Navigate, useLocation} from "react-router-dom";
 import React from "react";
 import {LoadingOutlined} from "@ant-design/icons";
 
+function Loading(){
+    return(
+        <div style={{
+            backgroundColor: "#f2f4f7",
+            overflow: "hidden",
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        }}>
+            <LoadingOutlined style={{
+                color: "#1488ed",
+                fontSize: "26px"
+            }} />
+        </div>
+    )
+}
+
 type GuideElementProps = {
     route : GuideRouteObject,
     beforeEach : Function | undefined
@@ -37,7 +56,7 @@ function transformRoute(guide : GuideProps) : GuideRouteObject[]{
         let newRoute : GuideRouteObject = {...route}
         // TODO: fallback完善
         newRoute.element = (
-            <React.Suspense fallback={<LoadingOutlined />}>
+            <React.Suspense fallback={<Loading />}>
                 <Guide route={route} beforeEach={beforeEach} />
             </React.Suspense>
         )

@@ -1,14 +1,18 @@
 import {IProblem, TProblemType} from "@/types/service/model";
-import {createRef, useEffect, useState} from "react";
+import React, {createRef, useEffect, useState} from "react";
+import classNames from "classnames";
 
 type EditableInputProps = {
     data: IProblem<TProblemType>,
     changeData: Function,
     index: number
+    error: boolean,
+    setError: Function
 }
 
 export default function EditableInput(props : EditableInputProps){
     let [value, setValue] = useState(props.data.result?.value || '')
+    let [error, setError] = useState(props.error)
     let textarea = createRef<HTMLTextAreaElement>()
     let titleTextarea = createRef<HTMLTextAreaElement>()
     // TODO: PROBLEM 状态更新时导致textarea样式重新渲染
@@ -31,6 +35,11 @@ export default function EditableInput(props : EditableInputProps){
     }, [])
 
     const saveInfo = () => {
+        if (!textarea.current?.value){
+            props.setError(props.index, true)
+        }else {
+            props.setError(props.index, false)
+        }
         let copy = JSON.parse(JSON.stringify(props.data))
         copy['result'] = {
             'value': textarea.current?.value || ''
@@ -38,10 +47,18 @@ export default function EditableInput(props : EditableInputProps){
         props.changeData(props.index, copy)
     }
 
+    const onFocus = () => {
+        setError(false)
+    }
+
     return (
         <div className="editable-input-container">
             <div className="title-container">
-                <span className="title__number">{`${props.index + 1}.`}</span>
+                <span className="title__number">
+                    <span className={classNames("required-title-with", {
+                        "required-show": props.data.required
+                    })}>*</span>
+                    {`${props.index + 1}.`}</span>
                 <textarea
                     disabled
                     ref={titleTextarea}
@@ -51,11 +68,15 @@ export default function EditableInput(props : EditableInputProps){
                 <textarea
                     className="input-textarea"
                     onBlur={saveInfo}
+                    onFocus={onFocus}
                     ref={textarea}
                     onChange={textareaValueChange}
                     value={value.toString()}
                     placeholder="请输入" />
             </div>
+            <div className={classNames("error", {
+                "error-show": error && (props.data.required && props.error)
+            })}>此题为必填，请输入</div>
         </div>
     );
 }

@@ -20,8 +20,8 @@ export default function EditScore(props: EditScoreProps){
     }, [props.data])
 
     useEffect(()=>{
-        if (!props.focus) textarea.current?.blur()
-        else textarea.current?.focus()
+        // if (!props.focus) textarea.current?.blur()
+        // else textarea.current?.focus()
     },[props.focus])
 
     const changeFocusElement = (event : any) => {
