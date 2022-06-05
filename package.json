@@ -17,8 +17,6 @@
     "classnames": "^2.3.1",
     "html2canvas": "^1.4.1",
     "http-proxy-middleware": "^2.0.6",
-    "immer": "^9.0.14",
-    "loadsh": "^0.0.4",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "nanoid": "^3.3.4",
