@@ -18,6 +18,10 @@ export function checkProblems(form : IForm) : boolean{
         message.info("请输入表单子标题")
         return false
     }
+    if (!form.problems || form.problems.length === 0){
+        message.info("至少创建一个问题")
+        return false
+    }
     for (let i = 0; i < form.problems.length; i++) {
         let problem = form.problems[i]
         if (!checkProblem(problem)) return false
@@ -32,6 +36,10 @@ export function checkProblem(problem : IProblem<TProblemType>) : boolean{
     }
     if (["singleSelect", "multiSelect", "pullSelect"].indexOf(problem.type) !== -1){
         let options = (problem?.setting as ISelectSetting).options || []
+        if(options.length === 0){
+            message.info("选项不能为空，请输入")
+            return false
+        }
         for (let i = 0; i < options.length; i++) {
             let option = options[i]
             if (!option.title){

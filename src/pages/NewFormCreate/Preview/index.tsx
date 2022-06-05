@@ -14,7 +14,6 @@ import {createForm, deleteForm, startCollectForm} from "@/services";
 import {parseSearch} from "@/utils/uri";
 import message from "@/components/Message";
 import logo from "@/assets/icon/logo.svg";
-import "@/styles/Write/index.scss"
 import {checkProblems} from "@/utils/validate";
 
 export default function Preview() {
@@ -52,13 +51,13 @@ export default function Preview() {
             <div className="phone-preview-container">
                 <div className="phone-preview-content">
                     <div className="content-wrapper">
-                        <div className="content">
+                        <div className="phone-content">
                             <div className="phone-container">
                                 {data && <EditableProblemContent canSubmit={false} data={data}/>}
                             </div>
                             <div className="phone-footer">
                                 <div className="footer-content">
-                                    <img src={logo}/>
+                                    <img alt="" className="phone-img" src={logo}/>
                                     由
                                     <span className="logo-text">金山文档</span>
                                     旗下表单提供服务
@@ -108,10 +107,10 @@ export default function Preview() {
             <HeaderLayout
                 center={pcAndPhone()}
                 className="preview-header">
-                <div onClick={() => navigate(-1)} className="preview-back">
-                    <LeftOutlined className="back-icon"/>
-                    <img className="folder-icon" src={folder}/>
-                    <h1 className="create-title">{data.title || '新建表单'}</h1>
+                <div onClick={() => navigate(-1)} className="preview-backup">
+                    <LeftOutlined className="back-icon-left"/>
+                    <img className="folder-icon-left" src={folder}/>
+                    <h1 className="create-title-left">{data.title || '新建表单'}</h1>
                 </div>
             </HeaderLayout>
             <div className="preview-container">

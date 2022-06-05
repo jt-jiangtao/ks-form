@@ -1,7 +1,6 @@
 .form {
   box-sizing: border-box;
   padding: 15px 0;
-  //border: solid 1px black;
   margin: 0 25px;
   display: flex;
   flex-direction: column;
@@ -69,7 +68,7 @@
   }
 
   .list_operate {
-    flex: 3.5;
+    flex: 3;
     text-align: center;
   }
 }

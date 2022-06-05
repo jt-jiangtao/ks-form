@@ -1,5 +1,5 @@
 import React from "react";
-import "@/styles/NewFormResult/Content/ShareContent.scss"
+import style from "@/styles/NewFormResult/Content/ShareContent.module.scss"
 import Button from "@/components/Button/Button";
 import {LinkOutlined} from "@ant-design/icons";
 import {QRCode} from "react-qrcode-logo";
@@ -44,25 +44,25 @@ export default function ShareContent(props : ShareContentProps){
     }
 
     return (
-        <div className="result-share">
+        <div className={style["result-share"]}>
             <h3>分享邀请他人填写</h3>
-            <div className="result-code">
-                <div className="qr-wrapper">
-                    <div className="qr-container">
-                        <div className="qr__title">{!props.data ? '' : props.data.title}</div>
+            <div className={style["result-code"]}>
+                <div className={style["qr-wrapper"]}>
+                    <div className={style["qr-container"]}>
+                        <div className={style["qr__title"]}>{!props.data ? '' : props.data.title}</div>
                         <div id="result-qr" className="qr">
                             <QRCode value={getUrl()} size={180} />
-                            <div className="qr-logo-container">
+                            <div className={style["qr-logo-container"]}>
                                 <img src={logo} />
                             </div>
                         </div>
-                        <div className="qr__des">微信扫码或长按识别，填写内容</div>
+                        <div className={style["qr__des"]}>微信扫码或长按识别，填写内容</div>
                     </div>
                 </div>
                 <Button type="link" onClick={handleDownload}>下载二维码</Button>
                 <Button
                     onClick={copyLink}
-                    className="copy-link" icon={<LinkOutlined />} type="default">复制链接</Button>
+                    className={style["copy-link"]} icon={<LinkOutlined />} type="default">复制链接</Button>
             </div>
         </div>
     )

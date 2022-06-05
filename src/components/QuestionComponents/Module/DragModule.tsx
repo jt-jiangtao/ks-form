@@ -77,11 +77,12 @@ export const DragModule: FC<DragModuleProps> = (props) => {
                         title={""}
                         tools={undefined}
                     >
-                        <div style={{
+                        <div
+                            style={{
                             margin: 0
                         }} className="select__title select__title--no-hover">
                             <div className="number">
-                                <span className={classNames("required-title-with", {"required-show": item?.props.data.required || false})}>*</span>
+                                <span className={classNames("required-title-with", {"required-show": item?.props.data?.required || false})}>*</span>
                                 {`${item.props.index + 1}.`}
                             </div>
                             <Textarea

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import style from "@/styles/Account/account.module.scss"
 import Modal from '@/components/Modal/Modal';
 import Button from '@/components/Button/Button';
+import {clearCache} from "@/utils/localStorage";
 
 export default function AccountHeader() {
     const navigate = useNavigate()
@@ -33,8 +34,9 @@ export default function AccountHeader() {
                     <Button key="cancel" type='default' onClick={close}>取消</Button>,
                     <Button key="ok" type='primary' onClick={()=>{
                         logout().then(res=>{
+                            clearCache('login')
+                            navigate('/signin')
                         })
-                        navigate('/signin')
                         close()
                     }}>确定</Button>
                 ]}>

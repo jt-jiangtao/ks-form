@@ -2,7 +2,7 @@ import HeaderLayout from "@/layout/HeaderLayout";
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import NavigateBar from "@/pages/NewFormResult/NavigateBar";
-import "@/styles/NewFormResult/index.scss";
+import style from "@/styles/NewFormResult/index.module.scss";
 import {LeftOutlined} from "@ant-design/icons";
 import folder from "@/assets/icon/folder.svg";
 import {useLocation} from "react-router";
@@ -42,20 +42,20 @@ export default function NewFormResult() {
     }, [location.search])
 
     return (
-        <div className="result-container">
-            <HeaderLayout className="result-header">
-                <div onClick={() => navigate("/form-list")} className="preview-back">
-                    <LeftOutlined className="back-icon"/>
-                    <img className="folder-icon" src={folder}/>
-                    <h1 className="create-title">{form?.title || '新建表单'}</h1>
+        <div className={style["result-container"]}>
+            <HeaderLayout className={style["result-header"]}>
+                <div onClick={() => navigate("/form-list")} className={style["preview-back"]}>
+                    <LeftOutlined className={style["back-icon"]}/>
+                    <img className={style["folder-icon"]} src={folder}/>
+                    <h1 className={style["create-title"]}>{form?.title || '新建表单'}</h1>
                 </div>
             </HeaderLayout>
             <main>
-                <div className="sideBar">
+                <div className={style["sideBar"]}>
                     <NavigateBar active={hash}/>
                 </div>
-                <div className="result-content-scroll">
-                    <div className="result-content">
+                <div className={style["result-content-scroll"]}>
+                    <div className={style["result-content"]}>
                         <Content active={hash} data={form} />
                     </div>
                 </div>

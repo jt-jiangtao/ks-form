@@ -4,7 +4,7 @@ import SignLayout from "@/layout/SignLayout";
 import {ILoginReq} from '@/types/service/request';
 import {setCache} from '@/utils/localStorage';
 import message from "@/components/Message";
-import * as LoginIn from "@/services/index"
+import * as LoginIn from "@/services/index";
 import style from '@/styles/signin.module.scss'
 import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
@@ -25,7 +25,6 @@ export default function Signin() {
     }, [user])
 
     const login = () => {
-        // console.log(user.account.trim() !== "" && user.pwd.trim() !== "")
         if (user.account.trim() === "" ||
             user.pwd.trim() === "") {
             LoginError.current?.replaceChildren("用户名或密码未输入")
@@ -51,16 +50,16 @@ export default function Signin() {
     // 用户名输入框值的回调
     const handleIptChangeAccount = (e: string) => {
         LoginError.current?.replaceChildren("")
-        const newuser = {...user}
-        newuser.account = e
-        setUser(newuser)
+        const newUserInfo = {...user}
+        newUserInfo.account = e
+        setUser(newUserInfo)
     }
     // 密码输入框的回调
     const handleIptChangePwd = (e: string) => {
         LoginError.current?.replaceChildren("")
-        const newuser = {...user}
-        newuser.pwd = e
-        setUser(newuser)
+        const newUserInfo = {...user}
+        newUserInfo.pwd = e
+        setUser(newUserInfo)
     }
     return (
         <SignLayout>

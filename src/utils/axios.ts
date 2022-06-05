@@ -10,9 +10,19 @@ const createAxios = (config : any) => {
             // 统一错误处理
             message.error(error.response.data.msg)
             // 拦截未登录
+            console.log({
+                pathname: window.location.pathname || '',
+                hash: window.location.hash || '',
+                search: window.location.search || ''
+            })
             if (error.response.data.stat === 'ERR_USER_NOT_LOGIN' && window.location.pathname !== '/signin') {
                 clearCache('login')
-                window.location.href = `/signin?cb=${window.location.pathname}`
+                window.location.href = `/signin?cb=${encodeURIComponent(JSON.stringify({
+                    pathname: window.location.pathname || '',
+                    hash: window.location.hash || '',
+                    search: window.location.search || ''
+                }))}`
+                // window.location.href = '/signin'
             }
             return Promise.reject({
                 data: error.response.data

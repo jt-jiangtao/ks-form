@@ -3,7 +3,7 @@ import {createRef, useEffect, useRef, useState} from "react";
 import {formResult} from "@/services";
 import {useLocation, useNavigate} from "react-router";
 import {parseSearch} from "@/utils/uri";
-import "@/styles/NewFormResult/Content/DataContent.scss"
+import style from "@/styles/NewFormResult/Content/DataContent.module.scss"
 import {LeftOutlined, RightOutlined} from "@ant-design/icons";
 import classNames from "classnames";
 import WatchProblemContent from "@/pages/ProblemContent/WatchProblemContent";
@@ -48,7 +48,7 @@ export default function DataContent(props : DataContentProps){
     }
 
     const inputChange = (event : any) => {
-      setInput(event.currentTarget.value)
+        setInput(event.currentTarget.value)
     }
 
     const share = () => {
@@ -59,54 +59,54 @@ export default function DataContent(props : DataContentProps){
     }
 
     return (
-        <div className="data-content">
+        <div className={style["data-content"]}>
             {
                 total === 0 ?
-                    <div className="empty-data-container">
-                        <div className="empty-data">
+                    <div className={style["empty-data-container"]}>
+                        <div className={style["empty-data"]}>
                             <img src={empty} />
-                            <div className="empty-result">
+                            <div className={style["empty-result"]}>
                                 暂无收集结果
                                 <span
                                     onClick={share}
-                                    className="empty-link">邀请填写</span>
+                                    className={style["empty-link"]}>邀请填写</span>
                             </div>
                         </div>
                     </div>
                     :
                     <>
-                        <div className="data-static">
+                        <div className={style["data-static"]}>
                             <div
-                                className="count">{`共收集 ${total} 份数据 (${props.data?.status === 2 ? '未发布' : (props.data?.status === 3 ? '正在收集' : '停止收集')})`}</div>
-                            <div className="switch">
+                                className={style["count"]}>{`共收集 ${total} 份数据 (${props.data?.status === 2 ? '未发布' : (props.data?.status === 3 ? '正在收集' : '停止收集')})`}</div>
+                            <div className={style["switch"]}>
                                 <div
                                     onClick={() => setCurrentIndex(current - 1)}
-                                    className={classNames("back", "operate-color", {
-                                        "opacity7": current === 1
+                                    className={classNames(style["back"], style["operate-color"], {
+                                        [style["opacity7"]]: current === 1
                                     })}>
                                     <LeftOutlined/>
                                 </div>
-                                <div className="current">
+                                <div className={style["current"]}>
                                     第<input
                                     onBlur={inputBlur}
                                     onChange={inputChange}
-                                    className="operate-color"
+                                    className={style["operate-color"]}
                                     type='text'
                                     ref={inputRef}
                                     value={input}/>份
                                 </div>
                                 <div
                                     onClick={() => setCurrentIndex(current + 1)}
-                                    className={classNames("next-btn", "operate-color", {
-                                        "opacity7": current === total
+                                    className={classNames(style["next-btn"], style["operate-color"], {
+                                        [style["opacity7"]]: current === total
                                     })}>
                                     <RightOutlined/>
                                 </div>
                             </div>
                         </div>
-                        <div className="get-form-content">
-                            <div className="form-time">{`提交用户: ${props.data?.author}`}</div>
-                            <div className="form-content">
+                        <div className={style["get-form-content"]}>
+                            <div className={style["form-time"]}>{`提交用户: ${props.data?.author}`}</div>
+                            <div className={style["form-content"]}>
                                 <WatchProblemContent form={props.data} data={data && data[current - 1]} />
                             </div>
                         </div>

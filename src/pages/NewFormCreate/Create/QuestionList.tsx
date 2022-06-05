@@ -406,7 +406,10 @@ export default function QuestionList() {
                 <SelectList
                     title="我的常用题"
                     pullable={false}
-                    manager={<Button onClick={() => setNormalQuestionStatus(1)} type="link">管理</Button>}
+                    manager={<Button onClick={(event : any) => {
+                        event.stopPropagation()
+                        setNormalQuestionStatus(1)
+                    }} type="link">管理</Button>}
                 >
                     {
                         normalUsedProblem.length === 0 ? <div className="normal-question-container">暂无我的常用题</div>
