@@ -11,6 +11,7 @@ import ToolList from "@/pages/NewFormCreate/Create/ToolList";
 import {NormalUsedProblemProvider} from "@/store/context/NormalUsedProblem";
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
+import {nanoid} from "nanoid";
 
 export default function Create() {
     const navigate = useNavigate()
@@ -34,7 +35,7 @@ export default function Create() {
                     <div ref={scrollRef} className="create-edit__scroll">
                         <div className="create-edit">
                             <div className="left-side">
-                                <QuestionList />
+                                <QuestionList key={`question-list-${nanoid(5)}`} />
                             </div>
                             <div className="center">
                                 <QuestionContent scrollRef={scrollRef} />

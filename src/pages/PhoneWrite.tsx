@@ -2,7 +2,7 @@ import React from "react";
 import {useState, useEffect} from "react";
 import {useLocation, useParams} from "react-router";
 import logo from '@/assets/icon/logo.svg'
-import "@/styles/Write/index.scss"
+import "@/styles/Write/index.module.scss"
 import {getForm} from "@/services";
 import EditableProblemContent from "@/pages/ProblemContent/EditableProblemContent";
 import {IForm} from "@/types/service/model";

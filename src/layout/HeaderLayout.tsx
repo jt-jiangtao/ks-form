@@ -1,5 +1,5 @@
 import React from "react";
-import '@/styles/HeaderLayout.scss'
+import '@/styles/layout/HeaderLayout.scss'
 import {useDispatch, useSelector} from "react-redux";
 import {refreshUserInfo} from "@/store/actions";
 

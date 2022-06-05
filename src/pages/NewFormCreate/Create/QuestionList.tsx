@@ -62,6 +62,7 @@ const problems = {
         setting: {
             options: [
                 {
+                    id: nanoid(10),
                     title: "",
                     status: 2
                 }
@@ -76,6 +77,7 @@ const problems = {
         setting: {
             options: [
                 {
+                    id: nanoid(10),
                     title: "",
                     status: 2
                 }
@@ -90,6 +92,7 @@ const problems = {
         setting: {
             options: [
                 {
+                    id: nanoid(10),
                     title: "",
                     status: 2
                 }
@@ -134,10 +137,12 @@ const problems = {
         setting: {
             options: [
                 {
+                    id: nanoid(10),
                     title: "男",
                     status: 2
                 },
                 {
+                    id: nanoid(10),
                     title: "女",
                     status: 2
                 }
@@ -178,6 +183,12 @@ export default function QuestionList() {
 
     const addNormalData = (event: any, data: any) => {
         event.stopPropagation()
+        if (["pullSelect", "singleSelect", "multiSelect"].indexOf(data.type) !== -1){
+            let options = data.setting.options
+            for (let i = 0; i < options.length; i++) {
+                options[i].id = nanoid(10)
+            }
+        }
         addData(data)
     }
 
@@ -403,6 +414,7 @@ export default function QuestionList() {
                             <div className="question-container">
                                 {
                                     normalUsedProblem.map((item: any) => <Button
+                                        key={`button-${nanoid(5)}`}
                                         onClick={(event) => addNormalData(event, item.problem)}
                                         className="question">{item.problem.title}</Button>)
                                 }
@@ -422,7 +434,7 @@ export default function QuestionList() {
                     {
                         normalUsedProblem.map((item: any) => {
                             return (
-                                <div className="question-item">
+                                <div key={`normal-problem-${nanoid(5)}`} className="question-item">
                                     <div className="title">{item.problem.title}</div>
                                     <div className="operation">
                                         <Button onClick={() => {

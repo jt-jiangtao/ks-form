@@ -22,13 +22,13 @@ export default function SideBar(props: SideBarProps) {
                     })}>新建</Button>
             <div className={style.submenu}>
                 <NavLink to="#mycreate" className={classNames(style.link,
-                    hash === 'mycreate' ? style.active : ""
+                    hash === 'mycreate' ? style.isActive : ""
                 )}>
                     <PlusSquareOutlined style={{marginRight: 10, fontSize: 14}}/>
                     表单列表
                 </NavLink>
                 <NavLink to="#myedit" className={classNames(style.link,
-                    hash === 'myedit' ? style.active : ""
+                    hash === 'myedit' ? style.isActive : ""
                 )}>
                     <FormOutlined style={{marginRight: 10, fontSize: 14}}/>
                     我填写的

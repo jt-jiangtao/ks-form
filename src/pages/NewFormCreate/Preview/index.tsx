@@ -14,7 +14,7 @@ import {createForm, deleteForm, startCollectForm} from "@/services";
 import {parseSearch} from "@/utils/uri";
 import message from "@/components/Message";
 import logo from "@/assets/icon/logo.svg";
-import "@/styles/Write/index.scss"
+import "@/styles/Write/index.module.scss"
 import {checkProblems} from "@/utils/validate";
 
 export default function Preview() {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import style from './style/account.module.scss'
+import style from '@/styles/Account/account.module.scss'
 interface  AccountBoxProps {
     title : string,
     children : React.ReactNode

@@ -1,6 +1,6 @@
 import AccountHeader from "./AcoountHeader"
 import {useEffect, useRef, useState} from "react"
-import style from "./style/account.module.scss"
+import style from "@/styles/Account/account.module.scss"
 import AccountInfo from "@/pages/Account/AccountInfo";
 import {IUser} from "@/types/service/model";
 import AccountBox from "@/pages/Account/AccountBox";

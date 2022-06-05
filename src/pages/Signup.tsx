@@ -21,7 +21,7 @@ export default function Signup() {
     const confirmPwd__error = useRef<HTMLParagraphElement>(null)
 
     // 验证密码位数是否正确
-    const Test = () => {
+    const testPwdLength = () => {
         if (userInfo.pwd?.length <= 6 || userInfo.pwd?.length as number >= 16) {
             pwd__error.current?.replaceChildren("密码位数不正确")
         }
@@ -46,7 +46,7 @@ export default function Signup() {
     // 用户名输入框失去焦点的回调
     const handleIptBlurAccount = (iptValue: string) => {
         if (userInfo.account === null || userInfo.account.trim() === "") {
-            console.log(account__error)
+            // console.log(account__error)
             account__error.current?.replaceChildren("请输入用户名")
         }
     }
@@ -73,14 +73,14 @@ export default function Signup() {
     // 密码输入框的回调
     const handleIptChangePwd = (e: string) => {
         pwd__error.current?.replaceChildren("")
-        Test()
+        testPwdLength()
         const newUserInfo = {...userInfo}
         newUserInfo.pwd = e
         setUserInfo(newUserInfo)
     }
     // 确认密码输入框的回调
     const handleIptChangeConfirmPwd = (e: string) => {
-        console.log(e)
+        // console.log(e)
         confirmPwd__error.current?.replaceChildren("")
         const newUserInfo = {...userInfo}
         newUserInfo.confirmPwd = e
