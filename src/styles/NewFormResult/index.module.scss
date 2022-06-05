@@ -16,6 +16,13 @@
     }
 }
 
+.result-header {
+    :global(.menu) {
+        left: 25px;
+        top: 42px;
+    }
+}
+
 .preview-back {
     cursor: pointer;
     display: flex;
