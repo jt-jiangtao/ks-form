@@ -25,7 +25,6 @@ export default function Signin() {
     }, [user])
 
     const login = () => {
-        // console.log(user.account.trim() !== "" && user.pwd.trim() !== "")
         if (user.account.trim() === "" ||
             user.pwd.trim() === "") {
             LoginError.current?.replaceChildren("用户名或密码未输入")
