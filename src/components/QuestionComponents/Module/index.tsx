@@ -22,6 +22,7 @@ type ModuleProps = {
 
 
 export default function Module(props: ModuleProps) {
+    const {draggable = true} = props
     const {data, setData, changeFocus} = useContext(DataInfoContext)
     let ref = useRef<HTMLDivElement>(null)
     let [{ handlerId }, drop] = useDrop<
@@ -87,7 +88,9 @@ export default function Module(props: ModuleProps) {
         preview(getEmptyImage(), { captureDraggingState: true })
     }, [])
 
-    drag(drop(ref))
+    if (draggable){
+        drag(drop(ref))
+    }
 
     const renderTitle = () => {
         return typeof props.title === 'string' ?
