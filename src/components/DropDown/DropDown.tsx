@@ -15,7 +15,7 @@ export default function DropDown(props: DropDownProps) {
     let [open, setOpen] = useState(false)
     const dropdownRef = createRef<HTMLDivElement>()
     const clickHandler = (event: any) => {
-        // event.stopPropagation()
+        event.stopPropagation()
         pullable && props.trigger === 'click' && setOpen(!open)
     }
 
