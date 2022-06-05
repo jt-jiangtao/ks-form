@@ -1,6 +1,7 @@
 import {GuideRouteObject} from "@/router/types/router";
 import {lazy} from "react";
 import { getCache } from "@/utils/localStorage";
+import {LocationType} from "@/router/useGuard/guideRoute";
 const Signin = lazy(()=> import('@/pages/Signin'))
 const Signup = lazy(()=> import('@/pages/Signup'))
 const FormList = lazy(()=> import('@/pages/FormList'))
@@ -75,13 +76,28 @@ const routes : GuideRouteObject[] = [
     }
 ]
 
-function beforeEach(pathname: string, meta: any, last: string) {
+
+function beforeEach(now: LocationType, meta: any, last: LocationType) {
     if (meta.redirect)return meta.redirect
     const hasLogin = getCache('login') === 'true'
     // 权限校验
     // 已登录跳转
-    if (meta.log && !hasLogin) return '/signin'
+    if (!now.pathname.startsWith('/signin') && last && meta.log && !hasLogin) {
+        return `/signin?cb=${encodeURIComponent(JSON.stringify({
+            pathname: last.pathname || '',
+            hash: last.hash || '',
+            search: last.search || ''
+        }))}`
+    }
     else if (hasLogin && meta.logRe) return meta.logRe
+    if (!now.pathname.startsWith('/signin') && last && last.pathname.startsWith('/signin') && last.search !== ''){
+        let splits = last.search.split("?cb=")
+        try {
+            debugger
+            let url = JSON.parse(decodeURIComponent(splits[splits.length - 1]))
+            return `${url?.pathname || ''}${url?.search || ''}${url.hash || ''}`
+        }catch (e){}
+    }
 }
 
 export default {

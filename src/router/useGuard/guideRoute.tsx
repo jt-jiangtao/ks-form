@@ -28,19 +28,25 @@ type GuideElementProps = {
     beforeEach : Function | undefined
 }
 
+export type LocationType = {
+    pathname: string,
+    search: string,
+    hash: string
+}
+
 let temp : any = null
-let last : string | null = null
+let last : LocationType | null = null
 
 function Guide(props : GuideElementProps) : any{
     const location = useLocation()
-    const {pathname} = location
+    const {pathname, search, hash} = location
     const meta = props.route.meta || {}
     if (props.beforeEach){
         if (temp === props.route.element){
             return props.route.element
         }
-        let newPath = props.beforeEach(pathname, meta, last)
-        last = pathname
+        let newPath = props.beforeEach({pathname, search, hash}, meta, last)
+        last = {pathname, search, hash}
         if (newPath && newPath !== pathname) return <Navigate to={newPath} />
     }
     temp = props.route.element
