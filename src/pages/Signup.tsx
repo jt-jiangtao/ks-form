@@ -28,10 +28,6 @@ export default function Signup() {
     }
     // 注册
     const register = () => {
-        console.log(userInfo)
-        console.log(userInfo.account !== "" && userInfo.pwd !== "" && userInfo.confirmPwd !== "" &&
-            userInfo.account.trim() !== "" && userInfo.pwd.trim() !== "" && userInfo.confirmPwd.trim() !== ""
-            && userInfo.pwd === userInfo.confirmPwd)
         LoginUp.register({
             account: userInfo.account,
             pwd: userInfo.pwd,
@@ -39,15 +35,12 @@ export default function Signup() {
         }).then(
             (res) => {
                 // debugger
-                console.log(res)
+                // console.log(res)
                 if (res.stat === "ok") {
                     message.success("注册成功,请登录！", 1000)
                     navigate("/signin")
                 }
-            }).catch(res => {
-            debugger
-            console.log(res)
-        })
+            })
     }
 
     // 用户名输入框失去焦点的回调
@@ -73,27 +66,26 @@ export default function Signup() {
     // 用户名输入框值的回调
     const handleIptChangeAccount = (e: string) => {
         account__error.current?.replaceChildren("")
-        const newuser = {...userInfo}
-        newuser.account = e
-        setUserInfo(newuser)
+        const newUserInfo = {...userInfo}
+        newUserInfo.account = e
+        setUserInfo(newUserInfo)
     }
     // 密码输入框的回调
     const handleIptChangePwd = (e: string) => {
         pwd__error.current?.replaceChildren("")
         Test()
-        const newuser = {...userInfo}
-        newuser.pwd = e
-        setUserInfo(newuser)
+        const newUserInfo = {...userInfo}
+        newUserInfo.pwd = e
+        setUserInfo(newUserInfo)
     }
     // 确认密码输入框的回调
     const handleIptChangeConfirmPwd = (e: string) => {
         console.log(e)
         confirmPwd__error.current?.replaceChildren("")
-        const newuser = {...userInfo}
-        newuser.confirmPwd = e
-        setUserInfo(newuser)
+        const newUserInfo = {...userInfo}
+        newUserInfo.confirmPwd = e
+        setUserInfo(newUserInfo)
     }
-
 
     return (
         <SignLayout>
@@ -136,7 +128,6 @@ export default function Signup() {
                     <div className={style.signup_tip}>密码为8-16位大小写字母、数字或符号的组合</div>
                     <div className={style.signup_login}>
                         {
-                            userInfo.account !== "" && userInfo.pwd !== "" && userInfo.confirmPwd !== "" &&
                             userInfo.account.trim() !== "" && userInfo.pwd.trim() !== "" && userInfo.confirmPwd.trim() !== ""
                             && userInfo.pwd === userInfo.confirmPwd && (userInfo.pwd?.length > 7 && userInfo.pwd?.length as number <= 16) ?
                                 < Button type="primary" style={{width: 295}} onClick={register}>注册</Button>
