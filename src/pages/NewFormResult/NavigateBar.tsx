@@ -1,4 +1,4 @@
-import '@/styles/NewFormResult/NavigateBar.scss'
+import style from '@/styles/NewFormResult/NavigateBar.module.scss'
 import {useLocation, useNavigate} from "react-router";
 import classNames from "classnames";
 
@@ -10,32 +10,32 @@ export default function NavigateBar(props: SideBarProps) {
     const navigate = useNavigate()
     const location = useLocation()
     return (
-        <div className="result-navigator-container">
-            <div className="result-navigator">
-                <div className="navigate-tabs">
+        <div className={style["result-navigator-container"]}>
+            <div className={style["result-navigator"]}>
+                <div className={style["navigate-tabs"]}>
                     <span
                         onClick={()=> navigate({
                             hash: "#data",
                             search: location.search
                         })}
-                        className={classNames("tab", {
-                            "tab-active": props.active === 'data'
+                        className={classNames(style["tab"], {
+                            [style["tab-active"]]: props.active === 'data'
                         })}>数据统计&分析</span>
                     <span
                         onClick={()=> navigate({
                             hash: "#problem",
                             search: location.search
                         })}
-                        className={classNames("tab", {
-                            "tab-active": props.active === 'problem'
+                        className={classNames(style["tab"], {
+                            [style["tab-active"]]: props.active === 'problem'
                         })}>表单问题</span>
                     <span
                         onClick={()=> navigate({
                             hash: "#share",
                             search: location.search
                         })}
-                        className={classNames("tab", {
-                            "tab-active": props.active === 'share'
+                        className={classNames(style["tab"], {
+                            [style["tab-active"]]: props.active === 'share'
                         })}>分享</span>
                 </div>
             </div>

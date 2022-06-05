@@ -1,10 +1,6 @@
 import Button from "@/components/Button/Button";
 import {useLocation, useNavigate} from "react-router";
-import {
-    PlusOutlined,
-    PlusSquareOutlined,
-    FormOutlined
-} from "@ant-design/icons";
+import {PlusOutlined, PlusSquareOutlined, FormOutlined} from "@ant-design/icons";
 import style from "@/styles/FormList/SideBar.module.scss"
 import {NavLink} from "react-router-dom";
 import classNames from "classnames";
@@ -25,14 +21,14 @@ export default function SideBar(props: SideBarProps) {
                         hash: "#data"
                     })}>新建</Button>
             <div className={style.submenu}>
-                <NavLink to="#mycreate" className={classNames(style.nvlink,
-                    hash === 'mycreate' ? style.isactive : ""
+                <NavLink to="#mycreate" className={classNames(style.link,
+                    hash === 'mycreate' ? style.isActive : ""
                 )}>
                     <PlusSquareOutlined style={{marginRight: 10, fontSize: 14}}/>
                     表单列表
                 </NavLink>
-                <NavLink to="#myedit" className={classNames(style.nvlink,
-                    hash === 'myedit' ? style.isactive : ""
+                <NavLink to="#myedit" className={classNames(style.link,
+                    hash === 'myedit' ? style.isActive : ""
                 )}>
                     <FormOutlined style={{marginRight: 10, fontSize: 14}}/>
                     我填写的

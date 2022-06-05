@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, useCallback, useReducer } from "react";
 import {useLocation, useNavigate, useParams} from "react-router";
 import HeaderLayout from "@/layout/HeaderLayout";
 import logo from '@/assets/icon/logo.svg'
-import "@/styles/Write/index.scss"
+import style from "@/styles/Write/index.module.scss"
 import {getForm} from "@/services";
 import EditableProblemContent from "@/pages/ProblemContent/EditableProblemContent";
 import {IForm} from "@/types/service/model";
@@ -36,18 +36,18 @@ export default function Write() {
 
     return (
         <>
-            <HeaderLayout needLog={false} className="write-header">
-                <div onClick={() => navigate("/form-list")} className="logo-title">
-                    <div className="logo">
+            <HeaderLayout needLog={false} className={style["write-header"]}>
+                <div onClick={() => navigate("/form-list")} className={style["logo-title"]}>
+                    <div className={style["logo"]}>
                         <img src={logo} />
                     </div>
-                    <div className="title">金山表单</div>
+                    <div className={style["title"]}>金山表单</div>
                 </div>
             </HeaderLayout>
-            <div className="write-page">
-                <div className="write-place">
-                    <div className="write-place-container">
-                        <div className="write-new-form-place">
+            <div className={style["write-page"]}>
+                <div className={style["write-place"]}>
+                    <div className={style["write-place-container"]}>
+                        <div className={style["write-new-form-place"]}>
                             {
                                 isSuccess ? <WriteSuccess />
                                     : data && <EditableProblemContent canSubmit={true} data={data}/>

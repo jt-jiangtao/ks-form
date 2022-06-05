@@ -13,7 +13,7 @@ import EditDateTime from "@/components/QuestionComponents/DateTime/EditDateTime"
 import Menu from "@/components/DropDown/Menu";
 import DropDown from "@/components/DropDown/DropDown";
 import downIcon from "@/assets/icon/down.svg"
-import "@/styles/EditProblemContent.scss"
+import "@/styles/ProblemContent/EditProblemContent.scss"
 import right from "@/assets/icon/right.svg"
 import {DndProvider} from "react-dnd";
 import {HTML5Backend} from "react-dnd-html5-backend";
