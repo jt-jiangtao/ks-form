@@ -18,6 +18,10 @@ export function checkProblems(form : IForm) : boolean{
         message.info("请输入表单子标题")
         return false
     }
+    if (!form.problems || form.problems.length === 0){
+        message.info("至少创建一个问题")
+        return false
+    }
     for (let i = 0; i < form.problems.length; i++) {
         let problem = form.problems[i]
         if (!checkProblem(problem)) return false
