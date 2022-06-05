@@ -41,7 +41,7 @@ export default function PhoneWrite() {
                             </div>
                             <div className={style["phone-footer"]}>
                                 <div className={style["footer-content"]}>
-                                    <img alt="" src={logo}/>
+                                    <img alt=" " src={logo}/>
                                     由
                                     <span className={style["logo-text"]}>金山文档</span>
                                     旗下表单提供服务
